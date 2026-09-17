@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const load=async p=>import('data:text/javascript;base64,'+Buffer.from(readFileSync(p)).toString('base64'));
+const s=await load('static/staged-progress.js'),g=await load('static/proposal-guide.js');
+const esc=x=>String(x??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const progress={kind:'directing_stages',label:'正在審查：<場景>',completed:5,total:37};
+const job={state:'failed',input:{directing_pipeline:'directing-stages-v1'},progress};
+assert(s.canResumeStages(job));assert(!s.canResumeStages({...job,cancel_requested:true}));
+const html=s.renderStagedProgress(job,esc);assert(html.includes('5／37'));assert(!html.includes('<場景>'));assert(html.includes('跨場核對'));
+const args={job:{id:'p',state:'succeeded',input:{revision:2},result:{canon:[],scenes:[],shots:[]}},status:{required:true,state:'failed',job_id:'r',resumable:true,progress},currentRevision:2,phase:'progress'};
+const next=g.proposalNextAction(args);assert.equal(next.action,'resume-directing');assert.equal(next.id,'r');
+assert(!g.proposalGuideMarkup(args,esc).includes('data-action="adopt"'));
+assert(g.reviewProgress({state:'running',progress}).note.includes('5／37'));
+console.log('Directing stages: progress, escaping, resume, cancellation and adoption gate passed.');

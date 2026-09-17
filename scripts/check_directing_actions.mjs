@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const mod=await import('data:text/javascript;base64,'+Buffer.from(readFileSync('static/directing-plan.js')).toString('base64'));
+const esc=x=>String(x??'').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const status={required:true,state:'succeeded',result:{verdict:'revise'}};
+assert.equal(mod.proposalAdoptionState(status,9,9).allowed,false);
+assert.match(mod.proposalAdoptionState(status,9,9).reason,/個別節拍/);
+assert.equal(mod.proposalAdoptionState({...status,result:{verdict:'pass'}},9,9).allowed,true);
+assert.equal(mod.proposalAdoptionState({...status,result:{verdict:'pass'}},8,9).allowed,false);
+assert.equal(mod.proposalAdoptionState({...status,state:'running',result:{verdict:'pass'}},9,9).allowed,false);
+assert.equal(mod.proposalAdoptionState(null,9,9).allowed,true);
+const html=mod.directingRevisionMarkup('<script>issue</script>','DeepSeek',esc);
+assert(!html.includes('<script>'));assert.match(html,/已自動帶入/);assert.match(html,/補充修訂要求（選填）/);
+// Execute the actual app branch and its submit callback with an isolated request sink.
+const source=readFileSync('static/app.js','utf8');
+const branch=source.slice(source.indexOf("if(a==='revise-directing'){"),source.indexOf("if(a==='edit-cut'){"));
+const form={},calls=[],messages=[];let htmlShown='',closed=0;
+const job={id:'candidate',capability:'narrative',input:{},directing_review:{result:{summary:'overall revise',coverage:[{verdict:'pass',reason:'ok'}],issues:[{code:'CONTINUITY',reason:'arm conflict',recommendation:'start lowered'}]}}};
+let pending;
+const ctx={a:'revise-directing',id:job.id,project:{id:'original-project'},api:async(path,body)=>{calls.push({path,body});return job;},modal:(title,html)=>htmlShown=html,directingRevisionMarkup:mod.directingRevisionMarkup,providerLabel:()=> 'DeepSeek',esc,$:()=>form,FormData:class{get(){return '';}},guarded:fn=>pending=fn(),close:()=>closed++,refresh:async()=>{},toast:t=>messages.push(t)};
+vm.createContext(ctx);await vm.runInContext('(async()=>{'+branch+'})()',ctx);
+assert.match(htmlShown,/arm conflict/);assert.equal(calls.length,1,'Opening form is read-only');
+ctx.project.id='different-project';form.onsubmit({preventDefault(){},target:{}});await pending;
+assert.equal(calls[1].path,'/projects/original-project/jobs');
+assert.equal(calls[1].body.proposal_id,'candidate');assert.match(calls[1].body.feedback,/start lowered/);assert.equal(closed,1);assert.match(messages[0],/修訂工作已建立/);
+console.log('Directing actions: adoption reason/gate, escaped carried feedback, actual empty-input submission, pinned project and success feedback passed.');
+// Staying in the original project carries the exact submitted job into progress.
+const progress=[];ctx.project.id='original-project';
+ctx.api=async(path,body)=>{calls.push({path,body});return body?{job:{id:'new-revision'}}:job;};
+ctx.showProposalProgress=async(pid,id)=>progress.push({pid,id});
+form.onsubmit({preventDefault(){},target:{}});await pending;
+assert.deepEqual(progress,[{pid:'original-project',id:'new-revision'}]);
+console.log('Revision submission opens progress for the exact returned job.');

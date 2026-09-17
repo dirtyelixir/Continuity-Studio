@@ -1,0 +1,71 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
+const {jobDetailBody,refreshJobDetail}=await import(url(readFileSync('static/job-detail.js','utf8')));
+const {renderWorkRow}=await import(url(readFileSync('static/work-activity.js','utf8')));
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const button=(label,action,attrs='')=>`<button data-action="${action}" ${attrs}>${label}</button>`;
+const h={esc,button,providerName:x=>x,renderProductionMethod:()=>'<details><summary>製作方法與沿用記錄</summary>HASH</details>',renderContextUsage:()=>'',imageLoraMarkup:()=>''};
+const issue={shot_ids:['s'],beat_ids:['b'],reason:'燈籠擋住手',recommendation:'調整機位',evidence:'<script>bad</script>'};
+const job={id:'review',project_id:'p',target_id:'',state:'succeeded',capability:'directing_qc',input:{revision:4,directing_source:{shots:[{id:'s',title:'掌心與徽章'}]}},result:{verdict:'revise',summary:'兩個動作要清楚',issues:[issue],coverage:[{...issue,beat_id:'b',verdict:'revise'}]}};
+const p={id:'p',directing:{current_review:{state:'succeeded',job_id:'review'},approval_source_hash:'source',scenes:[{status:'revise'}]},jobs:[]};
+const html=jobDetailBody(job,p,h);
+for(const text of ['審查結果：需要修訂','問題與建議 · 1 項','掌心與徽章','建議改法：','調整機位','人工批准此方案','revise-current-directing','&lt;script&gt;'])assert(html.includes(text),text);
+assert(!html.includes('<script>'));assert(!html.includes('details open'));assert(html.indexOf('建議改法')<html.indexOf('data-job-technical'));assert(html.indexOf('data-job-technical')<html.indexOf('HASH'));
+assert(!renderWorkRow({...job,kind:'job'},{...h,showAction:false}).includes('data-action'));
+assert(renderWorkRow({...job,kind:'job'},h).includes('審查已完成：需要修訂。'));
+for(const state of ['queued','running','awaiting_input','failed','interrupted','cancelled']){
+ const body=jobDetailBody({...job,state},p,h);
+ assert(body.includes('尚未有審查結論'));assert(!body.includes('審查結果：需要修訂'));assert(!body.includes('data-action="human-directing"'));
+}
+const pass=jobDetailBody({...job,result:{verdict:'pass',issues:[],coverage:[]}},p,h);
+assert(pass.includes('審查結果：通過'));assert(!pass.includes('data-action="human-directing"'));
+const uncertain=jobDetailBody({...job,result:{verdict:'uncertain'}},p,h);
+assert(uncertain.includes('未能判斷'));assert(uncertain.includes('未提供具體修訂建議'));
+const human=jobDetailBody(job,{...p,directing:{...p.directing,scenes:[{status:'human_approved'}]}},h);
+assert(human.includes('已由你人工批准'));assert(human.includes('審查結果：需要修訂'));assert(!human.includes('data-action="human-directing"'));
+const stale=jobDetailBody(job,{...p,directing:{}},h);
+assert(stale.includes('歷史審查記錄'));assert(!stale.includes('data-action="human-directing"'));assert(!stale.includes('data-action="revise-current-directing"'));
+const deferred=jobDetailBody(job,{...p,directing:{...p.directing,current_review:{state:'deferred',job_id:'review'}}},h);assert(!deferred.includes('data-action="human-directing"'));
+const candidate=jobDetailBody({...job,target_id:'proposal'}, {...p,directing:{},jobs:[{id:'proposal',capability:'storyboard'}]},h);
+assert(candidate.includes('data-action="proposal" data-id="proposal"'));
+const coverageOnly=jobDetailBody({...job,result:{verdict:'revise',coverage:[{...issue,verdict:'revise'}]}},p,h);
+assert(coverageOnly.includes('問題與建議 · 1 項'));assert(coverageOnly.includes('調整機位'));
+const text=jobDetailBody({...job,capability:'h3',result:{text:'可讀提示詞'}},p,h);
+assert(text.indexOf('可讀提示詞')<text.indexOf('data-job-technical'));
+assert(jobDetailBody({...job,capability:'image',state:'failed',result:null,error:'圖片 LoRA 依據必須引用本次畫面簡報原文。'},p,h).includes('尚未送入 ComfyUI'));
+// Project-list polling omits the large frozen input. Retain it for names and provenance.
+const body={_jobSnapshot:{...job,state:'running',result:null},ownerDocument:{activeElement:null},contains:()=>false,querySelectorAll:()=>[],innerHTML:''};
+refreshJobDetail(body,{id:'review',state:'succeeded',result:job.result,input:{revision:4}},p,h);
+assert(body.innerHTML.includes('審查結果：需要修訂'));assert(body.innerHTML.includes('掌心與徽章'));
+assert.equal(body._jobSnapshot.input.directing_source.shots[0].title,'掌心與徽章');
+let writes=0;Object.defineProperty(body,'innerHTML',{set(){writes++;}});refreshJobDetail(body,job,p,h);assert.equal(writes,0,'unchanged poll preserves DOM');
+// Exercise actual click branch: GET only, correct full snapshot, project ownership and navigation guard.
+const app=readFileSync('static/app.js','utf8'),start=app.indexOf("if(a==='job-detail'){");
+const branch=app.slice(start,app.indexOf("\nif(a==='manual')",start));
+const calls=[],dialogs=[],el={};let resolveJob;
+const ctx={a:'job-detail',id:'review',project:p,projectLoadVersion:1,api:path=>{calls.push(path);return path.startsWith('/jobs')?new Promise(r=>resolveJob=r):Promise.resolve(p);},modal:(...args)=>dialogs.push(args),esc,button,displayLabel:x=>x,activityTargetName:()=> '作品',renderWorkRow,jobDetailBody,jobDetailHelpers:()=>h,document:{querySelector:()=>el}};
+vm.createContext(ctx);
+let pending=vm.runInContext(`(async()=>{${branch}})()`,ctx);resolveJob(job);await pending;
+assert.equal(dialogs.length,1);assert.equal(el._jobSnapshot.id,'review');assert(!dialogs[0][1].includes('查看結果／記錄'));
+pending=vm.runInContext(`(async()=>{${branch}})()`,ctx);ctx.projectLoadVersion++;resolveJob(job);await pending;assert.equal(dialogs.length,1);
+pending=vm.runInContext(`(async()=>{${branch}})()`,ctx);resolveJob({...job,project_id:'foreign'});await assert.rejects(pending,/不屬於目前作品/);
+assert(calls.every(path=>path==='/jobs/review'||path==='/projects/p'));
+assert(app.includes('refreshJobDetail(body,j,fresh,jobDetailHelpers())'));
+console.log('Job detail: verdict versus completion, grounded suggestions, pass/pending/failure/history/human/candidate states, escaping, closed technical details, live completion with frozen source, stable DOM and guarded read-only opening passed.');
+const budgetJob={...job,error:'DeepSeek 輸出達到長度上限',state:'failed',result:null,input:{provider_config:{context_policy:{context_window:1048576,max_output_tokens:32768}}},budget_usage:{input_tokens:71851,count_method:'utf8-byte-upper-bound',fits:true,finish_reason:'length',content_chars:0,reasoning_chars:null,usage:{}}};
+const budgetHtml=jobDetailBody(budgetJob,p,h);
+for(const phrase of ['32,768','71,851','正式答案 0','未保存推理用量','每次輸出預留'])assert(budgetHtml.includes(phrase),phrase);
+assert(budgetHtml.indexOf('輸出預算說明')<budgetHtml.indexOf('data-job-technical'));
+
+const synced=jobDetailBody({...job,capability:'image',moment_verification:{state:'accepted',repaired:true},input:{image_moment_alignment:{omitted_context:['<unsafe> corrected eyeline']}}},p,h);
+assert(synced.includes('已在生圖前自動修正'));assert(synced.includes('&lt;unsafe&gt;'));assert(synced.indexOf('画面時刻同步')===-1);assert(synced.indexOf('畫面時刻同步')<synced.indexOf('data-job-technical'));
+const blockedMoment=jobDetailBody({...job,capability:'image',moment_verification:{state:'blocked',error:'state conflict'}},p,h);
+assert(blockedMoment.includes('圖片渲染前已攔下'));assert(!blockedMoment.includes('時刻檢查已通過'));
+
+const pendingMoment=jobDetailBody({...job,moment_verification:{state:'attempted'}},p,h);assert(pendingMoment.includes('正在檢查畫面時刻'));assert(!pendingMoment.includes('已攔下'));
+const saved=jobDetailBody({...job,capability:'narrative',state:'failed',result:null,saved_proposal:{title:'<draft>',story:'<story>',screenplay:'<script>',scenes:1,shots:3,canon:4,checks:[{shot_id:'shot_01',state:'accepted'},{shot_id:'shot_02',state:'blocked',error:'<reason>'}]}},p,h);
+assert(saved.includes('草案已保存，尚未成為完成方案'));assert(!saved.includes('尚無完成結果'));
+assert(saved.includes('1 鏡通過，1 鏡尚未通過'));assert(saved.includes('接續檢查尚未通過'));
+for(const text of ['&lt;draft&gt;','&lt;story&gt;','&lt;script&gt;','&lt;reason&gt;'])assert(saved.includes(text));

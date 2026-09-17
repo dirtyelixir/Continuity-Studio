@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "Choice": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 600,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "reason",
+        "evidence"
+      ],
+      "title": "Choice",
+      "type": "object"
+    },
+    "Selection": {
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "selected": {
+          "items": {
+            "$ref": "#/$defs/Choice"
+          },
+          "maxItems": 2,
+          "title": "Selected",
+          "type": "array"
+        }
+      },
+      "required": [
+        "summary",
+        "selected"
+      ],
+      "title": "Selection",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "visual_style": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Visual Style",
+      "type": "string"
+    },
+    "appearance": {
+      "maxLength": 1800,
+      "minLength": 1,
+      "title": "Appearance",
+      "type": "string"
+    },
+    "composition": {
+      "maxLength": 1400,
+      "minLength": 1,
+      "title": "Composition",
+      "type": "string"
+    },
+    "lighting": {
+      "maxLength": 600,
+      "minLength": 1,
+      "title": "Lighting",
+      "type": "string"
+    },
+    "requested_changes": {
+      "maxLength": 4000,
+      "title": "Requested Changes",
+      "type": "string"
+    },
+    "omitted_context": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Omitted Context",
+      "type": "array"
+    },
+    "conflicts": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "local_lora_selection": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Selection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "target_id",
+    "visual_style",
+    "appearance",
+    "composition",
+    "lighting",
+    "requested_changes",
+    "omitted_context",
+    "conflicts"
+  ],
+  "title": "PreparedImage",
+  "type": "object"
+}

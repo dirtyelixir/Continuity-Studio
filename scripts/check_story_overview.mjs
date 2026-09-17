@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const load=async path=>import('data:text/javascript;base64,'+Buffer.from(readFileSync(path,'utf8')).toString('base64'));
+const {renderStoryOverview,chapterForm}=await load('static/story-chapters.js');
+const {renderOverviewStatus}=await load('static/overview-status.js');
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const button=(label,action,attrs='',cls='')=>`<button class="${cls}" data-action="${action}" ${attrs}>${label}</button>`;
+const ui={esc,button,head:()=>{throw Error('duplicate heading');},stats:()=>{throw Error('duplicate stats');},jobList:items=>items.map(j=>`<div data-job="${esc(j.id)}">${esc(j.state)}</div>`).join(''),renderDirectorStyles:()=>'<div>Director options</div>'};
+const ch={id:'c"',number:1,title:'<script>Chapter</script>',source_kind:'story',brief:'Original chapter'};
+const p={id:'p',source_kind:'outline',idea:'Outline source '.repeat(40),style:'<img src=x>',story_chapters:[ch],jobs:[],assets:[],production:null};
+assert(renderStoryOverview({...p,story_chapters:[]},ui).includes('新增第一章'));
+let html=renderStoryOverview(p,ui);
+assert(html.startsWith('<section id="overview-chapters"'));
+assert(!html.includes('<script>')&&!html.includes('<img src=x>'));
+assert(html.includes('data-id="c&quot;"'));
+assert(html.includes('尚未採用製作方案'));
+p.production={chapters:[{id:ch.id,scene_ids:['s'],story:'Adopted story',screenplay:'Adopted screenplay'}],shots:[{id:'shot',scene_id:'s',keyframes:[]},{id:'other',scene_id:'elsewhere',keyframes:[]}],canon:[]};
+p.jobs=[{id:'old-active',target_id:ch.id,capability:'narrative',state:'running',created:'2026-01-01'},{id:'new-failure',target_id:ch.id,capability:'storyboard',state:'failed',created:'2026-01-02'}];
+html=renderStoryOverview(p,ui);
+assert(html.includes('目前採用版本 · 1 個鏡頭'),'count only the chapter scenes');
+assert(html.includes('繼續本章製作 →')&&html.includes('data-action="chapter-shots"'));
+assert.match(html,/data-action="develop-chapter"[^>]*disabled/,'older active job must block duplicate creation');
+assert(html.indexOf('data-job="new-failure"')<html.indexOf('修訂紀錄'));
+assert(html.indexOf('修訂紀錄')<html.indexOf('data-job="old-active"'));
+assert(html.includes('1 項仍在處理'));
+assert(html.includes('新方案採用前，目前版本仍會保留'));
+assert(!html.includes('製作動態'));
+assert(html.includes('<details><summary>閱讀完整故事大綱</summary>'));
+assert(html.includes('<summary>導演風格與拍法'));
+assert(chapterForm(ch,esc).includes('maxlength="20000"'));
+// Execute the real integration for serial, empty and legacy project states.
+const app=readFileSync('static/app.js','utf8');
+const ctx={project:p,...ui,head:(title,sub,actions='')=>`<h1>${title}</h1>${sub}${actions}`,stats:()=>'',renderStoryOverview,renderOverviewStatus,groupAssetVersions:()=>[],targetName:id=>id,displayLabel:x=>x,directingPanel:()=>'<div>EDIT_TABLE</div>',providerLabel:()=> 'Astra',uiError:x=>x,badge:()=>''};
+vm.createContext(ctx);vm.runInContext(app.slice(app.indexOf('function overview(){'),app.indexOf('function isCharacterAsset(')),ctx);
+for(const source_kind of ['outline','idea','story']){
+ ctx.project={...p,source_kind,qc:[],production:{...p.production,logline:'Logline',story:'Story',screenplay:'Script',style:'Style'},jobs:[]};
+ const output=vm.runInContext('overview()',ctx);
+ assert.equal((output.match(/<h1>/g)||[]).length,1);
+ assert.equal((output.match(/aria-label="製作進度與下一步"/g)||[]).length,0,'shared shell now owns progress; story content must not duplicate it');
+ assert(output.includes('<details id="overview-directing"'));
+}
+ctx.project={...p,production:null,jobs:[]};
+assert(vm.runInContext('overview()',ctx).includes('id="overview-chapters"'),'cross-page continuation still has its chapter destination');
+console.log('Story overview: adopted/candidate separation, sorted history, active-job guard, empty state, escaped source, collapsed details and actual app integration passed.');

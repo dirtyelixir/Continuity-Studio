@@ -1,0 +1,564 @@
+{
+  "canon": [
+    {
+      "description": "二十出頭香港青年，身形偏瘦、肩略內收；長橢圓臉、平直濃眉、左眉尾小缺口、黑色短髮貼額。",
+      "facts": [
+        "灰色圓領棉T恤、深藍長褲、灰白跑鞋，全章不換裝。",
+        "右褲袋放摺刀，左褲袋放黑色手機；不戴首飾。",
+        "遇險先停手、咬緊下顎；決定以踏實雙腳呈現。",
+        "與母親住二十八樓；父親六年前因癌症去世。"
+      ],
+      "id": "c_leyan",
+      "kind": "character",
+      "name": "陳樂言",
+      "scope": "public"
+    },
+    {
+      "description": "約六十歲，矮壯、方臉、寬鼻、右面頰凹痕；灰黑短髮、稀疏鬍根。",
+      "facts": [
+        "褪色橄欖綠短袖恤衫、炭灰工裝褲、黑膠底鞋、左腕舊鋼錶。",
+        "住二十七樓，妻子仍在；曾分退燒藥給樂言母親。",
+        "取水時左手提兩桶，右手持長身螺絲批。"
+      ],
+      "id": "c_chang",
+      "kind": "character",
+      "name": "昌叔",
+      "scope": "auto"
+    },
+    {
+      "description": "四十多歲，窄肩、長臉、黑直髮至背中，赤腳穿及膝白睡裙。",
+      "facts": [
+        "住十一樓，曾帶女兒上學。",
+        "本章感染失控；眼白充血、嘴唇乾裂、下巴深啡污漬、右指甲破損。",
+        "遭制服後死亡；不於後續鏡頭復起。"
+      ],
+      "id": "c_wong",
+      "kind": "character",
+      "name": "黃太",
+      "scope": "auto"
+    },
+    {
+      "description": "灰水泥雙跑樓梯，綠色鋼扶手、每層狹窄氣窗及綠色防煙門。",
+      "facts": [
+        "主動作區為十三樓轉角至十二樓平台。",
+        "機位保持中井同側，下行往畫右上行往畫左。",
+        "十二樓門框左側有深色刮痕；轉角有一粒碎石。"
+      ],
+      "id": "l_stairs",
+      "kind": "location",
+      "name": "住宅消防樓梯",
+      "scope": "auto"
+    },
+    {
+      "description": "半透明長方膠樽，藍色旋蓋及一體提手。",
+      "facts": [
+        "開章由樂言左手提空樽；取水後盛五公升。",
+        "逃跑仍留在樂言左手，不憑空消失。"
+      ],
+      "id": "p_jug",
+      "kind": "prop",
+      "name": "五公升膠水樽",
+      "scope": "auto"
+    },
+    {
+      "description": "兩個乳白膠桶，黑色提把，其中一桶外壁有藍膠帶。",
+      "facts": [
+        "遇襲掉在十二樓平台，事後由昌叔拾回。",
+        "返家後部分取水分給樂言，家中總存水約八公升。"
+      ],
+      "id": "p_buckets",
+      "kind": "prop",
+      "name": "昌叔兩個膠桶",
+      "scope": "auto"
+    },
+    {
+      "description": "黑色磨損刀柄，七厘米刀刃。",
+      "facts": [
+        "昌叔給樂言；收合時放右褲袋。",
+        "搏鬥後由樂言保留；洗手場後清潔收合，結尾入背囊。"
+      ],
+      "id": "p_knife",
+      "kind": "prop",
+      "name": "摺刀",
+      "scope": "auto"
+    },
+    {
+      "description": "琥珀色舊膠柄、長鋼桿，一字頭。",
+      "facts": [
+        "昌叔慣用右手持有；結束搏鬥後仍歸昌叔。"
+      ],
+      "id": "p_driver",
+      "kind": "prop",
+      "name": "長身螺絲批",
+      "scope": "auto"
+    }
+  ],
+  "chapters": [],
+  "logline": "停電第九日，陳樂言冒死取水返家，卻發現母親斷藥、屋苑水源被毀；一段未經證實的廣播與一張家庭舊照，迫使他把長洲當成下一個目的地。",
+  "scenes": [
+    {
+      "id": "28ef05efab4e42b8__s02",
+      "location_id": "l_stairs",
+      "summary": "逐層聽聲，遭黃太追襲；樂言折返救昌叔，付出第一次殺死熟人的代價。",
+      "time_of_day": "凌晨",
+      "title": "十二樓一隻"
+    }
+  ],
+  "screenplay": "場景來源保留在本測試的五個已採用鏡頭內。",
+  "shots": [
+    {
+      "action": "十九、十七、十四樓依序省略，抵十三樓停住；刮擦聲傳來。",
+      "angle": "1.3米高，水平。",
+      "beats": [
+        {
+          "action": "相同下行動作接十九、十七、十四樓牌，各次停耳聽。",
+          "end": 5.0,
+          "start": 0.0
+        },
+        {
+          "action": "十三樓昌叔舉手；樓下兩聲刮擦。",
+          "end": 9.0,
+          "start": 5.0
+        }
+      ],
+      "blocking": "昌叔領先半層，兩人往畫右下行。",
+      "camera": "固定機位；相同構圖硬切作下樓省略。",
+      "dialogue": [],
+      "duration": 9.0,
+      "end_state": [
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三樓上跑末端；昌叔後方"
+        },
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        }
+      ],
+      "entity_ids": [
+        "c_leyan",
+        "c_chang",
+        "p_jug",
+        "p_buckets",
+        "p_driver"
+      ],
+      "expression": "樂言嘴唇合攏，頸部向聲源微伸。",
+      "framing": "35mm側面中全景，扶手前景、兩人中景、樓層門後景。",
+      "id": "28ef05efab4e42b8__sh02",
+      "keyframes": [
+        {
+          "description": "16:9，35mm，1.3米水平機位；綠扶手斜穿前景，昌叔在右下方，樂言在左上方提空樽，十九樓牌位於後景綠門上；氣窗夜光讓鼻側與扶手邊緣可辨，燈具熄滅。",
+          "id": "28ef05efab4e42b8__fr02s",
+          "moment": "start"
+        }
+      ],
+      "music": "無。",
+      "scene_id": "28ef05efab4e42b8__s02",
+      "soundscape": "鞋底輕擦、水滴、氣窗震動，末段清晰『咔……咔』。",
+      "start_state": [
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        }
+      ],
+      "title": "逐層聽",
+      "transition_note": "本鏡三個同軸硬切省略樓層距離；不將二十八至十三樓表演壓成即時九秒。"
+    },
+    {
+      "action": "昌叔口形示意十二樓；兩人下降半跑，先露恐懼反應，再見黃太刮門。",
+      "angle": "成人視線高度，守中井同側。",
+      "beats": [
+        {
+          "action": "昌叔用口形說十二樓，兩人輕落幾級。",
+          "end": 3.0,
+          "start": 0.0
+        },
+        {
+          "action": "樂言認出人影，手伸右袋。",
+          "end": 5.0,
+          "start": 3.0
+        },
+        {
+          "action": "平搖揭示白睡裙、赤腳及刮門右手；黃太停手。",
+          "end": 10.0,
+          "start": 5.0
+        }
+      ],
+      "blocking": "兩人左上，黃太右下背對；昌叔停在樂言前一級。",
+      "camera": "固定腳架向右平搖20度，3秒完成。",
+      "dialogue": [
+        {
+          "delivery": "只有口形，無聲",
+          "end": 1.5,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 0.5,
+          "text": "十二樓。"
+        }
+      ],
+      "duration": 10.0,
+      "end_state": [
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三至十二樓下跑中段；昌叔後一級"
+        },
+        {
+          "entity_id": "p_knife",
+          "key": "status",
+          "value": "收合；樂言右手握於右褲袋內"
+        }
+      ],
+      "entity_ids": [
+        "c_leyan",
+        "c_chang",
+        "c_wong",
+        "p_jug",
+        "p_knife",
+        "p_buckets",
+        "p_driver"
+      ],
+      "expression": "樂言眉心靠攏，辨認後下顎鬆一下。",
+      "framing": "50mm雙人中近景起，沿視線緩移露出下層女人。",
+      "id": "28ef05efab4e42b8__sh03",
+      "keyframes": [
+        {
+          "description": "16:9寫實，50mm眼平；昌叔前景側臉，樂言在其左後方，眉心收緊；綠扶手指向尚未露出的畫右下方，灰白氣窗光貼住兩人面側，背景門框清楚。",
+          "id": "28ef05efab4e42b8__fr03s",
+          "moment": "start"
+        }
+      ],
+      "music": "無。",
+      "scene_id": "28ef05efab4e42b8__s02",
+      "soundscape": "兩下指甲刮鋼門，然後只剩氣窗風。",
+      "start_state": [
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三樓上跑末端；昌叔後方"
+        },
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        }
+      ],
+      "title": "熟人的背影",
+      "transition_note": "承接舉手；先保留兩秒辨認反應才交代黃太，無回憶插鏡。"
+    },
+    {
+      "action": "昌叔退步踩石，黃太轉身吸氣後衝來；桶掉下，兩人逃上樓。",
+      "angle": "1.2米水平，樓梯斜線保持原向。",
+      "beats": [
+        {
+          "action": "三秒靜止，黃太頭偏左再偏右。",
+          "end": 3.0,
+          "start": 0.0
+        },
+        {
+          "action": "石響，她轉身露充血眼白與乾裂嘴唇。",
+          "end": 5.0,
+          "start": 3.0
+        },
+        {
+          "action": "衝刺；昌叔喊走，放桶，兩人逃上轉角。",
+          "end": 8.0,
+          "start": 5.0
+        }
+      ],
+      "blocking": "黃太由右下追往左上；昌叔在樂言身後。",
+      "camera": "固定至突襲，再穩定器向畫左退移1.2米／秒，共2秒。",
+      "dialogue": [
+        {
+          "delivery": "突然爆聲",
+          "end": 5.5,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 5.0,
+          "text": "走！"
+        }
+      ],
+      "duration": 8.0,
+      "end_state": [
+        {
+          "entity_id": "p_buckets",
+          "key": "position",
+          "value": "十二樓平台地上"
+        },
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三樓轉角"
+        },
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        }
+      ],
+      "entity_ids": [
+        "c_leyan",
+        "c_chang",
+        "c_wong",
+        "p_jug",
+        "p_buckets",
+        "p_driver",
+        "p_knife"
+      ],
+      "expression": "樂言先屏息，聽見石響才猛收下巴。",
+      "framing": "35mm樓梯全景。",
+      "id": "28ef05efab4e42b8__sh04",
+      "keyframes": [
+        {
+          "description": "16:9，35mm水平全景；白睡裙女人定在右下綠門前，赤腳並立；昌叔左上方腳跟懸在一粒小石旁，樂言更高一級左手提藍蓋空樽，扶手分隔追逐路線，氣窗弱光保留自然膚色。",
+          "id": "28ef05efab4e42b8__fr04s",
+          "moment": "start"
+        }
+      ],
+      "music": "無。",
+      "scene_id": "28ef05efab4e42b8__s02",
+      "soundscape": "風停頓感、石粒『嗒』、窒息低鳴、塑膠桶落地及扶手撞響。",
+      "start_state": [
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三至十二樓下跑中段；昌叔後一級"
+        },
+        {
+          "entity_id": "p_knife",
+          "key": "status",
+          "value": "收合；樂言右手握於右褲袋內"
+        }
+      ],
+      "title": "石粒",
+      "transition_note": "黃太撞扶手後繼續追；桶留十二樓，樽隨樂言上樓。"
+    },
+    {
+      "action": "樂言停逃回頭；見昌叔兩次肘擊無效，左手頂下巴；樂言放下水樽，開刀折返，第一次出手無效，第二次被肩膀遮住。",
+      "angle": "眼平，始終留在同軸側。",
+      "beats": [
+        {
+          "action": "昌叔求救，樂言停住，反應保留兩秒。",
+          "end": 3.0,
+          "start": 0.0
+        },
+        {
+          "action": "昌叔兩次肘擊；樂言放樽、開刀、向右下折返。",
+          "end": 6.0,
+          "start": 3.0
+        },
+        {
+          "action": "首次出手無效，黃太尖叫；昌叔提示。",
+          "end": 9.0,
+          "start": 6.0
+        },
+        {
+          "action": "第二次出手，昌叔推開她；兩人跌坐。",
+          "end": 12.0,
+          "start": 9.0
+        }
+      ],
+      "blocking": "樂言左上轉角，昌叔右下三階，黃太更下方扯他胸口。",
+      "camera": "使用35mm鏡頭起於較近距離，軌道後移0.8米，0.1米／秒；無變焦。",
+      "dialogue": [
+        {
+          "delivery": "受力急叫",
+          "end": 1.8,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 0.0,
+          "text": "仆街！樂仔！"
+        },
+        {
+          "delivery": "喊破聲",
+          "end": 8.7,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 8.0,
+          "text": "眼呀！"
+        }
+      ],
+      "duration": 12.0,
+      "end_state": [
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；十三樓轉角地上"
+        },
+        {
+          "entity_id": "p_knife",
+          "key": "status",
+          "value": "展開染血；樂言右手"
+        },
+        {
+          "entity_id": "c_wong",
+          "key": "status",
+          "value": "倒在下方兩級；仍抓地"
+        }
+      ],
+      "entity_ids": [
+        "c_leyan",
+        "c_chang",
+        "c_wong",
+        "p_jug",
+        "p_knife",
+        "p_driver"
+      ],
+      "expression": "樂言目光先朝上層出口，再鎖住昌叔，咬牙。",
+      "framing": "50mm樂言中近景起，拉開至35mm等效中全景由後移完成。",
+      "id": "28ef05efab4e42b8__sh05",
+      "keyframes": [
+        {
+          "description": "16:9，35mm近距中近景；樂言停在十三樓轉角左側，左手藍蓋樽貼腿，右手仍在袋口，視線落向畫右下；身後上層出口黑暗但門框可辨，氣窗冷灰光照出額汗與繃紧下顎。",
+          "id": "28ef05efab4e42b8__fr05s",
+          "moment": "start"
+        }
+      ],
+      "music": "無。",
+      "scene_id": "28ef05efab4e42b8__s02",
+      "soundscape": "短促求救、衣料拉裂、急喘、尖叫與身體撞階；不放大穿刺音效。",
+      "start_state": [
+        {
+          "entity_id": "c_leyan",
+          "key": "position",
+          "value": "十三樓轉角"
+        },
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        }
+      ],
+      "title": "折返",
+      "transition_note": "首次刺擊落面頰、第二次按原文指向左眼，但接觸點全由昌叔肩背遮擋；不以傷口特寫代替救人的選擇。"
+    },
+    {
+      "action": "樂言看血手乾嘔；昌叔終止黃太動作。沉默後兩人拾回容器，繼續下樓。",
+      "angle": "坐姿眼平。",
+      "beats": [
+        {
+          "action": "樂言乾嘔，画外抓地聲停止。",
+          "end": 4.0,
+          "start": 0.0
+        },
+        {
+          "action": "死未與回答之間留兩秒沉默。",
+          "end": 10.0,
+          "start": 4.0
+        },
+        {
+          "action": "拾回容器；昌叔問，樂言看向下方答落。",
+          "end": 15.0,
+          "start": 10.0
+        }
+      ],
+      "blocking": "樂言左側貼牆；昌叔右下方處理黃太，離焦且主要在畫外。",
+      "camera": "兩個固定覆蓋段，切點落樂言垂眼。",
+      "dialogue": [
+        {
+          "delivery": "氣音",
+          "end": 5.0,
+          "entity_id": "c_leyan",
+          "language": "yue-HK",
+          "start": 4.0,
+          "text": "死未？"
+        },
+        {
+          "delivery": "不看他",
+          "end": 9.0,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 7.0,
+          "text": "本身已經死咗啦。"
+        },
+        {
+          "delivery": "低聲",
+          "end": 12.5,
+          "entity_id": "c_chang",
+          "language": "yue-HK",
+          "start": 11.0,
+          "text": "仲落唔落？"
+        },
+        {
+          "delivery": "喉嚨發緊",
+          "end": 14.0,
+          "entity_id": "c_leyan",
+          "language": "yue-HK",
+          "start": 13.5,
+          "text": "落。"
+        }
+      ],
+      "duration": 15.0,
+      "end_state": [
+        {
+          "entity_id": "c_wong",
+          "key": "status",
+          "value": "死亡；十二樓梯段"
+        },
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；樂言左手"
+        },
+        {
+          "entity_id": "p_buckets",
+          "key": "position",
+          "value": "昌叔左手"
+        },
+        {
+          "entity_id": "p_knife",
+          "key": "status",
+          "value": "收合；樂言右褲袋"
+        }
+      ],
+      "entity_ids": [
+        "c_leyan",
+        "c_chang",
+        "c_wong",
+        "p_knife",
+        "p_driver",
+        "p_jug",
+        "p_buckets"
+      ],
+      "expression": "樂言眼眶濕、吞不下口水，答落時仍發抖。",
+      "framing": "135mm樂言胸上反應，末段切同側35mm拾桶全景。",
+      "id": "28ef05efab4e42b8__sh06",
+      "keyframes": [
+        {
+          "description": "16:9寫實，135mm坐姿眼平；樂言靠灰水泥牆，染血右手停在胸下，眼神低垂、嘴唇微張；背後綠扶手柔焦，氣窗側光保留汗濕膚色，無傷口特寫。",
+          "id": "28ef05efab4e42b8__fr06s",
+          "moment": "start"
+        }
+      ],
+      "music": "無。",
+      "scene_id": "28ef05efab4e42b8__s02",
+      "soundscape": "乾嘔、金屬柄握動、兩次鈍響後抓地聲停止；最後桶把輕碰。",
+      "start_state": [
+        {
+          "entity_id": "p_jug",
+          "key": "status",
+          "value": "空樽；十三樓轉角地上"
+        },
+        {
+          "entity_id": "p_knife",
+          "key": "status",
+          "value": "展開染血；樂言右手"
+        },
+        {
+          "entity_id": "c_wong",
+          "key": "status",
+          "value": "倒在下方兩級；仍抓地"
+        }
+      ],
+      "title": "唔再問名字",
+      "transition_note": "末四秒同軸省略拾回十三樓樽及十二樓桶的距離；下一場已抵地下。"
+    }
+  ],
+  "story": "兩人下樓取水，發現黃太並遇襲。",
+  "style": "16:9 realistic cinema",
+  "title": "下一站：長洲",
+  "edit_plan": []
+}

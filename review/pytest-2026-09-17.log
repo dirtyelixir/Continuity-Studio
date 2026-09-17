@@ -1,0 +1,81 @@
+........................................................................ [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 18%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 37%]
+........................................................................ [ 43%]
+...........................................F....F....................... [ 50%]
+........................................................................ [ 56%]
+........................................................................ [ 62%]
+........................................................................ [ 69%]
+........................................................................ [ 75%]
+........................................................................ [ 81%]
+........................................................................ [ 87%]
+........................................................................ [ 94%]
+...................................................................      [100%]
+=================================== FAILURES ===================================
+___________ test_engine_automatically_applies_and_freezes_selection ____________
+
+client = <starlette.testclient.TestClient object at 0x7e896aecba10>
+plan = {'title': 'Test', 'logline': 'A keeper turns on a light.', 'story': 'Ada fixes a lamp.', 'screenplay': 'ADA: Light.', ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e896aecbd10>
+
+    def test_engine_automatically_applies_and_freezes_selection(client,plan,monkeypatch):
+        pid,ctx,calls=setup_engine(client,plan,monkeypatch)
+        before=copy.deepcopy(store.project(pid))
+        def generate():
+            j=engine.enqueue(pid,models.JobRequest(capability='image',target_id='room',image_provider='comfy_local',force=True))['job']
+            engine.execute(j['id']);done=store.job(j['id'])
+            assert done['state']=='succeeded',done['error']
+            return done
+>       first=generate()
+              ^^^^^^^^^^
+
+tests/test_image_loras.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def generate():
+        j=engine.enqueue(pid,models.JobRequest(capability='image',target_id='room',image_provider='comfy_local',force=True))['job']
+        engine.execute(j['id']);done=store.job(j['id'])
+>       assert done['state']=='succeeded',done['error']
+E       AssertionError: 圖片全白（所有像素均為純白 RGB）。
+E       assert 'failed' == 'succeeded'
+E         
+E         - succeeded
+E         + failed
+
+tests/test_image_loras.py:125: AssertionError
+____ test_explicit_retry_reuses_original_failed_brief_with_audited_evidence ____
+
+client = <starlette.testclient.TestClient object at 0x7e896c1790d0>
+plan = {'title': 'Test', 'logline': 'A keeper turns on a light.', 'story': 'Ada fixes a lamp.', 'screenplay': 'ADA: Light.', ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e896c17b9e0>
+
+    def test_explicit_retry_reuses_original_failed_brief_with_audited_evidence(client,plan,monkeypatch):
+        pid,req,old,calls=failed_citation_job(client,plan,monkeypatch)
+        work=store.DATA/'jobs'/old['id']
+        before={str(p):p.read_bytes() for p in work.rglob('*') if p.is_file()}
+        job=engine.enqueue(pid,req)['job'];engine.execute(job['id']);done=store.job(job['id'])
+>       assert done['state']=='succeeded',done['error']
+E       AssertionError: 圖片全白（所有像素均為純白 RGB）。
+E       assert 'failed' == 'succeeded'
+E         
+E         - succeeded
+E         + failed
+
+tests/test_image_loras.py:213: AssertionError
+=============================== warnings summary ===============================
+../../ChatGPT/Video Production Pipline/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /home/navievroom/Documents/ChatGPT/Video Production Pipline/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+../../ChatGPT/Video Production Pipline/.venv/lib/python3.12/site-packages/starlette/testclient.py:53
+  /home/navievroom/Documents/ChatGPT/Video Production Pipline/.venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_image_loras.py::test_engine_automatically_applies_and_freezes_selection
+FAILED tests/test_image_loras.py::test_explicit_retry_reuses_original_failed_brief_with_audited_evidence
+2 failed, 1145 passed, 2 warnings in 126.18s (0:02:06)

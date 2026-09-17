@@ -1,0 +1,69 @@
+{
+  "id": "minimax-h3-director",
+  "name": "MiniMax H3 導演台全能工作流 (1)",
+  "saved_at": "2026-09-09T13:51:54.894067+00:00",
+  "status": "archived_research_complete_integration_pending",
+  "original": {
+    "source_path": "/home/navievroom/Downloads/MiniMax+H3+导演台全能工作流 (1).json",
+    "archive_path": "original/MiniMax+H3+导演台全能工作流 (1).json",
+    "sha256": "fa40539a002264b292e6bcb990bc8d2f3788f90f4cadcaf6c67f2a726aa925be",
+    "bytes": 48070,
+    "format": "ComfyUI UI workflow JSON"
+  },
+  "upstream_repository": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
+  "upstream_commit": "f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d",
+  "installed_commit": "7de4a95243ce1a25fedc634a0eda62672610afd1",
+  "reference_files": [
+    {
+      "path": "upstream-reference/README.md",
+      "url": "https://raw.githubusercontent.com/AIMixer/ComfyUI_MiniMaxH3_Director/f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d/README.md",
+      "sha256": "f5fb4592dd9ddc9468ae141be64ac7f667cfd21756f5ba909b6454852a11a399"
+    },
+    {
+      "path": "upstream-reference/LICENSE",
+      "url": "https://raw.githubusercontent.com/AIMixer/ComfyUI_MiniMaxH3_Director/f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d/LICENSE",
+      "sha256": "367fe288aba854ae7d586c5cd3df10183c8880e7776531de3ba12d2300df9ae2"
+    },
+    {
+      "path": "upstream-reference/director/pack.py",
+      "url": "https://raw.githubusercontent.com/AIMixer/ComfyUI_MiniMaxH3_Director/f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d/director/pack.py",
+      "sha256": "2573efba8b22fe34b0020a8c61289a10b5f2afc4d44feee7686fb733594c1ebe"
+    },
+    {
+      "path": "upstream-reference/nodes/director.py",
+      "url": "https://raw.githubusercontent.com/AIMixer/ComfyUI_MiniMaxH3_Director/f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d/nodes/director.py",
+      "sha256": "7781227be4d2d0991f0ea076b79e15c30695acf1135053fab4e4840170becb56"
+    },
+    {
+      "path": "upstream-reference/nodes/director_groups.py",
+      "url": "https://raw.githubusercontent.com/AIMixer/ComfyUI_MiniMaxH3_Director/f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d/nodes/director_groups.py",
+      "sha256": "1e5a32efd2a786e2691c712b9174a9bae7a71ff5ea93c4f7236138eab6af8fe5"
+    }
+  ],
+  "runtime_changes": false,
+  "video_generation_tested": false,
+  "note": "Original workflow preserved verbatim as user-supplied data. Reference code is not installed or executed. Workflow licensing is not inferred from the plugin Apache-2.0 license.",
+  "readiness": {
+    "can_run_unchanged": false,
+    "blockers": [
+      "r2v task selected with fl2va UNET",
+      "three example reference images return 404"
+    ],
+    "optional_branches": "Turbo LoRA, attention patches and refine/upscale bypassed",
+    "runtime_version_parity": "unverified"
+  },
+  "research_document": "../../docs/H3_DIRECTOR_WORKFLOW.md",
+  "studio_runtime": {
+    "owner": "Continuity Studio",
+    "graph_builder": "studio/h3_render_graph.py",
+    "transport": "studio/comfy_video_provider.py",
+    "modes": [
+      "I2VA",
+      "FL2VA",
+      "REF2VA"
+    ],
+    "external_source_paths": "provenance only; never opened during generation",
+    "external_workflow_files_required": false,
+    "original_readiness_above": "Historical assessment of the untouched UI workflow, not the Studio API adapter."
+  }
+}

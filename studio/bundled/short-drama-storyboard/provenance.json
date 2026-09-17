@@ -1,0 +1,12 @@
+{
+  "id": "short-drama-storyboard",
+  "version": "snapshot-2026-09-08",
+  "source": "https://github.com/zenstory-ai/drama-skills",
+  "source_commit": "3ab6b8550bbccef71001d2187e2b2ac9a74ab917",
+  "license": "MIT",
+  "files": {
+    "SKILL.md": "ebb6383d86bd0740fd989ca8408258db04a178079df6b93a529c5b415f97cec0",
+    "references/shot-craft.md": "ff794b3d83e2fe5f58c1f023eb245bf9fd801a7516901c85f1d33c2c333e3f33",
+    "references/keyframe-craft.md": "db9ff0bb37fca8881c63cab393c05eea5bcc4da4acfd287a6b7df42a4db0ca24"
+  }
+}

@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const text=await readFile(new URL('../static/context-settings.js',import.meta.url),'utf8');
+const {renderContextSettings,contextLimitsForm,renderContextUsage}=await import('data:text/javascript;base64,'+Buffer.from(text).toString('base64'));
+const esc=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const p={id:'local_qwen',name:'Local <Qwen>',kind:'http',model:'qwen'};
+const policy={context_window:131072,max_output_tokens:8192,tokenizer:'llama_cpp'};
+const html=renderContextSettings({providers:[p],context_profiles:{local_qwen:policy}},esc);
+assert.ok(html.includes('131,072')&&html.includes('8,192')&&html.includes('VRAM Manager'));
+assert.ok(!html.includes('<Qwen>')&&html.includes('&lt;Qwen>'));
+assert.ok(html.includes('data-action="context-limits"'));
+const form=contextLimitsForm(p,policy,esc);
+assert.ok(form.includes('name="context_window"')&&form.includes('value="llama_cpp" selected'));
+assert.ok(!contextLimitsForm({...p,kind:'codex'}, {...policy,tokenizer:'estimate'},esc).includes('value="llama_cpp"'));
+const usage=renderContextUsage({input:{provider_config:{context_policy:policy}},context_usage:[{attempt:'02-scene-attempt-001',mode:'scoped',input_tokens:12000,full_input_tokens:190000,selected_units:12,omitted_units:120}]},esc);
+assert.ok(usage.includes('原文索引與相關背景')&&usage.includes('12 段'));
+assert.equal(renderContextUsage({input:{}},esc),'');
+console.log('Context settings and source-usage UI checks passed.');

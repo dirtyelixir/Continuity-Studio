@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-09",
+  "scope": "Isolated deterministic code investigation; no external requests or generation",
+  "production_data_touched": false,
+  "image_prepare_skill_injection": {
+    "standalone_image_prepare_has_skill": true,
+    "automatic_image_preparation_has_skill": false
+  },
+  "http_storyboard_repair": {
+    "mock_http_calls": 1,
+    "validation_error": "1 validation error for StoryboardProposal\ncoverage\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/too_short",
+    "raw_result_saved": false,
+    "repair_directory_exists": false
+  },
+  "real_provider_quality_tested": false,
+  "delegated_audit": "No completion evidence received; parent completed focused investigation",
+  "regression_command": ".venv/bin/python -m pytest tests/test_provider_profiles.py tests/test_providers.py tests/test_skills.py tests/test_image_prompt_assembly.py tests/test_storyboarding.py -q",
+  "regression_result": "108 passed, 2 existing dependency deprecation warnings, 8.87 seconds"
+}

@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const load=async name=>import('data:text/javascript;base64,'+Buffer.from(await readFile(new URL('../static/'+name,import.meta.url),'utf8')).toString('base64'));
+const {referenceFidelityFeedback}=await load('reference-fidelity.js');
+const old='Fix the door.\n[High reference preservation]face four-view crowd[/High reference preservation]';
+const next=referenceFidelityFeedback(old,true);
+assert.ok(next.startsWith('Fix the door.'));
+assert.equal(next,referenceFidelityFeedback(next,true));
+assert.equal(referenceFidelityFeedback(next,false),'Fix the door.');
+assert.ok(!next.includes('four-view')&&!next.includes('crowd')&&!next.includes('face'));
+const {generationStatus}=await load('generation-status.js');
+const job={id:'j',capability:'image',target_id:'stairs',state:'running',created:'2026-09-09T10:00:00Z',input:{image_prompt_stage:'source'}};
+assert.equal(generationStatus({assets:[],jobs:[job]},'stairs').label,'正在整理圖片提示詞');
+assert.equal(generationStatus({assets:[],jobs:[{...job,input:{image_prompt_stage:'render'}}]},'stairs').label,'正在生成圖片');
+const app=await readFile(new URL('../static/app.js',import.meta.url),'utf8');
+assert.ok(app.includes('歷史組裝指示')&&app.includes('已整理並交付生圖的提示詞'));
+assert.ok(app.includes("if(!h.ready)throw Error"));
+console.log('Prompt assembly UI: scoped fidelity, idempotent legacy feedback, real stage labels, historical prompt labels, draft copy gate passed.');

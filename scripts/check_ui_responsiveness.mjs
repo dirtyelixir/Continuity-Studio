@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const source=readFileSync('static/app.js','utf8');
+const ctx={setTimeout,clearTimeout,console};vm.createContext(ctx);
+// Exercise actual request scheduling with deferred network completion.
+const block=source.slice(source.indexOf('let refreshing='),source.indexOf('async function refreshState('));
+vm.runInContext(`let calls=0,release;async function refreshState(){calls++;await new Promise(r=>release=r);} ${block}`,ctx);
+vm.runInContext('var first=refresh();var second=refresh();',ctx);
+assert.equal(vm.runInContext('calls',ctx),1,'Background refreshes coalesce');
+vm.runInContext('release()',ctx);await ctx.first;await ctx.second;
+vm.runInContext('var third=refresh()',ctx);assert.equal(vm.runInContext('calls',ctx),2);vm.runInContext('release()',ctx);await ctx.third;
+const click=source.slice(source.indexOf('let backdropPointer='),source.indexOf("if(a==='prepare-scene')"));
+const handlers={};let closes=0,navs=0,guards=0;
+const ui={document:{addEventListener:(name,fn)=>handlers[name]=fn},close:()=>closes++,navigate:async()=>navs++,guarded:()=>guards++,toast:()=>{},uiError:x=>x};
+vm.createContext(ui);vm.runInContext(click+'});});',ui);
+const backdrop={classList:{contains:x=>x==='modal-backdrop'},closest:()=>null};
+const inside={classList:{contains:()=>false},closest:()=>null};
+handlers.pointerdown({target:inside});handlers.click({target:backdrop});assert.equal(closes,0,'Dragging from inside must not dismiss');
+handlers.pointerdown({target:backdrop});handlers.click({target:backdrop});assert.equal(closes,1);
+const target=action=>({classList:{contains:()=>false},closest:()=>({dataset:{action,page:'shots'}})});
+handlers.click({target:target('close')});assert.equal(closes,2);assert.equal(guards,0,'Close bypasses mutation wait');
+handlers.click({target:target('navigate')});assert.equal(navs,1);assert.equal(guards,0,'Navigation bypasses mutation wait');
+console.log('UI responsiveness: coalesced refresh, new refresh after completion, backdrop close, drag protection, close/navigation independent of mutation lock passed.');

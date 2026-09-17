@@ -1,0 +1,41 @@
+{
+  "status": "ahead",
+  "ahead_by": 5,
+  "commits": [
+    {
+      "sha": "aa5df2ba6309732329ab812b739fcac77392021a",
+      "message": "fix: 修复参考音频音色丢失/错位（<Audio N> 标签与音频槽位严格对齐）"
+    },
+    {
+      "sha": "3cea821640d02f16f24db3a8b61a34fa20d540f6",
+      "message": "fix: Linux 分段导出不再因 stdin flush 写出空目录"
+    },
+    {
+      "sha": "d0c371311c54f030aa68cff818d8d271e23fbdce",
+      "message": "feat: 段间引导增加「保完整」，默认保留对齐余帧"
+    },
+    {
+      "sha": "531adbacf4eec30c76e47a31dccbdea94ff1b6b3",
+      "message": "Merge pull request #128 from luckday888/pr/reference-audio-timbre"
+    },
+    {
+      "sha": "f1f68bc9fcc6ae3d965d89ea92fb1e1d8cdee13d",
+      "message": "fix: 参考音频保持 lazy，标签只对齐解码成功的槽"
+    }
+  ],
+  "changed_files": [
+    "director/executor_core.py",
+    "director/external_groups.py",
+    "director/fl2v_timeline.py",
+    "director/gen_timeline.py",
+    "director/h3_motion_context.py",
+    "director/plan.py",
+    "director/segment_cache.py",
+    "director/segment_continuity.py",
+    "lib/video_export.py",
+    "nodes/director_common.py",
+    "web/js/minimax_i18n.js",
+    "web/js/minimax_refine.js",
+    "web/js/minimax_timeline.js"
+  ]
+}

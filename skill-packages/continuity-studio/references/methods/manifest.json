@@ -1,0 +1,131 @@
+{
+  "id": "studio-production-methods",
+  "name": "Studio 既定製作方法",
+  "version": "1.6.2",
+  "routes": {
+    "h3_strategy": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md"
+    ],
+    "h3_video_prompt": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/performance.md"
+    ],
+    "director_style": [
+      "references/story.md"
+    ],
+    "narrative": [
+      "references/prompt-writing.md",
+      "references/story.md",
+      "references/directing.md",
+      "references/performance.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md"
+    ],
+    "storyboard": [
+      "references/prompt-writing.md",
+      "references/story.md",
+      "references/directing.md",
+      "references/performance.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md"
+    ],
+    "image_prepare": [
+      "references/prompt-writing.md",
+      "references/image-craft.md",
+      "references/directing.md"
+    ],
+    "image": [
+      "references/prompt-writing.md",
+      "references/image-craft.md"
+    ],
+    "image_review": [
+      "references/review.md"
+    ],
+    "h3": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/performance.md"
+    ],
+    "h3_prepare": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/performance.md"
+    ],
+    "h3_shot": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/performance.md"
+    ],
+    "h3_global": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md"
+    ],
+    "h3_scene": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/performance.md"
+    ],
+    "h3_guidance": [
+      "references/video.md"
+    ],
+    "qc": [
+      "references/review.md",
+      "references/directing.md",
+      "references/performance.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md"
+    ],
+    "directing_qc": [
+      "references/directing.md",
+      "references/review.md",
+      "references/performance.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md"
+    ],
+    "h3_group_plan": [
+      "references/prompt-writing.md",
+      "references/video.md",
+      "references/directing.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md"
+    ],
+    "storyboard_frames": [
+      "references/prompt-writing.md",
+      "references/directing.md",
+      "references/visual-skills/dramaturgy.md",
+      "references/montage.md",
+      "references/storyboard.md"
+    ]
+  },
+  "files": {
+    "SKILL.md": "c036878cccd0662374773312faa68f22c8bfc0e8376e5a288e811a66442fe162",
+    "references/character-sheet.md": "92316ef48923311d52587cecfd58e61da66c7d9b7d82c9258d0b5a62459fae32",
+    "references/directing.md": "750930bb98a7cc6bc715b452d673c2f0fc7ca75e9e49447cd382bf12c5813ca1",
+    "references/image-craft.md": "fc094385358fe77a45a39583ce0b531e0965ce1599da398af349214f25be2cb7",
+    "references/image-preparation.md": "e3b9444a545349459d372e3cc325b3905a51059bc3daa450b118988c05afb1c8",
+    "references/montage.md": "a7a15afae297474bbf360f62f22b0d95e28d2b00ee50e72992b575b9f636bddb",
+    "references/performance.md": "dc7a4eaf7363909475658294d4d108f5b83778b93742f0cb71f7283dac0baff0",
+    "references/planning.md": "a02342935a1dfda1cd20706c5ad7fe90e631c962e42d4b9708ee66166b598263",
+    "references/prompt-tasks.json": "4b3566c9486b98420fa0f6d608dd7a1735083b826bbf9406ad83580c48cf2b73",
+    "references/prompt-writing.md": "3033af15725db8e1d3da19b7bf9a101ba358aeeb73c92e7cd8ccfc0ee6e3660c",
+    "references/reference-authority.md": "8585cb2b87cf9b21d25ebf7752f6a84a227c4d85024c89dab0675b1ab7c69a57",
+    "references/render-rules.json": "60c99debc1b5e6d65234cd53e334f98bbe814bb3bd71c4875a034d05c511a2ac",
+    "references/review.md": "44ca0d9a48e4acb0dc51d0c02d1ea82908ab4ec1bc5dfc253e4476b5eaa42064",
+    "references/story.md": "27a751dcda19c8d6fb2d9c1740cbb3027d545b9d9bb3fbda1d9becbdd0d4d23e",
+    "references/storyboard.md": "41b55df4163d2a8a7bd79cc4fdad7c50fa848b380d7a77deddea20aa9911f7a7",
+    "references/video.md": "25dd514db4e1514843320c67a6d728177b8c5daf98e86a736dcd47584f03d4bf",
+    "references/visual-skills/LICENSE": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "references/visual-skills/NOTICE": "09dfa459fb45dbecc9f695c4fac13867e0c22384171431ddab1a6f49f41d2c3c",
+    "references/visual-skills/dramaturgy.md": "63adc8998aa6e1b5cd78b59e36d25510cce5a28ba985c0a3cb97711d7eaf930a",
+    "references/visual-skills/provenance.json": "184949bf5ce1fee6a76563adf8b47c69cf21d6b80c7b78c66bdf11813621e115"
+  }
+}

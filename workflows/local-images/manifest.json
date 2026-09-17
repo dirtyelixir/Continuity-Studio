@@ -1,0 +1,34 @@
+{
+  "collection": "Continuity Studio local images",
+  "adapter": "studio-local-images-v5",
+  "source_workflows": [
+    {
+      "source": "/home/navievroom/comfy/workflows/Shared/local-or-toonflow/Toon-flow-Local-Klein_true_V3人物资产制作合集（写真套图+换脸+角色定版图）By+像素幻想Lab.json",
+      "filename": "Toon-flow-Local-Klein_true_V3人物资产制作合集（写真套图+换脸+角色定版图）By+像素幻想Lab.json",
+      "sha256": "5ef3c363fe7a0f7dd2263a4abfed0e867dd10205c20f614ce9ca7bedc8137b3d"
+    },
+    {
+      "source": "/home/navievroom/comfy/workflows/Shared/local-or-toonflow/▶Local-krea2-图像编辑-整合流.json",
+      "filename": "▶Local-krea2-图像编辑-整合流.json",
+      "sha256": "1c329c4d5e0b1b05308d89b2a86b8300a07aac6883f01219ef38a65554ac1a46"
+    }
+  ],
+  "runtime_adapter": "studio/local_images.py",
+  "krea_edit_plugin_commit": "86f886dac23013d88996e3a2e99093ba44d322fb",
+  "documentation": "docs/LOCAL_IMAGE_WORKFLOWS.md",
+  "acceptance": "data/acceptance/local-images/verification.json",
+  "originals_modified": false,
+  "character_layout": "four-view-v2",
+  "character_layout_reference": "reference/character-four-view-v2.jpg",
+  "ownership": {
+    "owner": "Continuity Studio",
+    "external_source_paths": "provenance only; never opened during generation",
+    "runtime_graph_builder": "studio/local_images.py",
+    "external_workflow_files_required": false,
+    "runtime_dependencies": [
+      "ComfyUI service",
+      "installed model weights and custom nodes",
+      "VRAM Manager"
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+/* visual-style.css — 視覺風格選擇器樣式（與 visual-style.js 配對）。
+ *
+ * 設計規則：
+ *  - 所有 selector 都以 .visual-style-picker 為前綴，避免影響全站。
+ *  - 卡片採 responsive grid（minmax(160px, 1fr)）。
+ *  - 選中狀態用 CSS :has() 顯示（不依賴 JS 或外部 icon）。
+ *  - 配色沿用暖紙調：底 #f6f4ec、墨 #24271f、細邊框。
+ */
+
+.visual-style-picker{
+  --vs-paper: #f6f4ec;
+  --vs-panel: #fffefb;
+  --vs-ink: #24271f;
+  --vs-muted: #72776b;
+  --vs-line: #ddded3;
+  --vs-olive: #495742;
+  --vs-gold: #e1c574;
+  border: 1px solid var(--vs-line);
+  border-radius: 9px;
+  background: var(--vs-panel);
+  padding: 20px 22px 24px;
+  margin: 0 0 22px;
+  color: var(--vs-ink);
+  font-size: 14px;
+}
+
+.visual-style-picker legend{
+  font-size: 16px;
+  font-weight: 550;
+  letter-spacing: -0.3px;
+  padding: 0 8px;
+}
+
+.visual-style-picker__hint{
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: var(--vs-muted);
+}
+
+/* 卡片網格：responsive，每卡最小 160px。 */
+.visual-style-picker__cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+/* 單張風格卡片。radio 隱藏但保留可聚焦／可讀性。 */
+.visual-style-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 13px 13px;
+  border: 1px solid var(--vs-line);
+  border-radius: 7px;
+  background: var(--vs-paper);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+
+.visual-style-card input[type="radio"]{
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.visual-style-card:hover{
+  border-color: var(--vs-olive);
+}
+
+/* 卡片標題與說明。 */
+.visual-style-card__title{
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.visual-style-card__note{
+  font-size: 11px;
+  color: var(--vs-muted);
+  line-height: 1.45;
+}
+
+/* 選中狀態：用 :has(input:checked) 顯示（不需 JS 切換 class）。 */
+.visual-style-card:has(input:checked){
+  border-color: var(--vs-olive);
+  background: #eef0e6;
+  box-shadow: inset 3px 0 0 var(--vs-gold);
+}
+
+/* 鍵盤可見聚焦：radio 聚焦時高亮整張卡片。 */
+.visual-style-card:has(input:focus-visible){
+  outline: 2px solid #9dab8b;
+  outline-offset: 1px;
+}
+
+/* 下半部：畫幅比例與補充說明。 */
+.visual-style-picker__fields{
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 18px;
+}
+
+.visual-style-picker__label{
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  margin-bottom: 6px;
+}
+
+.visual-style-picker select,
+.visual-style-picker textarea{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--vs-panel);
+  color: var(--vs-ink);
+  border: 1px solid #cfd3c4;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.visual-style-picker textarea{
+  resize: vertical;
+  min-height: 84px;
+}
+
+.visual-style-picker select:focus,
+.visual-style-picker textarea:focus{
+  outline: 2px solid #9dab8b;
+  outline-offset: 1px;
+}
+
+/* 補充說明字數計數。 */
+.visual-style-picker__count{
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--vs-muted);
+  text-align: right;
+}
+
+/* 自訂方向被選時，補充說明欄位標記為必要（視覺提示，不影響驗證）。 */
+.visual-style-picker:has(input[value="custom"]:checked) .visual-style-picker__notes-field .visual-style-picker__label{
+  color: var(--vs-olive);
+}
+
+/* 窄螢幕：卡片與欄位堆疊。 */
+@media (max-width: 640px){
+  .visual-style-picker{
+    padding: 16px 14px 18px;
+  }
+  .visual-style-picker__fields{
+    grid-template-columns: 1fr;
+  }
+}

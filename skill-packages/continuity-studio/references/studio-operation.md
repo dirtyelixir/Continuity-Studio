@@ -1,0 +1,17 @@
+# Use with the Studio application
+
+Find the user's actual Studio workspace instead of assuming this package sits beside it. Before application changes read its AGENTS.md, docs/STATE.md, docs/DECISIONS.md and docs/USER_BRIEF.md. Existing source and configured routes govern. The portable Skill does not replace the application-owned mandatory bundle or register a second automatic extension.
+
+Studio starts with ./run.sh and normally serves 127.0.0.1:4760. Inspect health and existing processes before starting anything; avoid duplicate instances or interrupting active text, voice, image or video jobs. Use current application APIs/UI for creation, candidates and adoption, with source/revision checks. Do not patch the production SQLite JSON to bypass adoption or review. Authentication and GPU services are separate infrastructure; never bypass VRAM Manager or cancel unrelated rendering to run this method.
+
+Studio owns complete workflow definitions under workflows/ and generation adapters under studio/. External workflow source paths are provenance only. ComfyUI, models, custom nodes, VRAM Manager and configured provider credentials remain execution dependencies. A Skill installation is not their installation, nor proof that rendering works. Actual execution must use the supplied tools/providers, preserve exact requests and return real receipts/errors.
+
+For a failed job, inspect its saved status, result and checkpoints before retrying. Resume only through the current supported source/provider/method freshness checks. Retain partial transport output as diagnostics, never as a completed proposal. Do not automatically change providers, restart GPU services or regenerate paid output.
+
+## Backup and recovery
+
+Skill-only backup includes this entire directory, its source/provenance, licenses, schemas and all referenced method files. A ZIP or tar of SKILL.md alone is incomplete. Keep a checksum manifest and verify a freshly extracted copy in an unrelated directory. A standalone install uses a full copy under the user's personal skills directory, not symlinks to Downloads or the Studio checkout.
+
+An application recovery backup additionally needs source code, static files, documentation, requirements, all Studio-owned workflows and data/ (canon DB, revisions, media, references and job evidence). Make a transaction-consistent SQLite snapshot using the online backup API rather than a raw live database copy. Preserve source originals and record inclusions/exclusions. Exclude previous backups and reproducible caches to avoid recursive archives. Keep credentials separately if excluded; never claim a credential-free archive is a turnkey authenticated installation. Do not bundle external model weights implicitly.
+
+Validate database integrity, archive extraction and file hashes. Verify retained source files were stable during copying and compare database logical contents at the checkpoint. If work changed during the copy, repair or disclose the snapshot boundary; do not claim a coherent complete restore point from a partial copy. Keep local backups private. Restoring means extracting to a new directory and inspecting its restore instructions; overwriting live canon or running a second instance against it requires the user's recovery intent. Reconnect dependencies explicitly, then start via run.sh and validate real project/media availability before claiming recovery.

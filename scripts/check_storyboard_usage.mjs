@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {renderAnchorUsage,renderFrameUses} from '../static/storyboard-usage.js';
+const a={id:'a',time:4.8,title:'New view',generation_usage:{role:'cut_opening',scene_time:7.8,planned:{use:'planning_only',route_active:true,reason:'Inspect <pose>',boundary_exception:'Deliberate <cut>'},submitted:[]}};
+let h=renderAnchorUsage(a);
+assert(h.includes('CUT 後')&&h.includes('來源 4.8 秒')&&h.includes('場景剪接時間 7.8 秒'));
+assert(h.includes('Planning only')&&h.includes('未有此版本圖片'));
+assert(h.includes('&lt;pose&gt;')&&!h.includes('<pose>'));
+a.generation_usage.submitted=[{mode:'I2VA',roles:['startImage'],state:'failed'}];
+h=renderAnchorUsage(a);assert(h.includes('已提交 I2VA')&&h.includes('生成失敗')&&!h.includes('生成完成'));
+a.generation_usage.planned=null;
+assert(renderAnchorUsage(a).includes('尚未有逐張用圖安排'));
+const p={storyboard:{scenes:[{panels:[{title:'New view',anchors:[a]}]}]}};
+h=renderFrameUses(p,[{anchor_id:'a',use:'image_conditioning',reason:'Protect composition',boundary_exception:''}]);
+assert(h.includes('4.8 秒')&&h.includes('提交時核對')&&!h.includes('已提交'));
+assert.equal(renderAnchorUsage({}), '');
+console.log('Storyboard usage: source/edit time distinction, planned versus submitted inputs, failed receipts, escaped reasons and legacy unknowns passed.');

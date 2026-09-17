@@ -1,0 +1,25 @@
+{
+  "version": "studio-render-rules-v1",
+  "common": [
+    "Preserve the specified visual medium and aspect ratio. Do not substitute photorealism for the requested stylization.",
+    "Respect the assigned reference roles. Identity references govern the same subject; style and layout examples never supply a replacement identity.",
+    "Depict one coherent still image. Do not add unrequested story events, dialogue captions, camera-motion trails or sequential action panels."
+  ],
+  "targets": {
+    "character": [
+      "Maintain one identical subject across the required four views, including face, hair, build, wardrobe, accessories, anatomical asymmetries and holding hand."
+    ],
+    "location": [
+      "Establish one connected architectural view with its fixed spatial anchors, without people. Use only the lighting applicable to this location and time."
+    ],
+    "prop": [
+      "Show the complete specified object with its stable silhouette, proportions, materials and distinguishing details. No additional subject or collage."
+    ],
+    "crowd": [
+      "Preserve the specified people count when given and distinct individual faces and wardrobe; do not clone one person or collapse the crowd into a single identity."
+    ],
+    "frame": [
+      "Freeze only the specified moment. Preserve actor-specific pose, eyeline, hand and object ownership, screen direction and spatial relationships. Do not depict a later outcome."
+    ]
+  }
+}

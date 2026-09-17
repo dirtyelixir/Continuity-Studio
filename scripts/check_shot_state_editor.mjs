@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {shotStateFields,applyShotStateFields} from '../static/shot-state-editor.js';
+const legacy={keyframes:[{id:'start',moment:'start',description:'old'}],start_state:[],end_state:[]};
+assert.deepEqual(shotStateFields(legacy).map(x=>x.key),['keyframes','start_state','end_state']);
+const s={...structuredClone(legacy),canonical_state:{version:'canonical-shot-state-v1',moments:[],transitions:[],compositions:[]}};
+const fields=shotStateFields(s);
+assert.deepEqual(fields.map(x=>x.key),['frame_moments','canonical_state']);
+assert(!fields[0].value.includes('description'));
+const values=Object.fromEntries(fields.map(f=>[f.key,f.value]));
+applyShotStateFields(s,values);
+assert.equal(s.keyframes[0].description,'old');
+assert.throws(()=>applyShotStateFields(s,{...values,canonical_state:'null'}),/時間狀態/);
+assert.throws(()=>applyShotStateFields(s,{...values,frame_moments:'[{"id":"start","moment":"start","description":"new independent gaze"}]'}),/畫面時刻只填/);
+const next=JSON.parse(values.canonical_state);next.compositions=[{frame_id:'end',text:'A final view'}];
+applyShotStateFields(s,{canonical_state:JSON.stringify(next),frame_moments:'[{"id":"end","moment":"end"}]'});
+assert.deepEqual(s.keyframes,[{id:'end',moment:'end',description:''}]);
+assert.deepEqual(s.canonical_state,next);
+console.log('Canonical editor: authored state/composition only, legacy compatibility, frame binding and projection-edit rejection passed.');

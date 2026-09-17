@@ -1,0 +1,272 @@
+{
+  "canon": [
+    {
+      "description": "A meticulous young adult lighthouse keeper with a compact build, round face, broad dark eyebrows, freckles across a small nose and dark brown eyes.",
+      "facts": [
+        "Short black bob with blunt bangs and one curled strand beside her left cheek.",
+        "Mustard felt raincoat with three oversized dark wooden buttons, navy trousers and charcoal rubber boots.",
+        "A small silver lighthouse pin stays on her left lapel.",
+        "Precise hand movements and a habit of squaring objects.",
+        "Stands behind the workbench on screen left."
+      ],
+      "id": "char_ada",
+      "kind": "character",
+      "name": "Ada",
+      "scope": "public"
+    },
+    {
+      "description": "A small cream-painted maintenance robot with a rounded rectangular body, dome head and one central teal lens inside a dark circular bezel.",
+      "facts": [
+        "Approximately 35 centimeters tall, with short paddle feet and two slender articulated arms ending in rounded pincers.",
+        "Chipped cream paint at the lower corners, three horizontal chest vents and a brass maintenance badge on a pivot.",
+        "No mouth; expression comes from lens direction and head tilt.",
+        "Badge begins tilted clockwise and can be straightened.",
+        "Stands on the workbench on screen right."
+      ],
+      "id": "char_pip",
+      "kind": "character",
+      "name": "Pip",
+      "scope": "public"
+    },
+    {
+      "description": "A snug curved-wall workshop built from painted wood, unchanged throughout the film.",
+      "facts": [
+        "A scarred wooden workbench spans the foreground.",
+        "A circular window centered on the rear wall admits deep blue night light.",
+        "An amber wall sconce hangs rear left; a pegboard of neatly spaced tools hangs rear right.",
+        "Ada stands behind the left side of the bench; Pip stands on its right end.",
+        "The camera remains on the room-facing side of the bench, preserving Ada left and Pip right.",
+        "The amber sconce hangs low enough at rear left to rake across the bench surface, throwing the black toggle on the lantern's base into hard-edged relief."
+      ],
+      "id": "loc_workshop",
+      "kind": "location",
+      "name": "Tiny lighthouse workshop",
+      "scope": "auto"
+    },
+    {
+      "description": "A squat brass electric lantern with a clear cylindrical glass enclosure, wire handle and a black toggle on the right side of its base.",
+      "facts": [
+        "A crescent-shaped tarnish mark sits on the front of the base.",
+        "Stays upright at the center of the workbench throughout.",
+        "Toggle faces Pip and is visible from the camera side.",
+        "The black toggle is only a few centimetres long and sits at the lower right of the base.",
+        "Begins switched off; emits steady warm amber light when Pip raises the toggle."
+      ],
+      "id": "prop_lantern",
+      "kind": "prop",
+      "name": "Brass lantern",
+      "scope": "auto"
+    }
+  ],
+  "chapters": [],
+  "edit_plan": [
+    {
+      "continuity_note": "The source runs to 8.0 seconds; trimming the final 0.2 seconds still exits with Ada's hands on the bench, Pip's arms lowered with its lens on the switch, the toggle down and the lantern unlit, and Pip's badge tilted clockwise — exactly shot_02's opening state at its 0.2-second edit-in. The lantern's base sits nearest the lens from the first frame, so the toggle is held large in the lower-right foreground with the sconce rake on it for the whole selected range.",
+      "cut_in_reason": "Open on Ada's mistaken certainty and let the audience read the untouched toggle large in her own frame, in the same locked low composition, before any correction exists.",
+      "cut_out_reason": "Leave on Pip's silent attention just before the fix, with the toggle still unexamined, so the next cut feels prompted by Pip rather than by Ada.",
+      "id": "edit_01",
+      "planned_edit_in": 0.0,
+      "planned_edit_out": 7.8,
+      "shot_id": "shot_01"
+    }
+  ],
+  "logline": "A meticulous lighthouse keeper diagnoses a broken lantern until her tiny robot assistant quietly finds the switch.",
+  "scenes": [
+    {
+      "director_plan": null,
+      "id": "scene_workshop",
+      "location_id": "loc_workshop",
+      "summary": "Ada's confident diagnosis meets Pip's simple solution, followed by a small gesture of affection.",
+      "time_of_day": "Night",
+      "title": "A quiet repair"
+    }
+  ],
+  "screenplay": "INT. LIGHTHOUSE WORKSHOP — NIGHT\n\nA brass lantern sits dark on the workbench. Ada squares its handle with painstaking care, peers through the glass, and withdraws her hands.\n\nADA\nDefinitely broken.\n\nBeside her, Pip angles its single teal lens toward the lantern's base. A small arm reaches out and clicks the switch. Amber light fills Ada's face.\n\nAda looks from the lantern to Pip. Her solemn expression softens into a sheepish smile. She straightens Pip's crooked maintenance badge, then rests her hand against its rounded head. Pip leans into her palm. The lantern glows steadily between them.",
+  "shots": [
+    {
+      "action": "Ada carefully aligns the handle, peers into the dark lantern and delivers her diagnosis. Pip's lens lowers toward the switch.",
+      "angle": "Camera lowered to just above bench height and tilted up a few degrees toward Ada's face, with the lantern base closest to the lens so the slight downward read across the bench surface still exposes the base plate and its toggle at large scale.",
+      "beats": [
+        {
+          "action": "Ada precisely squares the lantern handle without shifting its base.",
+          "end": 2.5,
+          "start": 0.0
+        },
+        {
+          "action": "She peers into the glass, then sets both hands on the bench.",
+          "end": 4.5,
+          "start": 2.5
+        },
+        {
+          "action": "Ada delivers her diagnosis with absolute confidence.",
+          "end": 6.2,
+          "start": 4.5
+        },
+        {
+          "action": "Pip lowers its lens toward the untouched switch; hold the silence.",
+          "end": 8.0,
+          "start": 6.2
+        }
+      ],
+      "blocking": "Ada remains behind the bench left, her hands working at the handle and then resting flat on the bench, never crossing the right side of the base. Pip stands on the bench right, facing diagonally screen left toward the lantern, its arms lowered. The lantern stays upright at its centre position on the bench with its toggle on the camera side and nearest the lens, never occluded by Ada's hands or the wire handle.",
+      "camera": "Locked tripod, 50mm equivalent lens, mounted low and close so the composition reads as a tight medium-close two-shot; no movement. The rear-left amber sconce rakes low across the bench and the lantern base, so the black toggle reads as a hard-edged, high-contrast silhouette held large in the lower-right foreground, clear of Ada's hands and the wire handle.",
+      "dialogue": [
+        {
+          "delivery": "Soft, matter-of-fact certainty.",
+          "end": 6.0,
+          "entity_id": "char_ada",
+          "language": "en",
+          "start": 4.8,
+          "text": "Definitely broken."
+        }
+      ],
+      "direction": null,
+      "duration": 8.0,
+      "end_state": [
+        {
+          "entity_id": "prop_lantern",
+          "key": "position",
+          "value": "Upright at workbench center."
+        },
+        {
+          "entity_id": "prop_lantern",
+          "key": "power",
+          "value": "Toggle down; light off."
+        },
+        {
+          "entity_id": "char_ada",
+          "key": "pose",
+          "value": "Behind bench left, hands resting on bench, gaze on lantern."
+        },
+        {
+          "entity_id": "char_pip",
+          "key": "pose",
+          "value": "On bench right, arms lowered, lens directed at lantern switch."
+        },
+        {
+          "entity_id": "char_pip",
+          "key": "badge",
+          "value": "Tilted clockwise."
+        }
+      ],
+      "entity_ids": [
+        "char_ada",
+        "char_pip",
+        "prop_lantern"
+      ],
+      "expression": "Ada is earnestly certain; Pip is quietly attentive.",
+      "framing": "Tight medium-close two-shot from a low camera: Ada's face and hands at screen left, the lantern's base large in the lower-right foreground with its black toggle, and full Pip at screen right.",
+      "generation_duration": 8.0,
+      "id": "shot_01",
+      "keyframes": [
+        {
+          "description": "Seen from a camera just above bench height, Ada stands behind the left side of the bench with her fingertips squared on the upright lantern's wire handle, her face tilted up and her gaze fixed on the dark glass; Pip stands on the bench right with both arms lowered and its teal lens aimed at the lantern's base. The unlit lantern's base sits nearest the lens, its black toggle large in the lower-right foreground, clear of her hands and the handle, its black edge picked out as a hard silhouette by the amber sconce raking low across the bench from rear left, against the deep blue from the circular window.",
+          "id": "frame_01_start",
+          "moment": "start"
+        },
+        {
+          "description": "低機位中景雙人鏡頭，亞達站在工作檯左後方，雙手已平放在檯面上，臉微抬，目光鎖定未點亮的玻璃燈罩，嘴微張，正處於說出「Definitely broken」的瞬間。黃銅燈仍直立於檯面中央，黑色撥桿在低右前景保持大而清晰，未被她的手或提把遮擋，琥珀壁燈的低斜光切出硬邊。派普在工作檯右側，雙臂低垂，藍綠色鏡頭朝向亞達。此時尚未出現任何修正動作或反應，獎章仍順時針歪斜。",
+          "id": "sb_52d2d71608e347809d7b",
+          "moment": "key",
+          "source_time": 4.8,
+          "state": [
+            {
+              "entity_id": "prop_lantern",
+              "key": "position",
+              "value": "Upright at workbench center."
+            },
+            {
+              "entity_id": "prop_lantern",
+              "key": "power",
+              "value": "Toggle down; light off."
+            },
+            {
+              "entity_id": "char_ada",
+              "key": "pose",
+              "value": "Behind bench left, both hands resting on bench, gaze on lantern, mouth open in diagnosis."
+            },
+            {
+              "entity_id": "char_pip",
+              "key": "pose",
+              "value": "On bench right, arms lowered, lens directed at Ada."
+            },
+            {
+              "entity_id": "char_pip",
+              "key": "badge",
+              "value": "Tilted clockwise."
+            }
+          ]
+        },
+        {
+          "description": "低機位雙人鏡頭保持不變，亞達雙手平放在工作檯左側，目光仍停在未點亮的燈上；派普在工作檯右側，雙臂低垂，藍綠色鏡頭已轉向燈座上的黑色撥桿，鉗端仍遠離開關。黃銅燈直立於中央，黑色撥桿在低右前景依然清晰，未被遮擋，琥珀壁燈的低斜光切出硬邊。尚未發生撥動或點燈，派普的獎章仍順時針歪斜。",
+          "id": "sb_cf899f702acb957a10c8",
+          "moment": "key",
+          "source_time": 7.8,
+          "state": [
+            {
+              "entity_id": "prop_lantern",
+              "key": "position",
+              "value": "Upright at workbench center."
+            },
+            {
+              "entity_id": "prop_lantern",
+              "key": "power",
+              "value": "Toggle down; light off."
+            },
+            {
+              "entity_id": "char_ada",
+              "key": "pose",
+              "value": "Behind bench left, hands resting on bench, gaze on lantern."
+            },
+            {
+              "entity_id": "char_pip",
+              "key": "pose",
+              "value": "On bench right, arms lowered, lens directed at lantern switch."
+            },
+            {
+              "entity_id": "char_pip",
+              "key": "badge",
+              "value": "Tilted clockwise."
+            }
+          ]
+        }
+      ],
+      "music": "A sparse, warm plucked motif fades out before Ada's line.",
+      "scene_id": "scene_workshop",
+      "shot_purpose": "",
+      "soundscape": "Soft coastal wind beyond the walls, faint wood creaks, delicate brass handle squeak and felt sleeve rustle.",
+      "start_state": [
+        {
+          "entity_id": "prop_lantern",
+          "key": "position",
+          "value": "Upright at workbench center."
+        },
+        {
+          "entity_id": "prop_lantern",
+          "key": "power",
+          "value": "Toggle down; light off."
+        },
+        {
+          "entity_id": "char_ada",
+          "key": "pose",
+          "value": "Behind bench left, fingertips touching lantern handle, gaze on lantern."
+        },
+        {
+          "entity_id": "char_pip",
+          "key": "pose",
+          "value": "On bench right, arms lowered, lens directed at Ada."
+        },
+        {
+          "entity_id": "char_pip",
+          "key": "badge",
+          "value": "Tilted clockwise."
+        }
+      ],
+      "title": "The diagnosis",
+      "transition_note": "Straight cut to a tighter bench-height close view on the same side of the bench axis; lantern, bench surface and screen positions unchanged."
+    }
+  ],
+  "story": "In a tiny lighthouse workshop at night, Ada carefully inspects an unlit brass lantern. Convinced it has failed, she delivers her diagnosis with complete certainty. Pip, her small cream maintenance robot, notices the untouched toggle on the lantern's base and turns it on. Ada holds still in the sudden amber light, understanding she was wrong. She looks from the lantern to her patient assistant, straightens Pip's crooked maintenance badge, and rests her palm against its head. Pip leans contentedly into her hand, and the lantern glows steadily between them.",
+  "style": "Landscape 16:9. Handcrafted stop-motion look: felt clothing, painted-wood scenery, brushed brass and warm varnished metal, with subtle frame-to-frame imperfections and visible material texture. Warm amber practical illumination against deep blue night window light, soft falloff into shadowed workshop corners.",
+  "title": "The Smallest Fix"
+}

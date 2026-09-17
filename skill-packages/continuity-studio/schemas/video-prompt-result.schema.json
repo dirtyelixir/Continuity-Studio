@@ -1,0 +1,23 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "text": {
+      "maxLength": 7000,
+      "title": "Text",
+      "type": "string"
+    },
+    "frame_issues": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 8,
+      "title": "Frame Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "title": "VideoPromptResult",
+  "type": "object"
+}

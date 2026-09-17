@@ -1,0 +1,3908 @@
+{
+ "generated_by": "review/analyze_repo.py",
+ "studio_modules": [
+  {
+   "module": "studio.engine",
+   "file": "studio/engine.py",
+   "loc": 719,
+   "bytes": 63843,
+   "docstring": "",
+   "imports_internal": [
+    "asset_deletion",
+    "asset_library",
+    "asset_roles",
+    "chapter_pipeline",
+    "character_sheets",
+    "comfy_images",
+    "context_limits",
+    "continuity",
+    "crowds",
+    "delivery",
+    "directing",
+    "directing_auto",
+    "directing_pipeline",
+    "director_styles",
+    "frame_moment_guard",
+    "frame_moments",
+    "generation_groups",
+    "generation_pipeline",
+    "guidance",
+    "h3",
+    "h3_lora_advice",
+    "identity_from_image",
+    "image_loras",
+    "image_output_quality",
+    "image_prompts",
+    "input_references",
+    "job_queue",
+    "local_images",
+    "models",
+    "production_methods",
+    "prompt_preparation",
+    "providers",
+    "scene_prompts",
+    "serial_story",
+    "shot_prompts",
+    "shot_state",
+    "skills",
+    "speech_direction",
+    "store",
+    "storyboard_board",
+    "storyboarding",
+    "video_workflow",
+    "voice_defaults"
+   ],
+   "imports_external": [
+    "PIL",
+    "json",
+    "pathlib",
+    "shutil",
+    "threading",
+    "traceback"
+   ],
+   "style": {
+    "lines": 719,
+    "non_empty": 705,
+    "avg_chars": 89.2,
+    "lines_over_120": 96,
+    "lines_with_semicolon": 56
+   },
+   "test_refs": 11,
+   "error": null
+  },
+  {
+   "module": "studio.skills",
+   "file": "studio/skills.py",
+   "loc": 704,
+   "bytes": 24568,
+   "docstring": "Safe local instruction-skill registry for Continuity Studio. A *skill* is a directory containing a ``SKILL.md`` file with YAML frontmatter (required ``name`` and ``description``) and optionally a ``studio.json`` manifest. This module discovers skills from roots, installs them as immutable, content-hashed snapshots, and provides the instructions (SKILL.md body + reference texts) of enabled skills that match a capability. Design goals ------------ * No imports from other studio modules (bounded, self-contained). * Stdlib + PyYAML only. * Copy only safe text content: ``SKILL.md`` and ``references",
+   "imports_internal": [],
+   "imports_external": [
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "re",
+    "stat",
+    "tempfile",
+    "threading",
+    "yaml"
+   ],
+   "style": {
+    "lines": 704,
+    "non_empty": 595,
+    "avg_chars": 41.3,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 5
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.app",
+   "file": "studio/app.py",
+   "loc": 675,
+   "bytes": 42007,
+   "docstring": "",
+   "imports_internal": [
+    "asset_deletion",
+    "asset_library",
+    "asset_roles",
+    "chapter_pipeline",
+    "character_sheets",
+    "comfy_bridge",
+    "comfy_images",
+    "comfy_recovery",
+    "context_limits",
+    "continuity",
+    "delivery",
+    "directing",
+    "directing_approvals",
+    "directing_auto",
+    "directing_pipeline",
+    "director_styles",
+    "edit_segments",
+    "editorial",
+    "editorial_records",
+    "engine",
+    "folders",
+    "frame_moment_guard",
+    "generation_groups",
+    "generation_pipeline",
+    "h3",
+    "identity_assets",
+    "image_output_quality",
+    "input_references",
+    "job_queue",
+    "local_images",
+    "models",
+    "postproduction",
+    "production_methods",
+    "project_deletion",
+    "prompt_preparation",
+    "proposal_progress",
+    "provider_profiles",
+    "providers",
+    "saved_proposal",
+    "scene_asset_batch",
+    "scene_prompts",
+    "serial_story",
+    "shot_prompts",
+    "skills",
+    "store",
+    "story_import",
+    "storyboard_board",
+    "storyboarding",
+    "video_render",
+    "video_workflow",
+    "workflow_impact"
+   ],
+   "imports_external": [
+    "contextlib",
+    "fastapi",
+    "fcntl",
+    "hashlib",
+    "io",
+    "json",
+    "os",
+    "pathlib",
+    "shutil",
+    "urllib",
+    "zipfile"
+   ],
+   "style": {
+    "lines": 675,
+    "non_empty": 602,
+    "avg_chars": 68.7,
+    "lines_over_120": 55,
+    "lines_with_semicolon": 12
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.generation_groups",
+   "file": "studio/generation_groups.py",
+   "loc": 583,
+   "bytes": 43195,
+   "docstring": "Storyboard edit uses and native H3 generation are independently addressable. A group is one generated clip, never a selection for each constituent source Shot. All cut ranges remain planned until the user records observed boundaries on a take.",
+   "imports_internal": [
+    "asset_library",
+    "asset_roles",
+    "conditioning",
+    "continuity",
+    "engine",
+    "generation_pipeline",
+    "models",
+    "production_methods",
+    "prompt_preparation",
+    "shot_state",
+    "store",
+    "storyboard_board",
+    "storyboard_usage",
+    "video_render"
+   ],
+   "imports_external": [
+    "copy",
+    "fastapi",
+    "hashlib",
+    "json",
+    "pydantic",
+    "re",
+    "typing"
+   ],
+   "style": {
+    "lines": 583,
+    "non_empty": 512,
+    "avg_chars": 80.5,
+    "lines_over_120": 47,
+    "lines_with_semicolon": 42
+   },
+   "test_refs": 3,
+   "error": null
+  },
+  {
+   "module": "studio.video_render",
+   "file": "studio/video_render.py",
+   "loc": 582,
+   "bytes": 32016,
+   "docstring": "Persistent, explicitly submitted per-Shot video takes and recoverable Comfy jobs.",
+   "imports_internal": [
+    "asset_library",
+    "comfy_runtime",
+    "comfy_video_provider",
+    "conditioning",
+    "continuity",
+    "delivery",
+    "directing",
+    "edit_segments",
+    "engine",
+    "generation_groups",
+    "h3_lora_advice",
+    "h3_render_graph",
+    "h3_render_prompt",
+    "h3_render_settings",
+    "models",
+    "store",
+    "storyboard_board",
+    "storyboard_usage",
+    "take_lifecycle",
+    "video_workflow"
+   ],
+   "imports_external": [
+    "concurrent",
+    "contextlib",
+    "fastapi",
+    "hashlib",
+    "httpx",
+    "json",
+    "pathlib",
+    "pydantic",
+    "secrets",
+    "threading",
+    "uuid"
+   ],
+   "style": {
+    "lines": 582,
+    "non_empty": 515,
+    "avg_chars": 59.3,
+    "lines_over_120": 29,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.chapter_pipeline",
+   "file": "studio/chapter_pipeline.py",
+   "loc": 479,
+   "bytes": 31147,
+   "docstring": "Checkpointed chapter proposals. Only the assembled result can become a proposal. Every attempt retains its own request/output. Resume uses the original frozen input and provider, and never submits a completed stage again or bypasses final/QC checks.",
+   "imports_internal": [
+    "chapter_context",
+    "directing",
+    "director_styles",
+    "models",
+    "production_methods",
+    "providers",
+    "serial_story",
+    "store",
+    "storyboarding"
+   ],
+   "imports_external": [
+    "copy",
+    "json",
+    "os",
+    "pathlib",
+    "pydantic"
+   ],
+   "style": {
+    "lines": 479,
+    "non_empty": 428,
+    "avg_chars": 69.3,
+    "lines_over_120": 13,
+    "lines_with_semicolon": 9
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.image_prompts",
+   "file": "studio/image_prompts.py",
+   "loc": 450,
+   "bytes": 26671,
+   "docstring": "Separate source interpretation from the exact, single-image rendering brief. Canonical dependency hashes deliberately remain in continuity.context; changing prompt policy must not invalidate existing approved pixels or rewrite history.",
+   "imports_internal": [
+    "asset_roles",
+    "continuity",
+    "frame_moments",
+    "image_loras",
+    "models",
+    "production_methods",
+    "prompt_writing",
+    "providers",
+    "reference_boards",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re",
+    "shutil"
+   ],
+   "style": {
+    "lines": 450,
+    "non_empty": 405,
+    "avg_chars": 64.0,
+    "lines_over_120": 20,
+    "lines_with_semicolon": 11
+   },
+   "test_refs": 5,
+   "error": null
+  },
+  {
+   "module": "studio.storyboard_board",
+   "file": "studio/storyboard_board.py",
+   "loc": 447,
+   "bytes": 33959,
+   "docstring": "Ordered visual storyboard, exact frozen moments and image-bound human review.",
+   "imports_internal": [
+    "asset_library",
+    "comfy_images",
+    "conditioning",
+    "continuity",
+    "engine",
+    "models",
+    "production_methods",
+    "shot_state",
+    "store",
+    "storyboard_usage",
+    "video_workflow"
+   ],
+   "imports_external": [
+    "copy",
+    "fastapi",
+    "hashlib",
+    "html",
+    "json",
+    "pydantic",
+    "re",
+    "typing"
+   ],
+   "style": {
+    "lines": 447,
+    "non_empty": 392,
+    "avg_chars": 83.0,
+    "lines_over_120": 59,
+    "lines_with_semicolon": 44
+   },
+   "test_refs": 5,
+   "error": null
+  },
+  {
+   "module": "studio.models",
+   "file": "studio/models.py",
+   "loc": 433,
+   "bytes": 16860,
+   "docstring": "",
+   "imports_internal": [
+    "directing_models",
+    "image_loras",
+    "shot_state_models"
+   ],
+   "imports_external": [
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 433,
+    "non_empty": 371,
+    "avg_chars": 45.3,
+    "lines_over_120": 11,
+    "lines_with_semicolon": 4
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.directing_models",
+   "file": "studio/directing_models.py",
+   "loc": 413,
+   "bytes": 17673,
+   "docstring": "Pure data contracts for the Scene -> dramatic beats -> shots -> edit ranges pipeline. These models are self-contained (own ``Strict`` base, no ``studio.models`` import) so the directing layer can be validated and tested independently of the storyboard Production schema. ``validate_director_plan`` and ``validate_directing_review`` are the two entry points; both raise ``ValueError`` with Traditional Chinese messages on failure.",
+   "imports_internal": [],
+   "imports_external": [
+    "json",
+    "math",
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 413,
+    "non_empty": 335,
+    "avg_chars": 49.8,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 4
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.prompt_writing",
+   "file": "studio/prompt_writing.py",
+   "loc": 390,
+   "bytes": 19447,
+   "docstring": "Shared prompt-writing judgment, loaded from the versioned Studio method bundle. Why this module exists ---------------------- Prompt quality was previously spread over a dozen inline instruction constants plus the ``studio-production-methods`` bundle, and the agent-facing skill package carried a hand-made copy of that bundle. Writers therefore drifted apart, and the same craft rule could be missing from one entry point and duplicated in another. This module is the single runtime reading of the shared writing principles: * the prose lives once, in ``references/prompt-writing.md`` of the Studio ",
+   "imports_internal": [
+    "production_methods"
+   ],
+   "imports_external": [
+    "json",
+    "re"
+   ],
+   "style": {
+    "lines": 390,
+    "non_empty": 320,
+    "avg_chars": 60.8,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 18
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.postproduction",
+   "file": "studio/postproduction.py",
+   "loc": 375,
+   "bytes": 22369,
+   "docstring": "Versioned character voices and dialogue takes, independent of visual canon.",
+   "imports_internal": [
+    "engine",
+    "folders",
+    "models",
+    "store",
+    "voice_defaults",
+    "voxcpm_provider"
+   ],
+   "imports_external": [
+    "array",
+    "concurrent",
+    "fastapi",
+    "hashlib",
+    "io",
+    "json",
+    "pathlib",
+    "pydantic",
+    "threading",
+    "typing",
+    "wave"
+   ],
+   "style": {
+    "lines": 375,
+    "non_empty": 310,
+    "avg_chars": 67.4,
+    "lines_over_120": 41,
+    "lines_with_semicolon": 29
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.shot_state",
+   "file": "studio/shot_state.py",
+   "loc": 359,
+   "bytes": 28169,
+   "docstring": "Canonical state compiler and mandatory, durable Production pre-commit gate. No keyword inference of creative prose. The selected creative provider performs legacy extraction and an independent semantic check; Python owns projections, timeline integrity, receipt identity and the write boundary.",
+   "imports_internal": [
+    "models",
+    "providers",
+    "revision_feedback",
+    "shot_state_models",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "json",
+    "pathlib",
+    "threading"
+   ],
+   "style": {
+    "lines": 359,
+    "non_empty": 324,
+    "avg_chars": 86.8,
+    "lines_over_120": 36,
+    "lines_with_semicolon": 36
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.editorial",
+   "file": "studio/editorial.py",
+   "loc": 354,
+   "bytes": 18889,
+   "docstring": "Scene-scoped, versioned editorial trials using the existing Production contract. Trials are candidates, never another authority for production or media routing. Only explicit adoption writes a normal Production revision via engine.save_plan.",
+   "imports_internal": [
+    "continuity",
+    "directing",
+    "editorial_records",
+    "editorial_timing",
+    "engine",
+    "h3",
+    "models",
+    "store",
+    "workflow_impact"
+   ],
+   "imports_external": [
+    "copy",
+    "fastapi",
+    "hashlib",
+    "json",
+    "pydantic"
+   ],
+   "style": {
+    "lines": 354,
+    "non_empty": 302,
+    "avg_chars": 59.1,
+    "lines_over_120": 14,
+    "lines_with_semicolon": 10
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.directing_pipeline",
+   "file": "studio/directing_pipeline.py",
+   "loc": 351,
+   "bytes": 23281,
+   "docstring": "Budgeted directing review over frozen originals; only complete aggregate is a review.",
+   "imports_internal": [
+    "chapter_pipeline",
+    "context_limits",
+    "directing",
+    "directing_models",
+    "engine",
+    "models",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "json",
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 351,
+    "non_empty": 314,
+    "avg_chars": 71.7,
+    "lines_over_120": 27,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.video_workflow",
+   "file": "studio/video_workflow.py",
+   "loc": 345,
+   "bytes": 30220,
+   "docstring": "Explicit, reviewable H3 frame workflow; never infer text-only delivery.",
+   "imports_internal": [
+    "asset_library",
+    "asset_roles",
+    "conditioning",
+    "continuity",
+    "delivery",
+    "engine",
+    "generation_groups",
+    "h3",
+    "models",
+    "prompt_preparation",
+    "prompt_writing",
+    "shot_prompts",
+    "store",
+    "storyboard_board",
+    "storyboard_usage"
+   ],
+   "imports_external": [
+    "copy",
+    "re"
+   ],
+   "style": {
+    "lines": 345,
+    "non_empty": 323,
+    "avg_chars": 89.0,
+    "lines_over_120": 39,
+    "lines_with_semicolon": 29
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.generation_pipeline",
+   "file": "studio/generation_pipeline.py",
+   "loc": 315,
+   "bytes": 16990,
+   "docstring": "Adaptive generation planning over complete source units, with durable assembly. Local plans are provisional. Every artificial split is reconciled at its boundary before the aggregate can be saved or adopted. No partial provider output is used.",
+   "imports_internal": [
+    "chapter_pipeline",
+    "context_limits",
+    "generation_groups",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "json",
+    "pathlib"
+   ],
+   "style": {
+    "lines": 315,
+    "non_empty": 277,
+    "avg_chars": 58.1,
+    "lines_over_120": 7,
+    "lines_with_semicolon": 3
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.delivery",
+   "file": "studio/delivery.py",
+   "loc": 272,
+   "bytes": 21196,
+   "docstring": "One global prompt per Scene, with independent Shot prompts.",
+   "imports_internal": [
+    "asset_roles",
+    "conditioning",
+    "continuity",
+    "crowds",
+    "guidance",
+    "prompt_preparation",
+    "shot_prompts",
+    "speech_direction",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "re"
+   ],
+   "style": {
+    "lines": 272,
+    "non_empty": 238,
+    "avg_chars": 88.4,
+    "lines_over_120": 49,
+    "lines_with_semicolon": 27
+   },
+   "test_refs": 7,
+   "error": null
+  },
+  {
+   "module": "studio.editorial_records",
+   "file": "studio/editorial_records.py",
+   "loc": 258,
+   "bytes": 13261,
+   "docstring": "Version-bound editorial annotations consumed by review, playback and export. Dependency projections are explicit and versioned so that each consumer can react to exactly the fields it depends on: * ``audio_cues`` depend on scene shot IDs/durations, dialogue, and the local edit order/ranges — NOT on visual keyframes, framing, style, or the visual canon. * ``notes`` / ``knowledge`` (review annotations) retain the broader existing dependency set, but supplemental ``moment=='key'`` frames are excluded so that adding an unused intermediate visual frame does not stale them. New adoption records stor",
+   "imports_internal": [
+    "editorial",
+    "editorial_timing",
+    "store"
+   ],
+   "imports_external": [
+    "copy"
+   ],
+   "style": {
+    "lines": 258,
+    "non_empty": 212,
+    "avg_chars": 62.1,
+    "lines_over_120": 11,
+    "lines_with_semicolon": 3
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.chapter_context",
+   "file": "studio/chapter_context.py",
+   "loc": 254,
+   "bytes": 16203,
+   "docstring": "Source-grounded context selection for frozen chapter stages. Full requests are preferred when they fit. Smaller models get complete relevant source units plus a durable index of the whole source, not rolling summaries.",
+   "imports_internal": [
+    "chapter_pipeline",
+    "context_limits",
+    "models",
+    "store",
+    "storyboarding"
+   ],
+   "imports_external": [
+    "copy",
+    "json",
+    "pydantic"
+   ],
+   "style": {
+    "lines": 254,
+    "non_empty": 231,
+    "avg_chars": 67.2,
+    "lines_over_120": 13,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.providers",
+   "file": "studio/providers.py",
+   "loc": 253,
+   "bytes": 17714,
+   "docstring": "",
+   "imports_internal": [
+    "chapter_pipeline",
+    "comfy_images",
+    "comfy_runtime",
+    "context_limits",
+    "deepseek_stream",
+    "directing_models",
+    "directing_pipeline",
+    "generation_groups",
+    "h3_lora_advice",
+    "identity_from_image",
+    "local_images",
+    "models",
+    "provider_profiles",
+    "reference_boards",
+    "shot_state_models",
+    "store",
+    "storyboard_board",
+    "voice_defaults"
+   ],
+   "imports_external": [
+    "base64",
+    "contextlib",
+    "httpx",
+    "json",
+    "os",
+    "pathlib",
+    "shutil",
+    "signal",
+    "subprocess",
+    "time"
+   ],
+   "style": {
+    "lines": 253,
+    "non_empty": 240,
+    "avg_chars": 73.4,
+    "lines_over_120": 27,
+    "lines_with_semicolon": 14
+   },
+   "test_refs": 7,
+   "error": null
+  },
+  {
+   "module": "studio.h3_render_graph",
+   "file": "studio/h3_render_graph.py",
+   "loc": 245,
+   "bytes": 12820,
+   "docstring": "Deterministic API graph derived from the archived Director's active main chain.",
+   "imports_internal": [
+    "conditioning",
+    "h3_render_settings",
+    "store",
+    "storyboard_usage"
+   ],
+   "imports_external": [
+    "copy",
+    "math",
+    "pathlib",
+    "re"
+   ],
+   "style": {
+    "lines": 245,
+    "non_empty": 219,
+    "avg_chars": 56.3,
+    "lines_over_120": 5,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.directing",
+   "file": "studio/directing.py",
+   "loc": 226,
+   "bytes": 15284,
+   "docstring": "Formal director planning, evidence-bound semantic review, and source-clip edit decisions.",
+   "imports_internal": [
+    "directing_approvals",
+    "directing_auto",
+    "directing_models",
+    "edit_segments",
+    "editorial_records",
+    "frame_moment_guard",
+    "generation_groups",
+    "production_methods",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "json"
+   ],
+   "style": {
+    "lines": 226,
+    "non_empty": 197,
+    "avg_chars": 73.7,
+    "lines_over_120": 20,
+    "lines_with_semicolon": 4
+   },
+   "test_refs": 8,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_video_provider",
+   "file": "studio/comfy_video_provider.py",
+   "loc": 218,
+   "bytes": 10905,
+   "docstring": "ComfyUI transport. Submission is never automatically retried.",
+   "imports_internal": [
+    "h3_lora_catalog",
+    "h3_render_graph",
+    "h3_render_settings",
+    "store"
+   ],
+   "imports_external": [
+    "hashlib",
+    "httpx",
+    "json",
+    "os",
+    "pathlib",
+    "shutil",
+    "subprocess"
+   ],
+   "style": {
+    "lines": 218,
+    "non_empty": 184,
+    "avg_chars": 56.1,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.storyboard_usage",
+   "file": "studio/storyboard_usage.py",
+   "loc": 214,
+   "bytes": 12924,
+   "docstring": "Compile adopted board intent into existing generation routes, without media mutation. Editorial roles and execution uses are separate. Source timestamps never imply cuts. Legacy plans remain readable; only explicit new use contracts assert image coverage.",
+   "imports_internal": [
+    "conditioning",
+    "generation_groups",
+    "models",
+    "store",
+    "storyboard_board"
+   ],
+   "imports_external": [
+    "copy",
+    "hashlib",
+    "json",
+    "pathlib",
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 214,
+    "non_empty": 196,
+    "avg_chars": 62.0,
+    "lines_over_120": 11,
+    "lines_with_semicolon": 8
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_images",
+   "file": "studio/comfy_images.py",
+   "loc": 208,
+   "bytes": 13359,
+   "docstring": "One managed ComfyUI submission, durable receipt and exact-node output recovery.",
+   "imports_internal": [
+    "comfy_health",
+    "comfy_recovery",
+    "comfy_runtime",
+    "image_output_quality",
+    "local_images"
+   ],
+   "imports_external": [
+    "PIL",
+    "contextlib",
+    "hashlib",
+    "httpx",
+    "json",
+    "pathlib",
+    "time",
+    "uuid"
+   ],
+   "style": {
+    "lines": 208,
+    "non_empty": 185,
+    "avg_chars": 67.0,
+    "lines_over_120": 21,
+    "lines_with_semicolon": 23
+   },
+   "test_refs": 6,
+   "error": null
+  },
+  {
+   "module": "studio.local_images",
+   "file": "studio/local_images.py",
+   "loc": 207,
+   "bytes": 17336,
+   "docstring": "Pinned local image recipes; selection is structural, never a provider fallback.",
+   "imports_internal": [
+    "h3_render_settings",
+    "image_loras",
+    "store"
+   ],
+   "imports_external": [
+    "PIL",
+    "hashlib",
+    "json",
+    "pathlib",
+    "secrets"
+   ],
+   "style": {
+    "lines": 207,
+    "non_empty": 197,
+    "avg_chars": 83.4,
+    "lines_over_120": 37,
+    "lines_with_semicolon": 20
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.editorial_timing",
+   "file": "studio/editorial_timing.py",
+   "loc": 193,
+   "bytes": 8899,
+   "docstring": "Pure editorial timeline helper for the UI text-card animatic. ``timeline(plan, audio_cues)`` computes a deterministic, render-free preview of a production: the visual sequence laid out by ``edit_plan`` (each entry's planned source range placed back to back in sequence), the explicitly placed sound cues (placed verbatim — audio may legally cross a visual cut or refer to a shot that is not currently on screen), and a warning list that exposes source dialogue in edited shots which no explicit dialogue cue fully covers. The function is pure: no database, media, network, or rendering, and it never ",
+   "imports_internal": [],
+   "imports_external": [
+    "math"
+   ],
+   "style": {
+    "lines": 193,
+    "non_empty": 172,
+    "avg_chars": 48.7,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.image_loras",
+   "file": "studio/image_loras.py",
+   "loc": 186,
+   "bytes": 9004,
+   "docstring": "Studio-owned image adapters: semantic choice, frozen presets, strict routing.",
+   "imports_internal": [
+    "comfy_images",
+    "local_images"
+   ],
+   "imports_external": [
+    "copy",
+    "httpx",
+    "json",
+    "math",
+    "pathlib",
+    "pydantic"
+   ],
+   "style": {
+    "lines": 186,
+    "non_empty": 161,
+    "avg_chars": 53.7,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 5
+   },
+   "test_refs": 5,
+   "error": null
+  },
+  {
+   "module": "studio.provider_profiles",
+   "file": "studio/provider_profiles.py",
+   "loc": 163,
+   "bytes": 8724,
+   "docstring": "Explicit workspace-wide creative providers; image rendering is chosen separately.",
+   "imports_internal": [
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "httpx",
+    "json",
+    "os",
+    "re",
+    "tempfile"
+   ],
+   "style": {
+    "lines": 163,
+    "non_empty": 148,
+    "avg_chars": 55.3,
+    "lines_over_120": 4,
+    "lines_with_semicolon": 3
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_recovery",
+   "file": "studio/comfy_recovery.py",
+   "loc": 156,
+   "bytes": 8205,
+   "docstring": "Studio-owned recovery policy; only VRAM Manager may repair the GPU service. Unsent jobs may continue after repair. A submitted prompt is reconciled with the manager's saved snapshot; never replay it merely because HTTP recovered.",
+   "imports_internal": [
+    "comfy_health",
+    "comfy_runtime",
+    "engine",
+    "store"
+   ],
+   "imports_external": [
+    "httpx",
+    "json",
+    "logging",
+    "pathlib",
+    "threading"
+   ],
+   "style": {
+    "lines": 156,
+    "non_empty": 130,
+    "avg_chars": 57.5,
+    "lines_over_120": 4,
+    "lines_with_semicolon": 9
+   },
+   "test_refs": 3,
+   "error": null
+  },
+  {
+   "module": "studio.editorial_pilot",
+   "file": "studio/editorial_pilot.py",
+   "loc": 152,
+   "bytes": 15702,
+   "docstring": "Authored one-scene pilot, explicitly based on the user's existing screenplay. This is a reviewable editorial candidate, not a provider-generated or approved result. No media generation is performed here.",
+   "imports_internal": [
+    "editorial",
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "copy"
+   ],
+   "style": {
+    "lines": 152,
+    "non_empty": 149,
+    "avg_chars": 90.5,
+    "lines_over_120": 25,
+    "lines_with_semicolon": 49
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.serial_story",
+   "file": "studio/serial_story.py",
+   "loc": 149,
+   "bytes": 9248,
+   "docstring": "Persistent story outlines and chapter-scoped proposals using shared production canon.",
+   "imports_internal": [
+    "engine",
+    "models",
+    "store",
+    "story_import"
+   ],
+   "imports_external": [
+    "copy"
+   ],
+   "style": {
+    "lines": 149,
+    "non_empty": 127,
+    "avg_chars": 69.9,
+    "lines_over_120": 7,
+    "lines_with_semicolon": 8
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.prompt_preparation",
+   "file": "studio/prompt_preparation.py",
+   "loc": 144,
+   "bytes": 12701,
+   "docstring": "Scene-scoped English direction, independent of whether images are approved yet.",
+   "imports_internal": [
+    "asset_roles",
+    "prompt_writing",
+    "shot_state",
+    "speech_direction",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "re",
+    "unicodedata"
+   ],
+   "style": {
+    "lines": 144,
+    "non_empty": 120,
+    "avg_chars": 105.0,
+    "lines_over_120": 15,
+    "lines_with_semicolon": 8
+   },
+   "test_refs": 5,
+   "error": null
+  },
+  {
+   "module": "studio.context_limits",
+   "file": "studio/context_limits.py",
+   "loc": 140,
+   "bytes": 6830,
+   "docstring": "Frozen Studio budgets, distinct from advertised model training context. Unknown tokenizers use a UTF-8 byte upper bound, never a claimed exact count. llama.cpp requests use the selected gateway, including its VRAM admission rules.",
+   "imports_internal": [
+    "chapter_pipeline",
+    "store"
+   ],
+   "imports_external": [
+    "httpx",
+    "json",
+    "urllib"
+   ],
+   "style": {
+    "lines": 140,
+    "non_empty": 115,
+    "avg_chars": 57.2,
+    "lines_over_120": 4,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 4,
+   "error": null
+  },
+  {
+   "module": "studio.conditioning",
+   "file": "studio/conditioning.py",
+   "loc": 139,
+   "bytes": 10094,
+   "docstring": "Shared mode decision and deterministic reference-demand compiler. No provider calls. Shot strategy and image-demand planning share this contract. Assets fulfil intent; they never infer it. Legacy routes remain readable until a new decision is adopted.",
+   "imports_internal": [
+    "asset_library",
+    "asset_roles",
+    "continuity",
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "copy",
+    "hashlib",
+    "re"
+   ],
+   "style": {
+    "lines": 139,
+    "non_empty": 113,
+    "avg_chars": 85.0,
+    "lines_over_120": 8,
+    "lines_with_semicolon": 15
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.deepseek_stream",
+   "file": "studio/deepseek_stream.py",
+   "loc": 135,
+   "bytes": 7294,
+   "docstring": "DeepSeek chat transport: preserve partial evidence, require complete output.",
+   "imports_internal": [],
+   "imports_external": [
+    "httpx",
+    "json",
+    "time"
+   ],
+   "style": {
+    "lines": 135,
+    "non_empty": 127,
+    "avg_chars": 53.1,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.take_lifecycle",
+   "file": "studio/take_lifecycle.py",
+   "loc": 135,
+   "bytes": 6974,
+   "docstring": "Take compatibility is editorial evidence, independent of execution readiness. Receipts are append-only settings records. Frozen requests and successful outputs are never rewritten when an editor changes direction or rejects a candidate.",
+   "imports_internal": [
+    "asset_library",
+    "asset_roles",
+    "continuity",
+    "delivery",
+    "generation_groups",
+    "store",
+    "video_render",
+    "video_workflow"
+   ],
+   "imports_external": [
+    "copy",
+    "json"
+   ],
+   "style": {
+    "lines": 135,
+    "non_empty": 116,
+    "avg_chars": 57.7,
+    "lines_over_120": 2,
+    "lines_with_semicolon": 3
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.asset_library",
+   "file": "studio/asset_library.py",
+   "loc": 133,
+   "bytes": 8141,
+   "docstring": "Human-readable, stable original-image storage; asset IDs remain database identity.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "re",
+    "shutil",
+    "unicodedata",
+    "urllib"
+   ],
+   "style": {
+    "lines": 133,
+    "non_empty": 115,
+    "avg_chars": 70.8,
+    "lines_over_120": 11,
+    "lines_with_semicolon": 17
+   },
+   "test_refs": 6,
+   "error": null
+  },
+  {
+   "module": "studio.h3_render_settings",
+   "file": "studio/h3_render_settings.py",
+   "loc": 130,
+   "bytes": 6187,
+   "docstring": "User-facing H3 presets and deterministic resolution/step normalization.",
+   "imports_internal": [
+    "h3_lora_catalog",
+    "models"
+   ],
+   "imports_external": [
+    "math",
+    "pydantic",
+    "re",
+    "typing"
+   ],
+   "style": {
+    "lines": 130,
+    "non_empty": 110,
+    "avg_chars": 54.0,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.voice_defaults",
+   "file": "studio/voice_defaults.py",
+   "loc": 118,
+   "bytes": 6888,
+   "docstring": "Semantic voice proposals, cached against character context, never adopted audio.",
+   "imports_internal": [
+    "models",
+    "postproduction",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 118,
+    "non_empty": 102,
+    "avg_chars": 66.4,
+    "lines_over_120": 5,
+    "lines_with_semicolon": 5
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.image_output_quality",
+   "file": "studio/image_output_quality.py",
+   "loc": 117,
+   "bytes": 4972,
+   "docstring": "Deterministic blank-output guard for generated images; Pillow only, no provider or GPU calls.",
+   "imports_internal": [],
+   "imports_external": [
+    "PIL",
+    "functools",
+    "os",
+    "threading"
+   ],
+   "style": {
+    "lines": 117,
+    "non_empty": 96,
+    "avg_chars": 49.6,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.input_references",
+   "file": "studio/input_references.py",
+   "loc": 116,
+   "bytes": 5835,
+   "docstring": "Director-uploaded production inputs; never canonical assets or generation jobs.",
+   "imports_internal": [
+    "asset_library",
+    "continuity",
+    "store"
+   ],
+   "imports_external": [
+    "PIL",
+    "hashlib",
+    "io",
+    "json",
+    "pathlib",
+    "urllib"
+   ],
+   "style": {
+    "lines": 116,
+    "non_empty": 100,
+    "avg_chars": 53.0,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 11
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.continuity",
+   "file": "studio/continuity.py",
+   "loc": 114,
+   "bytes": 7590,
+   "docstring": "",
+   "imports_internal": [
+    "asset_roles",
+    "crowds",
+    "image_prompts",
+    "production_methods",
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 114,
+    "non_empty": 101,
+    "avg_chars": 74.6,
+    "lines_over_120": 14,
+    "lines_with_semicolon": 10
+   },
+   "test_refs": 5,
+   "error": null
+  },
+  {
+   "module": "studio.asset_deletion",
+   "file": "studio/asset_deletion.py",
+   "loc": 109,
+   "bytes": 6295,
+   "docstring": "Rejected images are discarded; preserve only text audit and in-use originals.",
+   "imports_internal": [
+    "asset_library",
+    "store"
+   ],
+   "imports_external": [
+    "PIL",
+    "hashlib",
+    "json",
+    "pathlib"
+   ],
+   "style": {
+    "lines": 109,
+    "non_empty": 99,
+    "avg_chars": 61.1,
+    "lines_over_120": 6,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.storyboarding",
+   "file": "studio/storyboarding.py",
+   "loc": 106,
+   "bytes": 10722,
+   "docstring": "Source-preserving storyboard adapter; production remains Studio's canonical model.",
+   "imports_internal": [
+    "asset_roles",
+    "directing_models",
+    "models",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "hashlib",
+    "json",
+    "pathlib"
+   ],
+   "style": {
+    "lines": 106,
+    "non_empty": 98,
+    "avg_chars": 104.6,
+    "lines_over_120": 11,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.store",
+   "file": "studio/store.py",
+   "loc": 105,
+   "bytes": 5945,
+   "docstring": "",
+   "imports_internal": [],
+   "imports_external": [
+    "contextlib",
+    "contextvars",
+    "datetime",
+    "functools",
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "sqlite3",
+    "uuid"
+   ],
+   "style": {
+    "lines": 105,
+    "non_empty": 91,
+    "avg_chars": 64.7,
+    "lines_over_120": 13,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 27,
+   "error": null
+  },
+  {
+   "module": "studio.frame_moment_guard",
+   "file": "studio/frame_moment_guard.py",
+   "loc": 102,
+   "bytes": 8077,
+   "docstring": "Bounded, durable text verification before a frozen frame reaches rendering.",
+   "imports_internal": [
+    "image_prompts",
+    "models",
+    "providers",
+    "store"
+   ],
+   "imports_external": [
+    "hashlib",
+    "json"
+   ],
+   "style": {
+    "lines": 102,
+    "non_empty": 91,
+    "avg_chars": 86.3,
+    "lines_over_120": 8,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.edit_segments",
+   "file": "studio/edit_segments.py",
+   "loc": 97,
+   "bytes": 5613,
+   "docstring": "One material mapping for single-source and native montage takes. Existing selections are read-only suggestions; observed legacy group ranges are projected without rewriting their receipts. Explicit edits have append-only history.",
+   "imports_internal": [
+    "directing",
+    "engine",
+    "models",
+    "store",
+    "take_lifecycle",
+    "video_render"
+   ],
+   "imports_external": [
+    "fastapi",
+    "pydantic"
+   ],
+   "style": {
+    "lines": 97,
+    "non_empty": 85,
+    "avg_chars": 64.2,
+    "lines_over_120": 9,
+    "lines_with_semicolon": 8
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.directing_auto",
+   "file": "studio/directing_auto.py",
+   "loc": 96,
+   "bytes": 4119,
+   "docstring": "Continue saved directing intent into one independent review per frozen source. Only save/startup/terminal hooks write. Read-only views never submit work. A failed or non-passing attempt is a result to handle, not an automatic retry loop.",
+   "imports_internal": [
+    "directing",
+    "directing_pipeline",
+    "editorial_records",
+    "engine",
+    "models",
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 96,
+    "non_empty": 80,
+    "avg_chars": 51.5,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.director_styles",
+   "file": "studio/director_styles.py",
+   "loc": 91,
+   "bytes": 8215,
+   "docstring": "Content-led director recommendations; one explicitly chosen lens per proposal.",
+   "imports_internal": [
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "functools",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re"
+   ],
+   "style": {
+    "lines": 91,
+    "non_empty": 81,
+    "avg_chars": 96.4,
+    "lines_over_120": 10,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.folders",
+   "file": "studio/folders.py",
+   "loc": 86,
+   "bytes": 4539,
+   "docstring": "Readable production snapshots, separate from canonical storage.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [
+    "io",
+    "json",
+    "pathlib",
+    "re",
+    "shutil",
+    "subprocess",
+    "tempfile",
+    "urllib",
+    "zipfile"
+   ],
+   "style": {
+    "lines": 86,
+    "non_empty": 76,
+    "avg_chars": 59.7,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 4
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.voxcpm_provider",
+   "file": "studio/voxcpm_provider.py",
+   "loc": 85,
+   "bytes": 5372,
+   "docstring": "Fail-closed local VoxCPM2 adapter. GPU lifetime is a child process lifetime.",
+   "imports_internal": [],
+   "imports_external": [
+    "array",
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "signal",
+    "subprocess",
+    "urllib",
+    "uuid",
+    "wave"
+   ],
+   "style": {
+    "lines": 85,
+    "non_empty": 75,
+    "avg_chars": 67.7,
+    "lines_over_120": 7,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 3,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_runtime",
+   "file": "studio/comfy_runtime.py",
+   "loc": 83,
+   "bytes": 4123,
+   "docstring": "Select the installed runtime through VRAM Manager and pin it during a job.",
+   "imports_internal": [],
+   "imports_external": [
+    "contextlib",
+    "httpx",
+    "logging",
+    "os",
+    "time",
+    "uuid"
+   ],
+   "style": {
+    "lines": 83,
+    "non_empty": 72,
+    "avg_chars": 53.4,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 3,
+   "error": null
+  },
+  {
+   "module": "studio.h3_lora_advice",
+   "file": "studio/h3_lora_advice.py",
+   "loc": 83,
+   "bytes": 5152,
+   "docstring": "Provider-backed, evidence-checked Style LoRA recommendations.",
+   "imports_internal": [
+    "comfy_video_provider",
+    "h3_render_settings",
+    "models",
+    "store",
+    "video_render"
+   ],
+   "imports_external": [
+    "pydantic"
+   ],
+   "style": {
+    "lines": 83,
+    "non_empty": 68,
+    "avg_chars": 72.0,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.identity_assets",
+   "file": "studio/identity_assets.py",
+   "loc": 81,
+   "bytes": 6033,
+   "docstring": "Explicit human adoption of existing pixels as a current visual identity.",
+   "imports_internal": [
+    "asset_library",
+    "character_sheets",
+    "continuity",
+    "engine",
+    "image_output_quality",
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "PIL",
+    "copy",
+    "hashlib",
+    "io",
+    "shutil"
+   ],
+   "style": {
+    "lines": 81,
+    "non_empty": 79,
+    "avg_chars": 71.0,
+    "lines_over_120": 4,
+    "lines_with_semicolon": 3
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.proposal_progress",
+   "file": "studio/proposal_progress.py",
+   "loc": 81,
+   "bytes": 3827,
+   "docstring": "Read-only progress from saved proposal and canonical verification artifacts.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [
+    "json"
+   ],
+   "style": {
+    "lines": 81,
+    "non_empty": 75,
+    "avg_chars": 46.1,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.directing_approvals",
+   "file": "studio/directing_approvals.py",
+   "loc": 77,
+   "bytes": 4343,
+   "docstring": "Version-bound human directing decisions, independent of AI review verdicts.",
+   "imports_internal": [
+    "directing",
+    "directing_auto",
+    "editorial_records",
+    "engine",
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 77,
+    "non_empty": 63,
+    "avg_chars": 66.6,
+    "lines_over_120": 8,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.identity_from_image",
+   "file": "studio/identity_from_image.py",
+   "loc": 75,
+   "bytes": 5070,
+   "docstring": "Source-bound visual identity drafts. Never adopts production or image approvals.",
+   "imports_internal": [
+    "asset_library",
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "PIL",
+    "hashlib",
+    "io",
+    "pathlib",
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 75,
+    "non_empty": 65,
+    "avg_chars": 53.7,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.shot_prompts",
+   "file": "studio/shot_prompts.py",
+   "loc": 74,
+   "bytes": 6275,
+   "docstring": "Reviewable regeneration of one Shot's effective Ref2VA prompt.",
+   "imports_internal": [
+    "asset_roles",
+    "delivery",
+    "generation_groups",
+    "prompt_preparation",
+    "store"
+   ],
+   "imports_external": [
+    "copy"
+   ],
+   "style": {
+    "lines": 74,
+    "non_empty": 62,
+    "avg_chars": 98.0,
+    "lines_over_120": 10,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.guidance",
+   "file": "studio/guidance.py",
+   "loc": 72,
+   "bytes": 7329,
+   "docstring": "Fresh, evidence-backed decisions about incoming Motion Context boundaries.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 72,
+    "non_empty": 65,
+    "avg_chars": 105.4,
+    "lines_over_120": 9,
+    "lines_with_semicolon": 4
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.scene_asset_batch",
+   "file": "studio/scene_asset_batch.py",
+   "loc": 70,
+   "bytes": 4819,
+   "docstring": "Scene-derived image batches with explicit preview and durable deduplication.",
+   "imports_internal": [
+    "asset_roles",
+    "comfy_images",
+    "continuity",
+    "engine",
+    "models",
+    "store"
+   ],
+   "imports_external": [
+    "json"
+   ],
+   "style": {
+    "lines": 70,
+    "non_empty": 66,
+    "avg_chars": 69.1,
+    "lines_over_120": 5,
+    "lines_with_semicolon": 6
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.scene_prompts",
+   "file": "studio/scene_prompts.py",
+   "loc": 70,
+   "bytes": 6812,
+   "docstring": "Reviewable regeneration of Scene common direction, preserving all Shots.",
+   "imports_internal": [
+    "asset_roles",
+    "delivery",
+    "prompt_preparation",
+    "store"
+   ],
+   "imports_external": [
+    "re"
+   ],
+   "style": {
+    "lines": 70,
+    "non_empty": 58,
+    "avg_chars": 112.5,
+    "lines_over_120": 10,
+    "lines_with_semicolon": 9
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.h3",
+   "file": "studio/h3.py",
+   "loc": 69,
+   "bytes": 5689,
+   "docstring": "",
+   "imports_internal": [
+    "continuity",
+    "prompt_preparation",
+    "speech_direction"
+   ],
+   "imports_external": [
+    "re"
+   ],
+   "style": {
+    "lines": 69,
+    "non_empty": 67,
+    "avg_chars": 84.5,
+    "lines_over_120": 15,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 12,
+   "error": null
+  },
+  {
+   "module": "studio.story_import",
+   "file": "studio/story_import.py",
+   "loc": 59,
+   "bytes": 3340,
+   "docstring": "Bounded text/DOCX preview. Never extracts archives or starts generation.",
+   "imports_internal": [],
+   "imports_external": [
+    "io",
+    "unicodedata",
+    "xml",
+    "zipfile"
+   ],
+   "style": {
+    "lines": 59,
+    "non_empty": 55,
+    "avg_chars": 53.4,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.production_methods",
+   "file": "studio/production_methods.py",
+   "loc": 55,
+   "bytes": 2224,
+   "docstring": "Studio-owned, mandatory production instructions; no provider or external skill dependency.",
+   "imports_internal": [],
+   "imports_external": [
+    "hashlib",
+    "json",
+    "pathlib"
+   ],
+   "style": {
+    "lines": 55,
+    "non_empty": 42,
+    "avg_chars": 50.5,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 2,
+   "error": null
+  },
+  {
+   "module": "studio.speech_direction",
+   "file": "studio/speech_direction.py",
+   "loc": 54,
+   "bytes": 4011,
+   "docstring": "Explicit speech boundaries derived from canonical Shot dialogue.",
+   "imports_internal": [
+    "asset_roles"
+   ],
+   "imports_external": [
+    "re"
+   ],
+   "style": {
+    "lines": 54,
+    "non_empty": 47,
+    "avg_chars": 84.8,
+    "lines_over_120": 7,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.crowds",
+   "file": "studio/crowds.py",
+   "loc": 53,
+   "bytes": 3350,
+   "docstring": "Collective cast references are distinct from individual turnaround sheets.",
+   "imports_internal": [],
+   "imports_external": [],
+   "style": {
+    "lines": 53,
+    "non_empty": 49,
+    "avg_chars": 68.4,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 7
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.frame_moments",
+   "file": "studio/frame_moments.py",
+   "loc": 52,
+   "bytes": 3525,
+   "docstring": "Single source for frozen dynamic state; prose alignment remains model work.",
+   "imports_internal": [
+    "continuity",
+    "shot_state",
+    "store"
+   ],
+   "imports_external": [
+    "copy"
+   ],
+   "style": {
+    "lines": 52,
+    "non_empty": 45,
+    "avg_chars": 78.3,
+    "lines_over_120": 9,
+    "lines_with_semicolon": 5
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.shot_state_models",
+   "file": "studio/shot_state_models.py",
+   "loc": 49,
+   "bytes": 1177,
+   "docstring": "Authored semantic timeline; endpoint/frame fields are compatibility projections.",
+   "imports_internal": [],
+   "imports_external": [
+    "pydantic",
+    "typing"
+   ],
+   "style": {
+    "lines": 49,
+    "non_empty": 33,
+    "avg_chars": 35.7,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.job_queue",
+   "file": "studio/job_queue.py",
+   "loc": 48,
+   "bytes": 1948,
+   "docstring": "Independent bounded lanes; a renderer cannot occupy a text worker.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [
+    "concurrent"
+   ],
+   "style": {
+    "lines": 48,
+    "non_empty": 38,
+    "avg_chars": 50.6,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.asset_roles",
+   "file": "studio/asset_roles.py",
+   "loc": 46,
+   "bytes": 3119,
+   "docstring": "Shared identities, scene usage and audio-only cast are independent concepts.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 46,
+    "non_empty": 40,
+    "avg_chars": 77.9,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 5
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.h3_lora_catalog",
+   "file": "studio/h3_lora_catalog.py",
+   "loc": 44,
+   "bytes": 2318,
+   "docstring": "Explicit, source-backed display and strength presets; never infer strength from rank.",
+   "imports_internal": [],
+   "imports_external": [
+    "pathlib"
+   ],
+   "style": {
+    "lines": 44,
+    "non_empty": 37,
+    "avg_chars": 51.6,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 3,
+   "error": null
+  },
+  {
+   "module": "studio.h3_render_prompt",
+   "file": "studio/h3_render_prompt.py",
+   "loc": 43,
+   "bytes": 1980,
+   "docstring": "Assemble LoRA activation prefixes without editing saved creative prompts.",
+   "imports_internal": [
+    "h3_lora_catalog"
+   ],
+   "imports_external": [
+    "re"
+   ],
+   "style": {
+    "lines": 43,
+    "non_empty": 39,
+    "avg_chars": 50.8,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.project_deletion",
+   "file": "studio/project_deletion.py",
+   "loc": 42,
+   "bytes": 2649,
+   "docstring": "Recoverable project deletion; no files or dependent records are removed.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 42,
+    "non_empty": 36,
+    "avg_chars": 65.5,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.reference_boards",
+   "file": "studio/reference_boards.py",
+   "loc": 37,
+   "bytes": 2303,
+   "docstring": "Lossless transport boards for image tools with five input slots. Original canon/assets stay separate; this only packages copied job inputs.",
+   "imports_internal": [],
+   "imports_external": [
+    "PIL",
+    "json",
+    "math",
+    "pathlib"
+   ],
+   "style": {
+    "lines": 37,
+    "non_empty": 32,
+    "avg_chars": 72.0,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 9
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.saved_proposal",
+   "file": "studio/saved_proposal.py",
+   "loc": 36,
+   "bytes": 1492,
+   "docstring": "Read-only preview of retained, unaccepted production output.",
+   "imports_internal": [
+    "store"
+   ],
+   "imports_external": [
+    "json"
+   ],
+   "style": {
+    "lines": 36,
+    "non_empty": 32,
+    "avg_chars": 46.6,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_health",
+   "file": "studio/comfy_health.py",
+   "loc": 35,
+   "bytes": 1822,
+   "docstring": "Read-only detection of a dead local ComfyUI executor despite a live HTTP server. The installed arbiter monitors HTTP/leases, not prompt_worker. A thread traceback from this exact process is positive evidence; missing logs or slow work are not. No service, GPU lease or external file is changed here.",
+   "imports_internal": [],
+   "imports_external": [
+    "os",
+    "pathlib",
+    "re",
+    "subprocess"
+   ],
+   "style": {
+    "lines": 35,
+    "non_empty": 31,
+    "avg_chars": 55.2,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 1
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.workflow_impact",
+   "file": "studio/workflow_impact.py",
+   "loc": 35,
+   "bytes": 2392,
+   "docstring": "Read-only preview of a proposed editorial baseline revision.",
+   "imports_internal": [
+    "continuity",
+    "editorial_records",
+    "generation_groups",
+    "store",
+    "storyboard_board",
+    "take_lifecycle",
+    "video_render"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 35,
+    "non_empty": 33,
+    "avg_chars": 72.5,
+    "lines_over_120": 6,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 0,
+   "error": null
+  },
+  {
+   "module": "studio.comfy_bridge",
+   "file": "studio/comfy_bridge.py",
+   "loc": 26,
+   "bytes": 1693,
+   "docstring": "Send existing images to the local ComfyUI input library via its upload API.",
+   "imports_internal": [
+    "asset_library",
+    "store"
+   ],
+   "imports_external": [
+    "httpx",
+    "mimetypes"
+   ],
+   "style": {
+    "lines": 26,
+    "non_empty": 23,
+    "avg_chars": 68.9,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.character_sheets",
+   "file": "studio/character_sheets.py",
+   "loc": 24,
+   "bytes": 1671,
+   "docstring": "Character sheet policy, independent of existing identity approval/provenance.",
+   "imports_internal": [
+    "continuity",
+    "crowds",
+    "store"
+   ],
+   "imports_external": [],
+   "style": {
+    "lines": 24,
+    "non_empty": 16,
+    "avg_chars": 104.3,
+    "lines_over_120": 2,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.revision_feedback",
+   "file": "studio/revision_feedback.py",
+   "loc": 20,
+   "bytes": 1306,
+   "docstring": "Interpret only Studio's exact historical empty revision templates.",
+   "imports_internal": [],
+   "imports_external": [
+    "re"
+   ],
+   "style": {
+    "lines": 20,
+    "non_empty": 17,
+    "avg_chars": 76.8,
+    "lines_over_120": 3,
+    "lines_with_semicolon": 2
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
+   "module": "studio.__init__",
+   "file": "studio/__init__.py",
+   "loc": 0,
+   "bytes": 0,
+   "docstring": "",
+   "imports_internal": [],
+   "imports_external": [],
+   "style": {
+    "lines": 0,
+    "non_empty": 0,
+    "avg_chars": 0.0,
+    "lines_over_120": 0,
+    "lines_with_semicolon": 0
+   },
+   "test_refs": 0,
+   "error": null
+  }
+ ],
+ "internal_edges": {
+  "studio.engine": [
+   "asset_deletion",
+   "asset_library",
+   "asset_roles",
+   "chapter_pipeline",
+   "character_sheets",
+   "comfy_images",
+   "context_limits",
+   "continuity",
+   "crowds",
+   "delivery",
+   "directing",
+   "directing_auto",
+   "directing_pipeline",
+   "director_styles",
+   "frame_moment_guard",
+   "frame_moments",
+   "generation_groups",
+   "generation_pipeline",
+   "guidance",
+   "h3",
+   "h3_lora_advice",
+   "identity_from_image",
+   "image_loras",
+   "image_output_quality",
+   "image_prompts",
+   "input_references",
+   "job_queue",
+   "local_images",
+   "models",
+   "production_methods",
+   "prompt_preparation",
+   "providers",
+   "scene_prompts",
+   "serial_story",
+   "shot_prompts",
+   "shot_state",
+   "skills",
+   "speech_direction",
+   "store",
+   "storyboard_board",
+   "storyboarding",
+   "video_workflow",
+   "voice_defaults"
+  ],
+  "studio.skills": [],
+  "studio.app": [
+   "asset_deletion",
+   "asset_library",
+   "asset_roles",
+   "chapter_pipeline",
+   "character_sheets",
+   "comfy_bridge",
+   "comfy_images",
+   "comfy_recovery",
+   "context_limits",
+   "continuity",
+   "delivery",
+   "directing",
+   "directing_approvals",
+   "directing_auto",
+   "directing_pipeline",
+   "director_styles",
+   "edit_segments",
+   "editorial",
+   "editorial_records",
+   "engine",
+   "folders",
+   "frame_moment_guard",
+   "generation_groups",
+   "generation_pipeline",
+   "h3",
+   "identity_assets",
+   "image_output_quality",
+   "input_references",
+   "job_queue",
+   "local_images",
+   "models",
+   "postproduction",
+   "production_methods",
+   "project_deletion",
+   "prompt_preparation",
+   "proposal_progress",
+   "provider_profiles",
+   "providers",
+   "saved_proposal",
+   "scene_asset_batch",
+   "scene_prompts",
+   "serial_story",
+   "shot_prompts",
+   "skills",
+   "store",
+   "story_import",
+   "storyboard_board",
+   "storyboarding",
+   "video_render",
+   "video_workflow",
+   "workflow_impact"
+  ],
+  "studio.generation_groups": [
+   "asset_library",
+   "asset_roles",
+   "conditioning",
+   "continuity",
+   "engine",
+   "generation_pipeline",
+   "models",
+   "production_methods",
+   "prompt_preparation",
+   "shot_state",
+   "store",
+   "storyboard_board",
+   "storyboard_usage",
+   "video_render"
+  ],
+  "studio.video_render": [
+   "asset_library",
+   "comfy_runtime",
+   "comfy_video_provider",
+   "conditioning",
+   "continuity",
+   "delivery",
+   "directing",
+   "edit_segments",
+   "engine",
+   "generation_groups",
+   "h3_lora_advice",
+   "h3_render_graph",
+   "h3_render_prompt",
+   "h3_render_settings",
+   "models",
+   "store",
+   "storyboard_board",
+   "storyboard_usage",
+   "take_lifecycle",
+   "video_workflow"
+  ],
+  "studio.chapter_pipeline": [
+   "chapter_context",
+   "directing",
+   "director_styles",
+   "models",
+   "production_methods",
+   "providers",
+   "serial_story",
+   "store",
+   "storyboarding"
+  ],
+  "studio.image_prompts": [
+   "asset_roles",
+   "continuity",
+   "frame_moments",
+   "image_loras",
+   "models",
+   "production_methods",
+   "prompt_writing",
+   "providers",
+   "reference_boards",
+   "store"
+  ],
+  "studio.storyboard_board": [
+   "asset_library",
+   "comfy_images",
+   "conditioning",
+   "continuity",
+   "engine",
+   "models",
+   "production_methods",
+   "shot_state",
+   "store",
+   "storyboard_usage",
+   "video_workflow"
+  ],
+  "studio.models": [
+   "directing_models",
+   "image_loras",
+   "shot_state_models"
+  ],
+  "studio.directing_models": [],
+  "studio.prompt_writing": [
+   "production_methods"
+  ],
+  "studio.postproduction": [
+   "engine",
+   "folders",
+   "models",
+   "store",
+   "voice_defaults",
+   "voxcpm_provider"
+  ],
+  "studio.shot_state": [
+   "models",
+   "providers",
+   "revision_feedback",
+   "shot_state_models",
+   "store"
+  ],
+  "studio.editorial": [
+   "continuity",
+   "directing",
+   "editorial_records",
+   "editorial_timing",
+   "engine",
+   "h3",
+   "models",
+   "store",
+   "workflow_impact"
+  ],
+  "studio.directing_pipeline": [
+   "chapter_pipeline",
+   "context_limits",
+   "directing",
+   "directing_models",
+   "engine",
+   "models",
+   "providers",
+   "store"
+  ],
+  "studio.video_workflow": [
+   "asset_library",
+   "asset_roles",
+   "conditioning",
+   "continuity",
+   "delivery",
+   "engine",
+   "generation_groups",
+   "h3",
+   "models",
+   "prompt_preparation",
+   "prompt_writing",
+   "shot_prompts",
+   "store",
+   "storyboard_board",
+   "storyboard_usage"
+  ],
+  "studio.generation_pipeline": [
+   "chapter_pipeline",
+   "context_limits",
+   "generation_groups",
+   "providers",
+   "store"
+  ],
+  "studio.delivery": [
+   "asset_roles",
+   "conditioning",
+   "continuity",
+   "crowds",
+   "guidance",
+   "prompt_preparation",
+   "shot_prompts",
+   "speech_direction",
+   "store"
+  ],
+  "studio.editorial_records": [
+   "editorial",
+   "editorial_timing",
+   "store"
+  ],
+  "studio.chapter_context": [
+   "chapter_pipeline",
+   "context_limits",
+   "models",
+   "store",
+   "storyboarding"
+  ],
+  "studio.providers": [
+   "chapter_pipeline",
+   "comfy_images",
+   "comfy_runtime",
+   "context_limits",
+   "deepseek_stream",
+   "directing_models",
+   "directing_pipeline",
+   "generation_groups",
+   "h3_lora_advice",
+   "identity_from_image",
+   "local_images",
+   "models",
+   "provider_profiles",
+   "reference_boards",
+   "shot_state_models",
+   "store",
+   "storyboard_board",
+   "voice_defaults"
+  ],
+  "studio.h3_render_graph": [
+   "conditioning",
+   "h3_render_settings",
+   "store",
+   "storyboard_usage"
+  ],
+  "studio.directing": [
+   "directing_approvals",
+   "directing_auto",
+   "directing_models",
+   "edit_segments",
+   "editorial_records",
+   "frame_moment_guard",
+   "generation_groups",
+   "production_methods",
+   "providers",
+   "store"
+  ],
+  "studio.comfy_video_provider": [
+   "h3_lora_catalog",
+   "h3_render_graph",
+   "h3_render_settings",
+   "store"
+  ],
+  "studio.storyboard_usage": [
+   "conditioning",
+   "generation_groups",
+   "models",
+   "store",
+   "storyboard_board"
+  ],
+  "studio.comfy_images": [
+   "comfy_health",
+   "comfy_recovery",
+   "comfy_runtime",
+   "image_output_quality",
+   "local_images"
+  ],
+  "studio.local_images": [
+   "h3_render_settings",
+   "image_loras",
+   "store"
+  ],
+  "studio.editorial_timing": [],
+  "studio.image_loras": [
+   "comfy_images",
+   "local_images"
+  ],
+  "studio.provider_profiles": [
+   "providers",
+   "store"
+  ],
+  "studio.comfy_recovery": [
+   "comfy_health",
+   "comfy_runtime",
+   "engine",
+   "store"
+  ],
+  "studio.editorial_pilot": [
+   "editorial",
+   "models",
+   "store"
+  ],
+  "studio.serial_story": [
+   "engine",
+   "models",
+   "store",
+   "story_import"
+  ],
+  "studio.prompt_preparation": [
+   "asset_roles",
+   "prompt_writing",
+   "shot_state",
+   "speech_direction",
+   "store"
+  ],
+  "studio.context_limits": [
+   "chapter_pipeline",
+   "store"
+  ],
+  "studio.conditioning": [
+   "asset_library",
+   "asset_roles",
+   "continuity",
+   "models",
+   "store"
+  ],
+  "studio.deepseek_stream": [],
+  "studio.take_lifecycle": [
+   "asset_library",
+   "asset_roles",
+   "continuity",
+   "delivery",
+   "generation_groups",
+   "store",
+   "video_render",
+   "video_workflow"
+  ],
+  "studio.asset_library": [
+   "store"
+  ],
+  "studio.h3_render_settings": [
+   "h3_lora_catalog",
+   "models"
+  ],
+  "studio.voice_defaults": [
+   "models",
+   "postproduction",
+   "providers",
+   "store"
+  ],
+  "studio.image_output_quality": [],
+  "studio.input_references": [
+   "asset_library",
+   "continuity",
+   "store"
+  ],
+  "studio.continuity": [
+   "asset_roles",
+   "crowds",
+   "image_prompts",
+   "production_methods",
+   "store"
+  ],
+  "studio.asset_deletion": [
+   "asset_library",
+   "store"
+  ],
+  "studio.storyboarding": [
+   "asset_roles",
+   "directing_models",
+   "models",
+   "providers",
+   "store"
+  ],
+  "studio.store": [],
+  "studio.frame_moment_guard": [
+   "image_prompts",
+   "models",
+   "providers",
+   "store"
+  ],
+  "studio.edit_segments": [
+   "directing",
+   "engine",
+   "models",
+   "store",
+   "take_lifecycle",
+   "video_render"
+  ],
+  "studio.directing_auto": [
+   "directing",
+   "directing_pipeline",
+   "editorial_records",
+   "engine",
+   "models",
+   "store"
+  ],
+  "studio.director_styles": [
+   "models",
+   "store"
+  ],
+  "studio.folders": [
+   "store"
+  ],
+  "studio.voxcpm_provider": [],
+  "studio.comfy_runtime": [],
+  "studio.h3_lora_advice": [
+   "comfy_video_provider",
+   "h3_render_settings",
+   "models",
+   "store",
+   "video_render"
+  ],
+  "studio.identity_assets": [
+   "asset_library",
+   "character_sheets",
+   "continuity",
+   "engine",
+   "image_output_quality",
+   "models",
+   "store"
+  ],
+  "studio.proposal_progress": [
+   "store"
+  ],
+  "studio.directing_approvals": [
+   "directing",
+   "directing_auto",
+   "editorial_records",
+   "engine",
+   "store"
+  ],
+  "studio.identity_from_image": [
+   "asset_library",
+   "models",
+   "store"
+  ],
+  "studio.shot_prompts": [
+   "asset_roles",
+   "delivery",
+   "generation_groups",
+   "prompt_preparation",
+   "store"
+  ],
+  "studio.guidance": [
+   "store"
+  ],
+  "studio.scene_asset_batch": [
+   "asset_roles",
+   "comfy_images",
+   "continuity",
+   "engine",
+   "models",
+   "store"
+  ],
+  "studio.scene_prompts": [
+   "asset_roles",
+   "delivery",
+   "prompt_preparation",
+   "store"
+  ],
+  "studio.h3": [
+   "continuity",
+   "prompt_preparation",
+   "speech_direction"
+  ],
+  "studio.story_import": [],
+  "studio.production_methods": [],
+  "studio.speech_direction": [
+   "asset_roles"
+  ],
+  "studio.crowds": [],
+  "studio.frame_moments": [
+   "continuity",
+   "shot_state",
+   "store"
+  ],
+  "studio.shot_state_models": [],
+  "studio.job_queue": [
+   "store"
+  ],
+  "studio.asset_roles": [
+   "store"
+  ],
+  "studio.h3_lora_catalog": [],
+  "studio.h3_render_prompt": [
+   "h3_lora_catalog"
+  ],
+  "studio.project_deletion": [
+   "store"
+  ],
+  "studio.reference_boards": [],
+  "studio.saved_proposal": [
+   "store"
+  ],
+  "studio.comfy_health": [],
+  "studio.workflow_impact": [
+   "continuity",
+   "editorial_records",
+   "generation_groups",
+   "store",
+   "storyboard_board",
+   "take_lifecycle",
+   "video_render"
+  ],
+  "studio.comfy_bridge": [
+   "asset_library",
+   "store"
+  ],
+  "studio.character_sheets": [
+   "continuity",
+   "crowds",
+   "store"
+  ],
+  "studio.revision_feedback": [],
+  "studio.__init__": []
+ },
+ "imported_by": {
+  "studio.engine": [
+   "studio.app",
+   "studio.comfy_recovery",
+   "studio.directing_approvals",
+   "studio.directing_auto",
+   "studio.directing_pipeline",
+   "studio.edit_segments",
+   "studio.editorial",
+   "studio.generation_groups",
+   "studio.identity_assets",
+   "studio.postproduction",
+   "studio.scene_asset_batch",
+   "studio.serial_story",
+   "studio.storyboard_board",
+   "studio.video_render",
+   "studio.video_workflow"
+  ],
+  "studio.skills": [
+   "studio.app",
+   "studio.engine"
+  ],
+  "studio.app": [],
+  "studio.generation_groups": [
+   "studio.app",
+   "studio.directing",
+   "studio.engine",
+   "studio.generation_pipeline",
+   "studio.providers",
+   "studio.shot_prompts",
+   "studio.storyboard_usage",
+   "studio.take_lifecycle",
+   "studio.video_render",
+   "studio.video_workflow",
+   "studio.workflow_impact"
+  ],
+  "studio.video_render": [
+   "studio.app",
+   "studio.edit_segments",
+   "studio.generation_groups",
+   "studio.h3_lora_advice",
+   "studio.take_lifecycle",
+   "studio.workflow_impact"
+  ],
+  "studio.chapter_pipeline": [
+   "studio.app",
+   "studio.chapter_context",
+   "studio.context_limits",
+   "studio.directing_pipeline",
+   "studio.engine",
+   "studio.generation_pipeline",
+   "studio.providers"
+  ],
+  "studio.image_prompts": [
+   "studio.continuity",
+   "studio.engine",
+   "studio.frame_moment_guard"
+  ],
+  "studio.storyboard_board": [
+   "studio.app",
+   "studio.engine",
+   "studio.generation_groups",
+   "studio.providers",
+   "studio.storyboard_usage",
+   "studio.video_render",
+   "studio.video_workflow",
+   "studio.workflow_impact"
+  ],
+  "studio.models": [
+   "studio.app",
+   "studio.chapter_context",
+   "studio.chapter_pipeline",
+   "studio.conditioning",
+   "studio.directing_auto",
+   "studio.directing_pipeline",
+   "studio.director_styles",
+   "studio.edit_segments",
+   "studio.editorial",
+   "studio.editorial_pilot",
+   "studio.engine",
+   "studio.frame_moment_guard",
+   "studio.generation_groups",
+   "studio.h3_lora_advice",
+   "studio.h3_render_settings",
+   "studio.identity_assets",
+   "studio.identity_from_image",
+   "studio.image_prompts",
+   "studio.postproduction",
+   "studio.providers",
+   "studio.scene_asset_batch",
+   "studio.serial_story",
+   "studio.shot_state",
+   "studio.storyboard_board",
+   "studio.storyboard_usage",
+   "studio.storyboarding",
+   "studio.video_render",
+   "studio.video_workflow",
+   "studio.voice_defaults"
+  ],
+  "studio.directing_models": [
+   "studio.directing",
+   "studio.directing_pipeline",
+   "studio.models",
+   "studio.providers",
+   "studio.storyboarding"
+  ],
+  "studio.prompt_writing": [
+   "studio.image_prompts",
+   "studio.prompt_preparation",
+   "studio.video_workflow"
+  ],
+  "studio.postproduction": [
+   "studio.app",
+   "studio.voice_defaults"
+  ],
+  "studio.shot_state": [
+   "studio.engine",
+   "studio.frame_moments",
+   "studio.generation_groups",
+   "studio.prompt_preparation",
+   "studio.storyboard_board"
+  ],
+  "studio.editorial": [
+   "studio.app",
+   "studio.editorial_pilot",
+   "studio.editorial_records"
+  ],
+  "studio.directing_pipeline": [
+   "studio.app",
+   "studio.directing_auto",
+   "studio.engine",
+   "studio.providers"
+  ],
+  "studio.video_workflow": [
+   "studio.app",
+   "studio.engine",
+   "studio.storyboard_board",
+   "studio.take_lifecycle",
+   "studio.video_render"
+  ],
+  "studio.generation_pipeline": [
+   "studio.app",
+   "studio.engine",
+   "studio.generation_groups"
+  ],
+  "studio.delivery": [
+   "studio.app",
+   "studio.engine",
+   "studio.scene_prompts",
+   "studio.shot_prompts",
+   "studio.take_lifecycle",
+   "studio.video_render",
+   "studio.video_workflow"
+  ],
+  "studio.editorial_records": [
+   "studio.app",
+   "studio.directing",
+   "studio.directing_approvals",
+   "studio.directing_auto",
+   "studio.editorial",
+   "studio.workflow_impact"
+  ],
+  "studio.chapter_context": [
+   "studio.chapter_pipeline"
+  ],
+  "studio.providers": [
+   "studio.app",
+   "studio.chapter_pipeline",
+   "studio.directing",
+   "studio.directing_pipeline",
+   "studio.engine",
+   "studio.frame_moment_guard",
+   "studio.generation_pipeline",
+   "studio.image_prompts",
+   "studio.provider_profiles",
+   "studio.shot_state",
+   "studio.storyboarding",
+   "studio.voice_defaults"
+  ],
+  "studio.h3_render_graph": [
+   "studio.comfy_video_provider",
+   "studio.video_render"
+  ],
+  "studio.directing": [
+   "studio.app",
+   "studio.chapter_pipeline",
+   "studio.directing_approvals",
+   "studio.directing_auto",
+   "studio.directing_pipeline",
+   "studio.edit_segments",
+   "studio.editorial",
+   "studio.engine",
+   "studio.video_render"
+  ],
+  "studio.comfy_video_provider": [
+   "studio.h3_lora_advice",
+   "studio.video_render"
+  ],
+  "studio.storyboard_usage": [
+   "studio.generation_groups",
+   "studio.h3_render_graph",
+   "studio.storyboard_board",
+   "studio.video_render",
+   "studio.video_workflow"
+  ],
+  "studio.comfy_images": [
+   "studio.app",
+   "studio.engine",
+   "studio.image_loras",
+   "studio.providers",
+   "studio.scene_asset_batch",
+   "studio.storyboard_board"
+  ],
+  "studio.local_images": [
+   "studio.app",
+   "studio.comfy_images",
+   "studio.engine",
+   "studio.image_loras",
+   "studio.providers"
+  ],
+  "studio.editorial_timing": [
+   "studio.editorial",
+   "studio.editorial_records"
+  ],
+  "studio.image_loras": [
+   "studio.engine",
+   "studio.image_prompts",
+   "studio.local_images",
+   "studio.models"
+  ],
+  "studio.provider_profiles": [
+   "studio.app",
+   "studio.providers"
+  ],
+  "studio.comfy_recovery": [
+   "studio.app",
+   "studio.comfy_images"
+  ],
+  "studio.editorial_pilot": [],
+  "studio.serial_story": [
+   "studio.app",
+   "studio.chapter_pipeline",
+   "studio.engine"
+  ],
+  "studio.prompt_preparation": [
+   "studio.app",
+   "studio.delivery",
+   "studio.engine",
+   "studio.generation_groups",
+   "studio.h3",
+   "studio.scene_prompts",
+   "studio.shot_prompts",
+   "studio.video_workflow"
+  ],
+  "studio.context_limits": [
+   "studio.app",
+   "studio.chapter_context",
+   "studio.directing_pipeline",
+   "studio.engine",
+   "studio.generation_pipeline",
+   "studio.providers"
+  ],
+  "studio.conditioning": [
+   "studio.delivery",
+   "studio.generation_groups",
+   "studio.h3_render_graph",
+   "studio.storyboard_board",
+   "studio.storyboard_usage",
+   "studio.video_render",
+   "studio.video_workflow"
+  ],
+  "studio.deepseek_stream": [
+   "studio.providers"
+  ],
+  "studio.take_lifecycle": [
+   "studio.edit_segments",
+   "studio.video_render",
+   "studio.workflow_impact"
+  ],
+  "studio.asset_library": [
+   "studio.app",
+   "studio.asset_deletion",
+   "studio.comfy_bridge",
+   "studio.conditioning",
+   "studio.engine",
+   "studio.generation_groups",
+   "studio.identity_assets",
+   "studio.identity_from_image",
+   "studio.input_references",
+   "studio.storyboard_board",
+   "studio.take_lifecycle",
+   "studio.video_render",
+   "studio.video_workflow"
+  ],
+  "studio.h3_render_settings": [
+   "studio.comfy_video_provider",
+   "studio.h3_lora_advice",
+   "studio.h3_render_graph",
+   "studio.local_images",
+   "studio.video_render"
+  ],
+  "studio.voice_defaults": [
+   "studio.engine",
+   "studio.postproduction",
+   "studio.providers"
+  ],
+  "studio.image_output_quality": [
+   "studio.app",
+   "studio.comfy_images",
+   "studio.engine",
+   "studio.identity_assets"
+  ],
+  "studio.input_references": [
+   "studio.app",
+   "studio.engine"
+  ],
+  "studio.continuity": [
+   "studio.app",
+   "studio.character_sheets",
+   "studio.conditioning",
+   "studio.delivery",
+   "studio.editorial",
+   "studio.engine",
+   "studio.frame_moments",
+   "studio.generation_groups",
+   "studio.h3",
+   "studio.identity_assets",
+   "studio.image_prompts",
+   "studio.input_references",
+   "studio.scene_asset_batch",
+   "studio.storyboard_board",
+   "studio.take_lifecycle",
+   "studio.video_render",
+   "studio.video_workflow",
+   "studio.workflow_impact"
+  ],
+  "studio.asset_deletion": [
+   "studio.app",
+   "studio.engine"
+  ],
+  "studio.storyboarding": [
+   "studio.app",
+   "studio.chapter_context",
+   "studio.chapter_pipeline",
+   "studio.engine"
+  ],
+  "studio.store": [
+   "studio.app",
+   "studio.asset_deletion",
+   "studio.asset_library",
+   "studio.asset_roles",
+   "studio.chapter_context",
+   "studio.chapter_pipeline",
+   "studio.character_sheets",
+   "studio.comfy_bridge",
+   "studio.comfy_recovery",
+   "studio.comfy_video_provider",
+   "studio.conditioning",
+   "studio.context_limits",
+   "studio.continuity",
+   "studio.delivery",
+   "studio.directing",
+   "studio.directing_approvals",
+   "studio.directing_auto",
+   "studio.directing_pipeline",
+   "studio.director_styles",
+   "studio.edit_segments",
+   "studio.editorial",
+   "studio.editorial_pilot",
+   "studio.editorial_records",
+   "studio.engine",
+   "studio.folders",
+   "studio.frame_moment_guard",
+   "studio.frame_moments",
+   "studio.generation_groups",
+   "studio.generation_pipeline",
+   "studio.guidance",
+   "studio.h3_lora_advice",
+   "studio.h3_render_graph",
+   "studio.identity_assets",
+   "studio.identity_from_image",
+   "studio.image_prompts",
+   "studio.input_references",
+   "studio.job_queue",
+   "studio.local_images",
+   "studio.postproduction",
+   "studio.project_deletion",
+   "studio.prompt_preparation",
+   "studio.proposal_progress",
+   "studio.provider_profiles",
+   "studio.providers",
+   "studio.saved_proposal",
+   "studio.scene_asset_batch",
+   "studio.scene_prompts",
+   "studio.serial_story",
+   "studio.shot_prompts",
+   "studio.shot_state",
+   "studio.storyboard_board",
+   "studio.storyboard_usage",
+   "studio.storyboarding",
+   "studio.take_lifecycle",
+   "studio.video_render",
+   "studio.video_workflow",
+   "studio.voice_defaults",
+   "studio.workflow_impact"
+  ],
+  "studio.frame_moment_guard": [
+   "studio.app",
+   "studio.directing",
+   "studio.engine"
+  ],
+  "studio.edit_segments": [
+   "studio.app",
+   "studio.directing",
+   "studio.video_render"
+  ],
+  "studio.directing_auto": [
+   "studio.app",
+   "studio.directing",
+   "studio.directing_approvals",
+   "studio.engine"
+  ],
+  "studio.director_styles": [
+   "studio.app",
+   "studio.chapter_pipeline",
+   "studio.engine"
+  ],
+  "studio.folders": [
+   "studio.app",
+   "studio.postproduction"
+  ],
+  "studio.voxcpm_provider": [
+   "studio.postproduction"
+  ],
+  "studio.comfy_runtime": [
+   "studio.comfy_images",
+   "studio.comfy_recovery",
+   "studio.providers",
+   "studio.video_render"
+  ],
+  "studio.h3_lora_advice": [
+   "studio.engine",
+   "studio.providers",
+   "studio.video_render"
+  ],
+  "studio.identity_assets": [
+   "studio.app"
+  ],
+  "studio.proposal_progress": [
+   "studio.app"
+  ],
+  "studio.directing_approvals": [
+   "studio.app",
+   "studio.directing"
+  ],
+  "studio.identity_from_image": [
+   "studio.engine",
+   "studio.providers"
+  ],
+  "studio.shot_prompts": [
+   "studio.app",
+   "studio.delivery",
+   "studio.engine",
+   "studio.video_workflow"
+  ],
+  "studio.guidance": [
+   "studio.delivery",
+   "studio.engine"
+  ],
+  "studio.scene_asset_batch": [
+   "studio.app"
+  ],
+  "studio.scene_prompts": [
+   "studio.app",
+   "studio.engine"
+  ],
+  "studio.h3": [
+   "studio.app",
+   "studio.editorial",
+   "studio.engine",
+   "studio.video_workflow"
+  ],
+  "studio.story_import": [
+   "studio.app",
+   "studio.serial_story"
+  ],
+  "studio.production_methods": [
+   "studio.app",
+   "studio.chapter_pipeline",
+   "studio.continuity",
+   "studio.directing",
+   "studio.engine",
+   "studio.generation_groups",
+   "studio.image_prompts",
+   "studio.prompt_writing",
+   "studio.storyboard_board"
+  ],
+  "studio.speech_direction": [
+   "studio.delivery",
+   "studio.engine",
+   "studio.h3",
+   "studio.prompt_preparation"
+  ],
+  "studio.crowds": [
+   "studio.character_sheets",
+   "studio.continuity",
+   "studio.delivery",
+   "studio.engine"
+  ],
+  "studio.frame_moments": [
+   "studio.engine",
+   "studio.image_prompts"
+  ],
+  "studio.shot_state_models": [
+   "studio.models",
+   "studio.providers",
+   "studio.shot_state"
+  ],
+  "studio.job_queue": [
+   "studio.app",
+   "studio.engine"
+  ],
+  "studio.asset_roles": [
+   "studio.app",
+   "studio.conditioning",
+   "studio.continuity",
+   "studio.delivery",
+   "studio.engine",
+   "studio.generation_groups",
+   "studio.image_prompts",
+   "studio.prompt_preparation",
+   "studio.scene_asset_batch",
+   "studio.scene_prompts",
+   "studio.shot_prompts",
+   "studio.speech_direction",
+   "studio.storyboarding",
+   "studio.take_lifecycle",
+   "studio.video_workflow"
+  ],
+  "studio.h3_lora_catalog": [
+   "studio.comfy_video_provider",
+   "studio.h3_render_prompt",
+   "studio.h3_render_settings"
+  ],
+  "studio.h3_render_prompt": [
+   "studio.video_render"
+  ],
+  "studio.project_deletion": [
+   "studio.app"
+  ],
+  "studio.reference_boards": [
+   "studio.image_prompts",
+   "studio.providers"
+  ],
+  "studio.saved_proposal": [
+   "studio.app"
+  ],
+  "studio.comfy_health": [
+   "studio.comfy_images",
+   "studio.comfy_recovery"
+  ],
+  "studio.workflow_impact": [
+   "studio.app",
+   "studio.editorial"
+  ],
+  "studio.comfy_bridge": [
+   "studio.app"
+  ],
+  "studio.character_sheets": [
+   "studio.app",
+   "studio.engine",
+   "studio.identity_assets"
+  ],
+  "studio.revision_feedback": [
+   "studio.shot_state"
+  ],
+  "studio.__init__": []
+ },
+ "tests": [
+  {
+   "file": "tests/test_asset_deletion.py",
+   "loc": 88
+  },
+  {
+   "file": "tests/test_asset_library.py",
+   "loc": 87
+  },
+  {
+   "file": "tests/test_asset_roles.py",
+   "loc": 98
+  },
+  {
+   "file": "tests/test_blank_approval.py",
+   "loc": 29
+  },
+  {
+   "file": "tests/test_canonical_shot_state.py",
+   "loc": 366
+  },
+  {
+   "file": "tests/test_chapter_context.py",
+   "loc": 128
+  },
+  {
+   "file": "tests/test_chapter_pipeline.py",
+   "loc": 372
+  },
+  {
+   "file": "tests/test_character_policy.py",
+   "loc": 93
+  },
+  {
+   "file": "tests/test_character_prompts.py",
+   "loc": 160
+  },
+  {
+   "file": "tests/test_comfy_bridge.py",
+   "loc": 43
+  },
+  {
+   "file": "tests/test_comfy_runtime.py",
+   "loc": 73
+  },
+  {
+   "file": "tests/test_comfy_transition_wait.py",
+   "loc": 54
+  },
+  {
+   "file": "tests/test_conditioning.py",
+   "loc": 134
+  },
+  {
+   "file": "tests/test_context_count_labels.py",
+   "loc": 35
+  },
+  {
+   "file": "tests/test_context_limits.py",
+   "loc": 120
+  },
+  {
+   "file": "tests/test_crowds.py",
+   "loc": 65
+  },
+  {
+   "file": "tests/test_deepseek_stream.py",
+   "loc": 116
+  },
+  {
+   "file": "tests/test_delivery.py",
+   "loc": 154
+  },
+  {
+   "file": "tests/test_directing.py",
+   "loc": 202
+  },
+  {
+   "file": "tests/test_directing_approvals.py",
+   "loc": 97
+  },
+  {
+   "file": "tests/test_directing_auto.py",
+   "loc": 134
+  },
+  {
+   "file": "tests/test_directing_models.py",
+   "loc": 527
+  },
+  {
+   "file": "tests/test_directing_pipeline.py",
+   "loc": 327
+  },
+  {
+   "file": "tests/test_director_styles.py",
+   "loc": 123
+  },
+  {
+   "file": "tests/test_editorial.py",
+   "loc": 287
+  },
+  {
+   "file": "tests/test_editorial_timing.py",
+   "loc": 272
+  },
+  {
+   "file": "tests/test_endpoint_frame_redundancy.py",
+   "loc": 90
+  },
+  {
+   "file": "tests/test_folders.py",
+   "loc": 79
+  },
+  {
+   "file": "tests/test_frame_moment_guard.py",
+   "loc": 106
+  },
+  {
+   "file": "tests/test_frame_moments.py",
+   "loc": 60
+  },
+  {
+   "file": "tests/test_generation_arrangements.py",
+   "loc": 77
+  },
+  {
+   "file": "tests/test_generation_groups.py",
+   "loc": 196
+  },
+  {
+   "file": "tests/test_generation_pipeline.py",
+   "loc": 290
+  },
+  {
+   "file": "tests/test_generation_plan_compaction.py",
+   "loc": 46
+  },
+  {
+   "file": "tests/test_generation_plan_contract.py",
+   "loc": 79
+  },
+  {
+   "file": "tests/test_guidance.py",
+   "loc": 129
+  },
+  {
+   "file": "tests/test_h3_lora_advice.py",
+   "loc": 63
+  },
+  {
+   "file": "tests/test_h3_render_graph.py",
+   "loc": 146
+  },
+  {
+   "file": "tests/test_h3_render_prompt.py",
+   "loc": 29
+  },
+  {
+   "file": "tests/test_h3_render_settings.py",
+   "loc": 89
+  },
+  {
+   "file": "tests/test_identity_assets.py",
+   "loc": 67
+  },
+  {
+   "file": "tests/test_identity_from_image.py",
+   "loc": 79
+  },
+  {
+   "file": "tests/test_image_conflict_repair.py",
+   "loc": 175
+  },
+  {
+   "file": "tests/test_image_loras.py",
+   "loc": 246
+  },
+  {
+   "file": "tests/test_image_output_quality.py",
+   "loc": 150
+  },
+  {
+   "file": "tests/test_image_prompt_assembly.py",
+   "loc": 372
+  },
+  {
+   "file": "tests/test_image_review_state_checks.py",
+   "loc": 49
+  },
+  {
+   "file": "tests/test_input_references.py",
+   "loc": 101
+  },
+  {
+   "file": "tests/test_invalid_image_output.py",
+   "loc": 70
+  },
+  {
+   "file": "tests/test_job_cancel.py",
+   "loc": 37
+  },
+  {
+   "file": "tests/test_local_images.py",
+   "loc": 163
+  },
+  {
+   "file": "tests/test_location_reference_scope.py",
+   "loc": 92
+  },
+  {
+   "file": "tests/test_managed_comfy_recovery.py",
+   "loc": 126
+  },
+  {
+   "file": "tests/test_montage_methods.py",
+   "loc": 96
+  },
+  {
+   "file": "tests/test_nonverbal_voice.py",
+   "loc": 74
+  },
+  {
+   "file": "tests/test_off_state_affirmative.py",
+   "loc": 65
+  },
+  {
+   "file": "tests/test_performance_methods.py",
+   "loc": 53
+  },
+  {
+   "file": "tests/test_postproduction.py",
+   "loc": 120
+  },
+  {
+   "file": "tests/test_preparation_scope.py",
+   "loc": 34
+  },
+  {
+   "file": "tests/test_prepared_image_revision_length.py",
+   "loc": 55
+  },
+  {
+   "file": "tests/test_production.py",
+   "loc": 157
+  },
+  {
+   "file": "tests/test_production_methods.py",
+   "loc": 193
+  },
+  {
+   "file": "tests/test_project_deletion.py",
+   "loc": 73
+  },
+  {
+   "file": "tests/test_prompt_preparation.py",
+   "loc": 148
+  },
+  {
+   "file": "tests/test_prompt_writing.py",
+   "loc": 244
+  },
+  {
+   "file": "tests/test_prompt_writing_wiring.py",
+   "loc": 213
+  },
+  {
+   "file": "tests/test_proposal_progress.py",
+   "loc": 85
+  },
+  {
+   "file": "tests/test_proposal_progress_api.py",
+   "loc": 26
+  },
+  {
+   "file": "tests/test_provider_profiles.py",
+   "loc": 129
+  },
+  {
+   "file": "tests/test_provider_timeout.py",
+   "loc": 84
+  },
+  {
+   "file": "tests/test_providers.py",
+   "loc": 84
+  },
+  {
+   "file": "tests/test_queue_recovery.py",
+   "loc": 174
+  },
+  {
+   "file": "tests/test_qwen_profile.py",
+   "loc": 170
+  },
+  {
+   "file": "tests/test_ref2va_planner_review.py",
+   "loc": 11
+  },
+  {
+   "file": "tests/test_response_reads.py",
+   "loc": 36
+  },
+  {
+   "file": "tests/test_revision_feedback.py",
+   "loc": 38
+  },
+  {
+   "file": "tests/test_saved_proposal.py",
+   "loc": 27
+  },
+  {
+   "file": "tests/test_scene_asset_batch.py",
+   "loc": 105
+  },
+  {
+   "file": "tests/test_scene_prompts.py",
+   "loc": 82
+  },
+  {
+   "file": "tests/test_serial_story.py",
+   "loc": 130
+  },
+  {
+   "file": "tests/test_shot_prompts.py",
+   "loc": 97
+  },
+  {
+   "file": "tests/test_shot_references.py",
+   "loc": 107
+  },
+  {
+   "file": "tests/test_skill_package_sync.py",
+   "loc": 107
+  },
+  {
+   "file": "tests/test_skills.py",
+   "loc": 628
+  },
+  {
+   "file": "tests/test_speech_direction.py",
+   "loc": 67
+  },
+  {
+   "file": "tests/test_story_import.py",
+   "loc": 39
+  },
+  {
+   "file": "tests/test_storyboard_board.py",
+   "loc": 266
+  },
+  {
+   "file": "tests/test_storyboard_image_need.py",
+   "loc": 209
+  },
+  {
+   "file": "tests/test_storyboard_usage.py",
+   "loc": 149
+  },
+  {
+   "file": "tests/test_storyboarding.py",
+   "loc": 154
+  },
+  {
+   "file": "tests/test_video_gpu_queue.py",
+   "loc": 110
+  },
+  {
+   "file": "tests/test_video_references.py",
+   "loc": 28
+  },
+  {
+   "file": "tests/test_video_render.py",
+   "loc": 341
+  },
+  {
+   "file": "tests/test_video_service_prepare.py",
+   "loc": 53
+  },
+  {
+   "file": "tests/test_video_strategy_choice.py",
+   "loc": 18
+  },
+  {
+   "file": "tests/test_video_workflow.py",
+   "loc": 174
+  },
+  {
+   "file": "tests/test_voice_admission.py",
+   "loc": 49
+  },
+  {
+   "file": "tests/test_voice_defaults.py",
+   "loc": 90
+  },
+  {
+   "file": "tests/test_voice_references.py",
+   "loc": 93
+  },
+  {
+   "file": "tests/test_voxcpm_provider.py",
+   "loc": 67
+  },
+  {
+   "file": "tests/test_workflow_cleanup.py",
+   "loc": 259
+  },
+  {
+   "file": "tests/test_workflow_ownership.py",
+   "loc": 93
+  }
+ ],
+ "counts": {
+  "studio_modules": 83,
+  "studio_loc": 15219,
+  "test_files": 102,
+  "test_loc": 13294
+ }
+}

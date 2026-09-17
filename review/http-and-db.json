@@ -1,0 +1,269 @@
+{
+ "routes": [
+  {
+   "method": "GET",
+   "path": "/"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/assets/{aid}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/assets/{aid}/comfy"
+  },
+  {
+   "method": "POST",
+   "path": "/api/assets/{aid}/decision"
+  },
+  {
+   "method": "GET",
+   "path": "/api/assets/{aid}/image"
+  },
+  {
+   "method": "GET",
+   "path": "/api/assets/{aid}/path"
+  },
+  {
+   "method": "POST",
+   "path": "/api/assets/{aid}/reveal"
+  },
+  {
+   "method": "GET",
+   "path": "/api/character-sheet-guide"
+  },
+  {
+   "method": "GET",
+   "path": "/api/health"
+  },
+  {
+   "method": "GET",
+   "path": "/api/jobs/{jid}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/adopt"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/cancel"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/manual"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/recover"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/recover-image"
+  },
+  {
+   "method": "POST",
+   "path": "/api/jobs/{jid}/resume"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects"
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/projects/{pid}"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/chapters"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/projects/{pid}/chapters/{cid}"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/projects/{pid}/delivery"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/directing-approval"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/director-style"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/export"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/folder"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/folder/open"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/folder/{snapshot}/{filename:path}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/guidance/analyze"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/identity-assets/{target_id}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/input-references"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/input-references/{rid}/image"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/input-references/{rid}/path"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/input-references/{rid}/reveal"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/jobs"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/library/open"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/projects/{pid}/outline"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/projects/{pid}/plan"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/plan-impact"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/restore/{number}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/scene-prompts/{jid}/adopt"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/scenes/{scene_id}/asset-batch"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/scenes/{scene_id}/asset-batch"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/shot-prompts/{jid}/adopt"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/undelete"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/upload/{target_id}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/video-workflow/adopt/{jid}"
+  },
+  {
+   "method": "PUT",
+   "path": "/api/projects/{pid}/video-workflow/{sid}"
+  },
+  {
+   "method": "POST",
+   "path": "/api/projects/{pid}/video-workflow/{sid}/frame"
+  },
+  {
+   "method": "GET",
+   "path": "/api/projects/{pid}/video-workflow/{sid}/packet"
+  },
+  {
+   "method": "GET",
+   "path": "/api/settings"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/context-limits"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/deepseek/check"
+  },
+  {
+   "method": "GET",
+   "path": "/api/settings/local-images"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/local-images/check"
+  },
+  {
+   "method": "GET",
+   "path": "/api/settings/local-images/recovery"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/profile"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/providers"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/qwen/check"
+  },
+  {
+   "method": "POST",
+   "path": "/api/settings/routing"
+  },
+  {
+   "method": "POST",
+   "path": "/api/skills/install"
+  },
+  {
+   "method": "POST",
+   "path": "/api/skills/{sid}/enable"
+  },
+  {
+   "method": "POST",
+   "path": "/api/story-import/preview"
+  }
+ ],
+ "db_tables": [
+  "assets",
+  "events",
+  "jobs",
+  "projects",
+  "revisions",
+  "settings",
+  "story_chapters"
+ ]
+}

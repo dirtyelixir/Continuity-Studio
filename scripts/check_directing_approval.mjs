@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const load=async path=>import('data:text/javascript;base64,'+Buffer.from(readFileSync(path,'utf8')).toString('base64'));
+const {directingPanel,proposalAdoptionState}=await load('static/directing-plan.js');
+const {proposalGuideMarkup}=await load('static/proposal-guide.js');
+const {directingApprovalForm}=await load('static/directing-approval.js');
+const esc=x=>String(x??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const result={verdict:'revise',summary:'<script>Opinion',issues:[],coverage:[]};
+const status={required:true,state:'succeeded',result,approval_source_hash:'basis'};
+const job={id:'proposal',state:'succeeded',capability:'narrative',input:{revision:2},result:{canon:[],shots:[],scenes:[]}};
+assert(proposalGuideMarkup({job,status,currentRevision:2},esc).includes('人工批准並採用此方案'));
+assert(!proposalGuideMarkup({job,status,currentRevision:3},esc).includes('data-action="human-directing"'));
+assert(proposalAdoptionState({...status,human_approval:{id:'yes'}},2,2).allowed);
+assert(!proposalAdoptionState({...status,human_approval:{id:'yes'}},2,3).allowed);
+const p={id:'p',production:{scenes:[{id:'s',title:'S',director_plan:{beats:[],reveal_order:[]}}],shots:[],edit_plan:[]},directing:{approval_source_hash:'basis',scenes:[{scene_id:'s',status:'revise'}],current_review:status}};
+assert(directingPanel(p,esc).includes('人工批准此方案'));
+p.directing.scenes[0].status='human_approved';assert(directingPanel(p,esc).includes('已人工批准此方案'));
+assert(!directingApprovalForm(status,false,esc).includes('<script>'));
+// Execute the real handler with a project switch after opening the form.
+const src=readFileSync('static/app.js','utf8'),begin=src.indexOf("if(a==='human-directing'){"),end=src.indexOf("if(a==='directing-qc')",begin);
+const form={},calls=[];const current={id:'p',revision:2,directing:{current_review:status,approval_source_hash:'basis'}};
+const ctx={a:'human-directing',id:'',project:current,refresh:async()=>{},api:async(path,body)=>{calls.push({path,body});return {}},modal(){},directingApprovalForm,esc,$:()=>form,FormData:class {get(){return ''}},guarded:async fn=>await fn(),close(){},toast(){},readableProposal:()=>true};
+vm.createContext(ctx);await vm.runInContext('(async()=>{'+src.slice(begin,end)+'})()',ctx);
+ctx.project={id:'other'};form.onsubmit({preventDefault(){},target:{}});await new Promise(r=>setTimeout(r,0));
+assert.equal(calls[0].path,'/projects/p/directing-approval');assert.equal(calls[0].body.revision,2);assert.equal(calls[0].body.source_hash,'basis');
+console.log('Human directing approval: prominent actions, stale-proposal exclusion, truthful labels, escaped review, optional note and pinned project/version submission passed.');

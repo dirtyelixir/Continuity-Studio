@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+.env
+
+# Never part of a review snapshot: durable canon, generated media, local evidence archives.
+data/
+backups/
+reviews/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm

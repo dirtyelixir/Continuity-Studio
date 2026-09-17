@@ -1,0 +1,913 @@
+{
+  "$defs": {
+    "Beat": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "number"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "number"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "action"
+      ],
+      "title": "Beat",
+      "type": "object"
+    },
+    "Change": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "key",
+        "before",
+        "after"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "Composition": {
+      "additionalProperties": false,
+      "properties": {
+        "frame_id": {
+          "title": "Frame Id",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 2400,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "frame_id",
+        "text"
+      ],
+      "title": "Composition",
+      "type": "object"
+    },
+    "Dialogue": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "language": {
+          "title": "Language",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "number"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "number"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "text",
+        "language",
+        "start",
+        "end",
+        "delivery"
+      ],
+      "title": "Dialogue",
+      "type": "object"
+    },
+    "DirectorialIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "audience_knowledge_before": {
+          "minLength": 1,
+          "title": "Audience Knowledge Before",
+          "type": "string"
+        },
+        "audience_must_learn": {
+          "minLength": 1,
+          "title": "Audience Must Learn",
+          "type": "string"
+        },
+        "emotional_target": {
+          "minLength": 1,
+          "title": "Emotional Target",
+          "type": "string"
+        },
+        "visual_priority": {
+          "minLength": 1,
+          "title": "Visual Priority",
+          "type": "string"
+        },
+        "reveal_strategy": {
+          "minLength": 1,
+          "title": "Reveal Strategy",
+          "type": "string"
+        },
+        "coverage_strategy": {
+          "minLength": 1,
+          "title": "Coverage Strategy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "audience_knowledge_before",
+        "audience_must_learn",
+        "emotional_target",
+        "visual_priority",
+        "reveal_strategy",
+        "coverage_strategy"
+      ],
+      "title": "DirectorialIntent",
+      "type": "object"
+    },
+    "DramaticBeat": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "event": {
+          "minLength": 1,
+          "title": "Event",
+          "type": "string"
+        },
+        "intent": {
+          "$ref": "#/$defs/DirectorialIntent"
+        }
+      },
+      "required": [
+        "id",
+        "event",
+        "intent"
+      ],
+      "title": "DramaticBeat",
+      "type": "object"
+    },
+    "EditDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "shot_id": {
+          "minLength": 1,
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "planned_edit_in": {
+          "minimum": 0,
+          "title": "Planned Edit In",
+          "type": "number"
+        },
+        "planned_edit_out": {
+          "exclusiveMinimum": 0,
+          "title": "Planned Edit Out",
+          "type": "number"
+        },
+        "cut_in_reason": {
+          "minLength": 1,
+          "title": "Cut In Reason",
+          "type": "string"
+        },
+        "cut_out_reason": {
+          "minLength": 1,
+          "title": "Cut Out Reason",
+          "type": "string"
+        },
+        "continuity_note": {
+          "minLength": 1,
+          "title": "Continuity Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "shot_id",
+        "planned_edit_in",
+        "planned_edit_out",
+        "cut_in_reason",
+        "cut_out_reason",
+        "continuity_note"
+      ],
+      "title": "EditDecision",
+      "type": "object"
+    },
+    "Entity": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "character",
+            "crowd",
+            "voice",
+            "location",
+            "prop"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "facts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "scope": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "public",
+            "scene"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "description",
+        "facts"
+      ],
+      "title": "Entity",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "entity_id",
+        "key",
+        "value"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "Frame": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "moment": {
+          "enum": [
+            "start",
+            "end",
+            "key"
+          ],
+          "title": "Moment",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "source_time": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Time"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/State"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        }
+      },
+      "required": [
+        "id",
+        "moment",
+        "description"
+      ],
+      "title": "Frame",
+      "type": "object"
+    },
+    "Moment": {
+      "additionalProperties": false,
+      "properties": {
+        "time": {
+          "minimum": 0,
+          "title": "Time",
+          "type": "number"
+        },
+        "state": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "title": "State",
+          "type": "array"
+        }
+      },
+      "required": [
+        "time",
+        "state"
+      ],
+      "title": "Moment",
+      "type": "object"
+    },
+    "Scene": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "location_id": {
+          "title": "Location Id",
+          "type": "string"
+        },
+        "time_of_day": {
+          "title": "Time Of Day",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "director_plan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SceneDirectorPlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "location_id",
+        "time_of_day",
+        "summary"
+      ],
+      "title": "Scene",
+      "type": "object"
+    },
+    "SceneDirectorPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "beats": {
+          "items": {
+            "$ref": "#/$defs/DramaticBeat"
+          },
+          "minItems": 1,
+          "title": "Beats",
+          "type": "array"
+        },
+        "reveal_order": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reveal Order",
+          "type": "array"
+        }
+      },
+      "required": [
+        "beats",
+        "reveal_order"
+      ],
+      "title": "SceneDirectorPlan",
+      "type": "object"
+    },
+    "Shot": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "duration": {
+          "maximum": 15,
+          "minimum": 4,
+          "title": "Duration",
+          "type": "number"
+        },
+        "generation_duration": {
+          "anyOf": [
+            {
+              "maximum": 15,
+              "minimum": 4,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Generation Duration"
+        },
+        "shot_purpose": {
+          "default": "",
+          "title": "Shot Purpose",
+          "type": "string"
+        },
+        "direction": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ShotDirection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "entity_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entity Ids",
+          "type": "array"
+        },
+        "framing": {
+          "title": "Framing",
+          "type": "string"
+        },
+        "angle": {
+          "title": "Angle",
+          "type": "string"
+        },
+        "camera": {
+          "title": "Camera",
+          "type": "string"
+        },
+        "blocking": {
+          "title": "Blocking",
+          "type": "string"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "expression": {
+          "title": "Expression",
+          "type": "string"
+        },
+        "start_state": {
+          "items": {
+            "$ref": "#/$defs/State"
+          },
+          "title": "Start State",
+          "type": "array"
+        },
+        "end_state": {
+          "items": {
+            "$ref": "#/$defs/State"
+          },
+          "title": "End State",
+          "type": "array"
+        },
+        "transition_note": {
+          "title": "Transition Note",
+          "type": "string"
+        },
+        "beats": {
+          "items": {
+            "$ref": "#/$defs/Beat"
+          },
+          "title": "Beats",
+          "type": "array"
+        },
+        "dialogue": {
+          "items": {
+            "$ref": "#/$defs/Dialogue"
+          },
+          "title": "Dialogue",
+          "type": "array"
+        },
+        "keyframes": {
+          "items": {
+            "$ref": "#/$defs/Frame"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Keyframes",
+          "type": "array"
+        },
+        "soundscape": {
+          "title": "Soundscape",
+          "type": "string"
+        },
+        "music": {
+          "title": "Music",
+          "type": "string"
+        },
+        "canonical_state": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ShotState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "scene_id",
+        "title",
+        "duration",
+        "entity_ids",
+        "framing",
+        "angle",
+        "camera",
+        "blocking",
+        "action",
+        "expression",
+        "start_state",
+        "end_state",
+        "transition_note",
+        "beats",
+        "dialogue",
+        "keyframes",
+        "soundscape",
+        "music"
+      ],
+      "title": "Shot",
+      "type": "object"
+    },
+    "ShotDirection": {
+      "additionalProperties": false,
+      "properties": {
+        "beat_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Beat Ids",
+          "type": "array"
+        },
+        "subject_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Subject Ids",
+          "type": "array"
+        },
+        "visual_carrier": {
+          "minLength": 1,
+          "title": "Visual Carrier",
+          "type": "string"
+        },
+        "readability": {
+          "minLength": 1,
+          "title": "Readability",
+          "type": "string"
+        },
+        "cut_in_reason": {
+          "minLength": 1,
+          "title": "Cut In Reason",
+          "type": "string"
+        },
+        "cut_out_reason": {
+          "minLength": 1,
+          "title": "Cut Out Reason",
+          "type": "string"
+        },
+        "next_shot_relationship": {
+          "minLength": 1,
+          "title": "Next Shot Relationship",
+          "type": "string"
+        }
+      },
+      "required": [
+        "beat_ids",
+        "subject_ids",
+        "visual_carrier",
+        "readability",
+        "cut_in_reason",
+        "cut_out_reason",
+        "next_shot_relationship"
+      ],
+      "title": "ShotDirection",
+      "type": "object"
+    },
+    "ShotState": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "canonical-shot-state-v1",
+          "default": "canonical-shot-state-v1",
+          "title": "Version",
+          "type": "string"
+        },
+        "moments": {
+          "items": {
+            "$ref": "#/$defs/Moment"
+          },
+          "minItems": 2,
+          "title": "Moments",
+          "type": "array"
+        },
+        "transitions": {
+          "items": {
+            "$ref": "#/$defs/Transition"
+          },
+          "title": "Transitions",
+          "type": "array"
+        },
+        "compositions": {
+          "items": {
+            "$ref": "#/$defs/Composition"
+          },
+          "title": "Compositions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "moments",
+        "transitions",
+        "compositions"
+      ],
+      "title": "ShotState",
+      "type": "object"
+    },
+    "State": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "key",
+        "value"
+      ],
+      "title": "State",
+      "type": "object"
+    },
+    "StoryChapter": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "story": {
+          "title": "Story",
+          "type": "string"
+        },
+        "screenplay": {
+          "title": "Screenplay",
+          "type": "string"
+        },
+        "scene_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scene Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "story",
+        "screenplay",
+        "scene_ids"
+      ],
+      "title": "StoryChapter",
+      "type": "object"
+    },
+    "Transition": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "number"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "number"
+        },
+        "changes": {
+          "items": {
+            "$ref": "#/$defs/Change"
+          },
+          "minItems": 1,
+          "title": "Changes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "changes"
+      ],
+      "title": "Transition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "logline": {
+      "title": "Logline",
+      "type": "string"
+    },
+    "story": {
+      "title": "Story",
+      "type": "string"
+    },
+    "screenplay": {
+      "title": "Screenplay",
+      "type": "string"
+    },
+    "style": {
+      "title": "Style",
+      "type": "string"
+    },
+    "canon": {
+      "items": {
+        "$ref": "#/$defs/Entity"
+      },
+      "minItems": 1,
+      "title": "Canon",
+      "type": "array"
+    },
+    "scenes": {
+      "items": {
+        "$ref": "#/$defs/Scene"
+      },
+      "minItems": 1,
+      "title": "Scenes",
+      "type": "array"
+    },
+    "shots": {
+      "items": {
+        "$ref": "#/$defs/Shot"
+      },
+      "minItems": 1,
+      "title": "Shots",
+      "type": "array"
+    },
+    "chapters": {
+      "items": {
+        "$ref": "#/$defs/StoryChapter"
+      },
+      "title": "Chapters",
+      "type": "array"
+    },
+    "edit_plan": {
+      "items": {
+        "$ref": "#/$defs/EditDecision"
+      },
+      "title": "Edit Plan",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "logline",
+    "story",
+    "screenplay",
+    "style",
+    "canon",
+    "scenes",
+    "shots"
+  ],
+  "title": "Production",
+  "type": "object"
+}

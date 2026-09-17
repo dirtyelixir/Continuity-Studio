@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const {watchProposal}=await import('data:text/javascript;base64,'+Buffer.from(readFileSync('static/proposal-watch.js')).toString('base64'));
+let tick,resolve,reads=0,rendered=[],errors=[],cleared=false,current=true;
+const stop=watchProposal({read:()=>{reads++;return new Promise(r=>resolve=r);},render:v=>rendered.push(v),onError:e=>errors.push(e),isCurrent:()=>current,setTimer:fn=>{tick=fn;return 1;},clearTimer:()=>cleared=true});
+assert.equal(reads,0);const pending=tick();assert.equal(reads,1);
+stop();resolve('late result');await pending;
+assert.deepEqual(rendered,[]);assert(cleared,'closing cancels timer');
+let attempts=0;
+const stop2=watchProposal({read:async()=>{if(++attempts===1)throw Error('offline');return 'ready';},render:v=>rendered.push(v),onError:e=>errors.push(e.message),isCurrent:()=>current,setTimer:fn=>{tick=fn;return 2;},clearTimer:()=>{}});
+await tick();assert.deepEqual(errors,['offline']);await tick();assert.deepEqual(rendered,['ready']);
+current=false;await tick();assert.equal(attempts,2,'navigation stops reads');stop2();
+console.log('Proposal watch: delayed reads, close/in-flight isolation, connection recovery and navigation stop passed.');

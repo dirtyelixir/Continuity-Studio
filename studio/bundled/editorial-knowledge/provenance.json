@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "adaptation": "Selected craft references; Studio rules override upstream recipes and routing. Original sources retained with attribution.",
+  "files": [
+    {
+      "file": "director/references/editing-and-assembly.md",
+      "url": "https://raw.githubusercontent.com/wuwangzhang1216/DirectorSKILL/c65ae0d14457053efb1e354c7e7f7e120d97fad1/references/editing-and-assembly.md",
+      "commit": "c65ae0d14457053efb1e354c7e7f7e120d97fad1",
+      "sha256": "8256bb843e8d45ba66aba927edef30cd586a0a32030e4a4639d26be156e850de"
+    },
+    {
+      "file": "director/references/sound-and-dialogue.md",
+      "url": "https://raw.githubusercontent.com/wuwangzhang1216/DirectorSKILL/c65ae0d14457053efb1e354c7e7f7e120d97fad1/references/sound-and-dialogue.md",
+      "commit": "c65ae0d14457053efb1e354c7e7f7e120d97fad1",
+      "sha256": "fcc99cacf1bc35caf3dd5e9430a0f3c731b5b65868171cc488282559017d43de"
+    },
+    {
+      "file": "director/LICENSE",
+      "url": "https://raw.githubusercontent.com/wuwangzhang1216/DirectorSKILL/c65ae0d14457053efb1e354c7e7f7e120d97fad1/LICENSE",
+      "commit": "c65ae0d14457053efb1e354c7e7f7e120d97fad1",
+      "sha256": "df731ea2e1ffd3b8890ad246da3df96ceba3301c16fb4970c16811df4c728b56"
+    },
+    {
+      "file": "visual/video/references/dramaturgy.md",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/video/references/dramaturgy.md",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "63adc8998aa6e1b5cd78b59e36d25510cce5a28ba985c0a3cb97711d7eaf930a"
+    },
+    {
+      "file": "visual/LICENSE",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/LICENSE",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "file": "visual/NOTICE",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/NOTICE",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "09dfa459fb45dbecc9f695c4fac13867e0c22384171431ddab1a6f49f41d2c3c"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "BeatCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "beat_id": {
+          "minLength": 1,
+          "title": "Beat Id",
+          "type": "string"
+        },
+        "scene_id": {
+          "minLength": 1,
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "shot_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Shot Ids",
+          "type": "array"
+        },
+        "verdict": {
+          "enum": [
+            "pass",
+            "revise",
+            "uncertain"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "required_communication": {
+          "minLength": 1,
+          "title": "Required Communication",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "recommendation": {
+          "minLength": 1,
+          "title": "Recommendation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "beat_id",
+        "scene_id",
+        "shot_ids",
+        "verdict",
+        "required_communication",
+        "evidence",
+        "reason",
+        "recommendation"
+      ],
+      "title": "BeatCoverage",
+      "type": "object"
+    },
+    "DirectingIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "SHOT_OVERLOADED",
+            "REVEAL_ORDER",
+            "UNREADABLE_CARRIER",
+            "CONTINUITY",
+            "EDIT_RANGE",
+            "OTHER"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "shot_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Shot Ids",
+          "type": "array"
+        },
+        "beat_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Beat Ids",
+          "type": "array"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "recommendation": {
+          "minLength": 1,
+          "title": "Recommendation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "evidence",
+        "reason",
+        "recommendation"
+      ],
+      "title": "DirectingIssue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "verdict": {
+      "enum": [
+        "pass",
+        "revise",
+        "uncertain"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/BeatCoverage"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/DirectingIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "verdict",
+    "summary"
+  ],
+  "title": "DirectingReview",
+  "type": "object"
+}

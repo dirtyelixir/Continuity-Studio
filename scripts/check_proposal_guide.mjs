@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const m=await import('data:text/javascript;base64,'+Buffer.from(readFileSync('static/proposal-guide.js')).toString('base64'));
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const job={id:'candidate',input:{revision:9},state:'succeeded',result:{canon:[],scenes:[],shots:[]}};
+const base={job,currentRevision:9,status:{required:true,state:'succeeded',result:{verdict:'revise',summary:'<script>unsafe</script>'}}};
+const next=(status,extras={})=>m.proposalNextAction({...base,status:{...base.status,...status},...extras});
+assert.equal(next({}).action,'revise-directing');
+assert.equal(next({result:{verdict:'uncertain'}}).action,'revise-directing');
+assert.equal(next({result:{verdict:'pass'}}).action,'adopt');
+assert.equal(next({required:false}).action,'adopt');
+for(const state of ['queued','running']){assert.equal(next({state,result:{verdict:'pass'}}).action,undefined);assert.equal(next({state}).step,2);}
+assert.equal(next({state:'awaiting_input',job_id:'review'}).id,'review');
+for(const state of ['missing','failed','interrupted','cancelled'])assert.equal(next({state}).action,'directing-qc');
+assert.equal(next({},{currentRevision:10}).action,'develop');
+assert.equal(next({},{currentRevision:10,job:{...job,target_id:'chapter',input:{revision:9,serial_source:{}}}}).id,'chapter');
+for(const state of ['queued','running'])assert.equal(next({},{phase:'progress',job:{...job,state}}).action,undefined);
+assert.equal(next({},{phase:'progress',job:{...job,state:'awaiting_input'}}).action,'manual');
+assert.equal(next({},{phase:'progress',job:{...job,state:'failed'}}).action,'job-detail');
+assert.equal(next({result:{verdict:'pass'}},{phase:'progress'}).action,'proposal');
+assert.equal(next({state:'running'},{phase:'progress'}).step,2);
+assert.equal(next({},{phase:'progress',currentRevision:10}).action,'develop');
+const html=m.proposalGuideMarkup(base,esc);assert(!html.includes('<script>'));assert.match(html,/aria-current="step"/);assert.match(html,/補充要求可留空/);
+assert(!m.proposalGuideFooterMarkup(base,esc).includes('data-action="adopt"'));
+console.log('Proposal guide: review/progress states, stale source routing, no premature adoption and escaping passed.');

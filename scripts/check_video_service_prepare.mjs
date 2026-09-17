@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {installVideoRenderUI} from '../static/video-render.js';
+const handlers={},calls=[];let pending,resolve,fail=false;
+globalThis.document={addEventListener:(t,f)=>handlers[t]=f};
+installVideoRenderUI({getProject:()=>({id:'p'}),drafts:{},api:async(path,body)=>{calls.push({path,body});if(fail)throw Error('GPU busy');await new Promise(r=>resolve=r);return {message:'H3 ready'};},modal(){},refresh:async()=>{},guarded:f=>pending=f(),toast(){}});
+const b={dataset:{renderAction:'status'},textContent:'準備影片服務（自動切換 H3）',disabled:false},event={target:{closest:()=>b}};
+handlers.click(event);assert(b.disabled);assert.equal(b.textContent,'正在準備 H3…');
+handlers.click(event);assert.equal(calls.length,1,'duplicate click must not ask manager twice');
+assert.deepEqual(calls[0],{path:'/video-provider/prepare',body:{}});resolve();await pending;assert(!b.disabled);assert(b.textContent.includes('自動切換'));
+fail=true;handlers.click(event);await assert.rejects(()=>pending,/GPU busy/);assert(!b.disabled);assert(b.textContent.includes('自動切換'));
+console.log('Service preparation: explicit POST, visible progress, duplicate click guard and manager refusal recovery passed.');

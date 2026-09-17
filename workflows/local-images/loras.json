@@ -1,0 +1,284 @@
+{
+  "version": "2026-09-10.3",
+  "entries": [
+    {
+      "id": "krea_darkbrush",
+      "names": [
+        "krea2_darkbrush.safetensors",
+        "Krea-2/01-krea2_darkbrush.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "monochrome ink wash style",
+      "description": "Monochrome ink wash and loose brushwork. Only for requested black-and-white ink artwork, not realistic color horror.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-darkbrush"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_dotmatrix",
+      "names": [
+        "krea2_dotmatrix.safetensors",
+        "Krea-2/02-krea2_dotmatrix.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "monochrome stippling style",
+      "description": "Black-and-white stippled illustration built from dots.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-dotmatrix"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_kidsdrawing",
+      "names": [
+        "krea2_kidsdrawing.safetensors",
+        "Krea-2/03-krea2_kidsdrawing.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "naive expressive sketch style",
+      "description": "Naive expressive hand-drawn sketch aesthetic.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-kidsdrawing"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_neondrip",
+      "names": [
+        "krea2_neondrip.safetensors",
+        "Krea-2/04-krea2_neondrip.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "textured abstract style",
+      "description": "Textured abstract painted artwork.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-neondrip"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_rainywindow",
+      "names": [
+        "krea2_rainywindow.safetensors",
+        "Krea-2/05-krea2_rainywindow.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "rainy window style",
+      "description": "View rendered through a rain-covered window; not a general rainy outdoor scene.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-rainywindow"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_retroanime",
+      "names": [
+        "krea2_retroanime.safetensors",
+        "Krea-2/06-krea2_retroanime.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "purple retro anime style",
+      "description": "Purple-tinted retro anime illustration.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-retroanime"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_softwatercolor",
+      "names": [
+        "krea2_softwatercolor.safetensors",
+        "Krea-2/07-krea2_softwatercolor.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "art deco watercolor style",
+      "description": "Art deco watercolor illustration.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-softwatercolor"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_sunsetblur",
+      "names": [
+        "krea2_sunsetblur.safetensors",
+        "Krea-2/08-krea2_sunsetblur.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "ethereal motion blur style",
+      "description": "Ethereal motion-blurred stylization; use only when blur is intended.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-sunsetblur"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_vintagetarot",
+      "names": [
+        "krea2_vintagetarot.safetensors",
+        "Krea-2/09-krea2_vintagetarot.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "vintage tarot style",
+      "description": "Vintage tarot-card illustration aesthetic; preserve any no-text requirements.",
+      "sources": [
+        "https://huggingface.co/Comfy-Org/Krea-2/blob/main/README.md",
+        "https://huggingface.co/krea/Krea-2-LoRA-vintagetarot"
+      ],
+      "preset_basis": "Author/Comfy-Org documented 1.0; compatibility with Studio INT8/edit recipes requires visual review."
+    },
+    {
+      "id": "krea_realism_v2",
+      "names": [
+        "Flux Krea 2/Krea2-realism-V2.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new",
+        "krea_edit",
+        "krea_two",
+        "krea_inpaint",
+        "krea_outpaint"
+      ],
+      "strength": 1.0,
+      "trigger": "",
+      "description": "Photographic texture, natural facial expression, realistic lighting and composition. Suitable for a specifically photographic still with detailed surface/skin rendering. Not a blood/gore specialist; do not select to turn illustration into photography. May shift identity; use cautiously with exact identity references.",
+      "sources": [
+        "https://huggingface.co/RudySen/Krea2-realism-V2"
+      ],
+      "preset_basis": "Author supports 1.0 and prefers 1.5–2.0 for stronger effect. Studio starts at 1.0. Model card instance_prompt none interpreted as no special trigger; training metadata r3alism is not treated as a required trigger."
+    },
+    {
+      "id": "klein_consistency_9b",
+      "names": [
+        "f2k_9B_lcs_consist_20260415.safetensors"
+      ],
+      "family": "klein",
+      "recipes": [
+        "klein_reference",
+        "klein_sheet",
+        "klein_portrait"
+      ],
+      "requires_reference": true,
+      "strength": 0.6,
+      "trigger": "",
+      "description": "Reference-preserving Klein 9B editing: improve structural consistency when the requested change is small and the existing reference layout/appearance must be retained. Avoid for changed viewpoint, four-view camera layouts, major transformations or freely recomposed scenes because stronger consistency can resist edits.",
+      "sources": [
+        "https://huggingface.co/lrzjason/Consistance_Edit_Lora"
+      ],
+      "preset_basis": "Studio conservative trial preset 0.6, not an author numeric recommendation; author advises lowering strength if it prevents the desired edit. No documented trigger."
+    },
+    {
+      "id": "krea_blood_detail",
+      "names": [
+        "Flux Krea 2/krea2filterbypass3.safetensors"
+      ],
+      "family": "krea",
+      "recipes": [
+        "krea_new"
+      ],
+      "strength": 1.0,
+      "trigger": "",
+      "description": "Krea2 text-fusion adapter locally tested for explicitly requested NON-GRAPHIC fictional blood marks on intact objects, fabric or wardrobe. Helps restore missing visible red blood stains in photographic horror-film props. Only choose for actual requested visible blood stains, not blood-red color metaphors, generic horror mood, clean objects, or negated blood. Does not add a new style. No claim of broader anatomy or gore capability.",
+      "sources": [
+        "https://huggingface.co/uzumix/krea2filterbypass3.safetensors",
+        "https://huggingface.co/Sentinel7/krea2/blob/main/2728234/3067151/krea2filterbypass3.safetensors"
+      ],
+      "sha256": "ec5901a2d0b8f4e4e1e7e62fe4567566f0837799f7a413b03a06f72f47934dda",
+      "preset_basis": "Studio validated sample preset at strength 1.0, not an author numeric recommendation. Local 160-byte F32 [1,12] txtfusion.projector.diff matches published file hash. Same-seed/identical-prompt Studio sample shows visible dark-red cloth stains compared with faint marks without this adapter. This is a single-scene validation, not broad quality assurance.",
+      "local_evidence": "data/acceptance/image-auto-lora-20260910/blood-qualification/comfy-receipt.json"
+    }
+  ],
+  "excluded": [
+    {
+      "names": [
+        "Flux Krea 2/Flux-Klein-NSFW-v2.safetensors",
+        "Flux Krea 2/Krea2 NSFW+.safetensors",
+        "Flux Krea 2/Krea2_HMNSFW_AIO.safetensors",
+        "klein_snofs_v1_4.safetensors"
+      ],
+      "reason": "未確認有適用本次血跡／恐怖效果的用途與權重；NSFW 名稱不構成選用依據。"
+    }
+  ]
+}

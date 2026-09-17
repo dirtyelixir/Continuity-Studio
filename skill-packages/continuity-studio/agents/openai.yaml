@@ -1,0 +1,4 @@
+interface:
+  display_name: "Continuity Studio 製作方法"
+  short_description: "故事、導演分鏡、表演、視覺連戲、圖片與 H3 提示詞製作及審查"
+  default_prompt: "用 $continuity-studio 按現有故事與參考素材，完成所需製作階段並保留連戲。"

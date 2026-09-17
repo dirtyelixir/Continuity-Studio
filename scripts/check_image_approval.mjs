@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const source=readFileSync('static/app.js','utf8');
+let markup='',submitted=null;const form={};
+const context={targetName:()=> 'Frame',esc:s=>String(s).replaceAll('<','&lt;'),button:()=>'',modal:(title,html)=>{markup=html;},$:()=>form,guarded:fn=>fn(),api:async(path,body)=>{submitted={path,body};},FormData:class{get(){return '';}},close(){},refresh:async()=>{},toast(){}};
+vm.createContext(context);vm.runInContext(source.slice(source.indexOf('function approveImageForm('),source.indexOf('function feedbackModal(')),context);
+context.approveImageForm({id:'image-id',target_id:'frame',review:{summary:'Review',issues:['<bad>']}});
+assert(markup.includes('批准備註（選填）')&&markup.includes('&lt;bad>'));
+assert(!markup.includes('required')&&!markup.includes('留空可由 Astra 決定'));
+await form.onsubmit({preventDefault(){},target:{}});
+assert.equal(submitted.path,'/assets/image-id/decision');assert.equal(submitted.body.note,'');assert.equal(submitted.body.status,'approved');
+console.log('Optional approval note, review display, escaping and blank submission passed.');

@@ -1,0 +1,112 @@
+{
+  "id": "prompt-tasks",
+  "version": "prompt-tasks-v1",
+  "note": "Task-type contract for prompt writing. Content rules live in prompt-writing.md; this file records, per task, which principles carry the load, which syntax the target actually supports, and which deterministic checks apply. Weights/negative/timing are false unless a target genuinely supports them; do not add syntax that a renderer will read literally as text.",
+  "tasks": {
+    "character_sheet": {
+      "emphasis": ["reference", "medium", "concise"],
+      "positive": "one person, four views, identical wardrobe and asymmetries in every view",
+      "preserve": ["canonical identity facts", "wardrobe", "anatomical asymmetries"],
+      "forbid": ["reproducing panels or separators as content", "inventing a second character from two views"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["reference_overreach", "unsupported_syntax", "over_escalation"]
+    },
+    "location_plate": {
+      "emphasis": ["fixed_vs_staging", "reference", "medium"],
+      "positive": "one connected empty architectural space and its fixed anchors",
+      "preserve": ["approved layout, openings, railings, materials, fixed marks for this target"],
+      "forbid": ["people", "fixtures or fire from another time of day", "a tour through several floors"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["reference_overreach", "unsupported_syntax", "state_duplication", "over_escalation"]
+    },
+    "prop_design": {
+      "emphasis": ["reference", "fixed_vs_staging", "cause_and_effect"],
+      "positive": "silhouette, material, proportions and stable distinguishing marks",
+      "preserve": ["object design", "current declared physical state when the frame depends on it"],
+      "forbid": ["inheriting the owner's acting or biography", "letting a design reference decide the object's current switch or fill state"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["reference_overreach", "unsupported_syntax", "cause_ambiguity", "state_duplication"]
+    },
+    "still_frame": {
+      "emphasis": ["purpose", "time", "composition", "ownership", "reference"],
+      "positive": "one consistent instant, named subjects, actor-specific hand ownership, motivated viewpoint",
+      "preserve": ["authoritative moment state", "canon identity", "approved spatial relationships"],
+      "forbid": ["a second later instant in the same frame", "camera-motion trails", "sequential action panels"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["still_action_leak", "composition_conflict", "ownership_ambiguity", "reference_overreach", "unsupported_syntax", "state_duplication", "over_escalation"]
+    },
+    "exact_start_keyframe": {
+      "emphasis": ["time", "fixed_vs_staging", "purpose"],
+      "positive": "the opening instant exactly as the authoritative state describes it",
+      "preserve": ["start_state", "ownership and contact at that instant"],
+      "forbid": ["carrying the later gesture, contact or outcome into the frame", "substituting the opening for an intermediate moment"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["still_action_leak", "composition_conflict", "ownership_ambiguity", "unsupported_syntax", "state_duplication"]
+    },
+    "portrait": {
+      "emphasis": ["purpose", "behaviour", "reference"],
+      "positive": "one photographic portrait of the described subject at the target moment",
+      "preserve": ["identity reference", "target moment"],
+      "forbid": ["substituting the reference's staging for the requested portrait"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["reference_overreach", "unsupported_syntax", "over_escalation"]
+    },
+    "image_edit": {
+      "emphasis": ["fixed_vs_staging", "concise", "task_fit"],
+      "positive": "explicitly what changes, and explicitly what is preserved",
+      "preserve": ["everything outside the requested change", "the edit target's body, hair, wardrobe, pose unless changed"],
+      "forbid": ["a change request hidden inside a defect observation", "restating the whole target instead of the delta"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["unsupported_syntax", "still_action_leak", "state_duplication", "over_escalation"],
+      "requires_fields": ["requested_changes"]
+    },
+    "scene_global": {
+      "emphasis": ["fixed_vs_staging", "concise", "reference"],
+      "positive": "this location's reusable appearance, light and atmosphere, plus the reference subject definitions",
+      "preserve": ["each assigned Subject N to Picture N mapping", "canonical person names"],
+      "forbid": ["shot-specific blocking or camera", "prop inventories", "dialogue", "plot recap", "future events"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["unsupported_syntax", "state_duplication", "over_escalation", "redundancy"]
+    },
+    "shot_prompt": {
+      "emphasis": ["purpose", "time", "ownership", "composition", "behaviour"],
+      "positive": "this shot's own camera, blocking, acting, actions, timing and sound",
+      "preserve": ["exact scripted utterances, language tags, timings, prop ownership and causality"],
+      "forbid": ["neighbouring shots' dialogue or actions", "editorial bookkeeping", "invented story events"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["ownership_ambiguity", "composition_conflict", "unsupported_syntax", "state_duplication", "over_escalation", "redundancy"]
+    },
+    "video_i2va": {
+      "emphasis": ["time", "behaviour", "task_fit"],
+      "positive": "ordered movement from the supplied source image across the configured duration",
+      "preserve": ["source opening composition and identity", "ordered action and state change"],
+      "forbid": ["restating the source image as a still description", "freezing the whole duration"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["unsupported_syntax", "state_duplication", "over_escalation"]
+    },
+    "video_fl2va": {
+      "emphasis": ["time", "task_fit"],
+      "positive": "movement that legitimately arrives at the supplied ending state",
+      "preserve": ["both supplied frames", "the ordered route between them"],
+      "forbid": ["a route that cannot reach the ending state", "static description of either frame alone"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["unsupported_syntax", "state_duplication", "over_escalation"]
+    },
+    "video_ref2va": {
+      "emphasis": ["reference", "time", "ownership"],
+      "positive": "reusable reference identities plus this shot's ordered action",
+      "preserve": ["each reference's authorised role", "reference slot mapping"],
+      "forbid": ["treating a reference as the opening composition it does not supply", "reference-defined switch or pose state"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["reference_overreach", "unsupported_syntax", "state_duplication", "over_escalation"]
+    },
+    "montage_group": {
+      "emphasis": ["time", "task_fit", "purpose"],
+      "positive": "one generation covering a planned multi-shot group with real internal progression",
+      "preserve": ["planned shot order and timings", "authorised non-diegetic music and overall soundscape"],
+      "forbid": ["treating an intentionally designed montage as a continuity fault", "removing planned actions to satisfy a single-shot rule"],
+      "syntax": {"weighting": false, "negative_prompt": false, "timing_directives": false},
+      "checks": ["unsupported_syntax", "over_escalation"]
+    }
+  }
+}

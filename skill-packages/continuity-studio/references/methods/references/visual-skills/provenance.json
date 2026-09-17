@@ -1,0 +1,23 @@
+{
+  "adaptation": "../montage.md applies this pinned visual-skills chapter to Studio planning and review; optional upstream recipes remain optional.",
+  "files": [
+    {
+      "file": "dramaturgy.md",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/video/references/dramaturgy.md",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "63adc8998aa6e1b5cd78b59e36d25510cce5a28ba985c0a3cb97711d7eaf930a"
+    },
+    {
+      "file": "LICENSE",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/LICENSE",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "file": "NOTICE",
+      "url": "https://raw.githubusercontent.com/smixs/visual-skills/ae26d624edd747e719fa21528d18d39e68c04a0e/NOTICE",
+      "commit": "ae26d624edd747e719fa21528d18d39e68c04a0e",
+      "sha256": "09dfa459fb45dbecc9f695c4fac13867e0c22384171431ddab1a6f49f41d2c3c"
+    }
+  ]
+}

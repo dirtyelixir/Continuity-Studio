@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {generationStatus,imageProgressMarkup} from '../static/generation-status.js';
+import {renderVideoWorkflow} from '../static/video-workflow.js';
+const p={id:'p',assets:[{id:'old',target_id:'stairs',status:'approved',created:'1'},{id:'new',target_id:'stairs',status:'pending',created:'2'}],jobs:[{id:'job',capability:'image',target_id:'stairs',state:'running',created:'3'}],production:{scenes:[{id:'scene',title:'Scene'}],shots:[{id:'shot',title:'Shot',duration:9}]}};
+const ref={target_id:'stairs',name:'Stairs',kind:'location',ready:true,status:'approved',asset:p.assets[0]};
+p.video_workflow={shots:[{shot_id:'shot',scene_id:'scene',mode:'I2VA',duration:9,frames:[],references:[ref],prompt:{},jobs:{},reasons:[]}]};
+let html=renderVideoWorkflow(p,'shot',()=>'',{get:()=>null});
+assert(html.includes('正在重新生成'));assert(html.includes('data-image-progress="stairs"'));assert(html.includes('data-id="job"'));assert(html.includes('data-progress-target="stairs" disabled'));
+assert(imageProgressMarkup(p,'stairs',String).includes('原有版本'));
+assert.equal(generationStatus(p,'another-scene'),null);
+p.jobs=[{id:'review',target_id:'new',capability:'image_review',state:'running',created:'4'}];
+assert.equal(generationStatus(p,'stairs').jobId,'review');
+assert(generationStatus(p,'stairs').label.includes('正在審查'));
+p.jobs[0].state='succeeded';assert.equal(generationStatus(p,'stairs').phase,'ready');
+console.log('Shared target mapping across old/new assets, frame-workspace cards, review jobs, completion and unrelated assets passed.');

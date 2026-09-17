@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const source=readFileSync(new URL('../static/identity-image.js',import.meta.url),'utf8');
+const {bindIdentityImageAssistant}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;');
+function fixture(overrides={}){
+ const nodes=Object.fromEntries(['analyse','status','candidate','apply','undo'].map(key=>[key,{hidden:key==='candidate'||key==='undo',disabled:false,textContent:'',innerHTML:''}]));
+ const root={querySelector:s=>nodes[s.match(/identity-(\w+)/)[1]]};nodes.candidate.querySelector=root.querySelector;
+ const form={isConnected:true,elements:{description:{value:'Unsaved description'},facts:{value:'Unsaved fact'},name:{value:'Ada edited'},kind:{value:'character'},public_asset:{checked:true}},insertAdjacentHTML:(_,html)=>form.html=html,querySelector:()=>root};
+ const project={id:'p',revision:5,jobs:[]};
+ const job={id:'job',project_id:'p',target_id:'ada',capability:'identity_from_image',state:'succeeded',input:{source_asset_id:'a',revision:5},result:{description:'Visible <hair>',facts:['Yellow coat'],uncertainties:['Back unseen']},...overrides};
+ const calls=[];let fail=false;
+ const api=async(path,body)=>{calls.push([path,body]);if(fail)throw Error('offline');return body?{job:{id:'job'}}:job;};
+ const args={form,project,entity:{id:'ada',name:'Ada',kind:'character'},asset:{id:'a'},api,esc,providerName:'Selected provider'};
+ return {nodes,form,project,job,calls,args,setFail:()=>fail=true};
+}
+let f=fixture();bindIdentityImageAssistant(f.args);assert.equal(f.calls.length,0,'opening editor does not spend');assert.match(f.form.html,/本次反推來源/);
+await f.nodes.analyse.onclick();assert.equal(f.calls[0][1].source_asset_id,'a');assert.equal(f.form.elements.description.value,'Unsaved description','result is not auto-applied');assert.match(f.nodes.candidate.innerHTML,/&lt;hair>/);assert.match(f.nodes.candidate.innerHTML,/Back unseen/);
+f.nodes.apply.onclick();assert.equal(f.form.elements.description.value,'Visible <hair>');assert.equal(f.form.elements.facts.value,'Yellow coat');assert.equal(f.form.elements.name.value,'Ada edited');assert.equal(f.form.elements.public_asset.checked,true);assert.equal(f.calls.length,2,'apply never saves canon');
+f.nodes.undo.onclick();assert.equal(f.form.elements.description.value,'Unsaved description');assert.equal(f.form.elements.facts.value,'Unsaved fact');
+f=fixture({input:{revision:6,source_asset_id:'a'}});bindIdentityImageAssistant(f.args);await f.nodes.analyse.onclick();assert.equal(f.nodes.candidate.hidden,true);assert.match(f.nodes.status.textContent,/版本已變更/);
+f=fixture({target_id:'other'});bindIdentityImageAssistant(f.args);await f.nodes.analyse.onclick();assert.equal(f.nodes.candidate.hidden,true);
+f=fixture();f.setFail();bindIdentityImageAssistant(f.args);await f.nodes.analyse.onclick();assert.equal(f.nodes.analyse.disabled,false);assert.equal(f.form.elements.description.value,'Unsaved description');
+f=fixture();bindIdentityImageAssistant(f.args);f.form.isConnected=false;await f.nodes.analyse.onclick();assert.equal(f.calls.length,1);assert.equal(f.nodes.candidate.hidden,true);
+f=fixture();bindIdentityImageAssistant({...f.args,asset:null});assert.match(f.form.html,/尚未有圖片/);assert.equal(f.calls.length,0);
+f=fixture();bindIdentityImageAssistant({...f.args,entity:{kind:'voice'}});assert.equal(f.form.html,undefined);
+f=fixture();bindIdentityImageAssistant({...f.args,available:false});assert.equal(f.nodes.analyse.disabled,true);assert.equal(f.calls.length,0);
+f=fixture({state:'awaiting_input'});bindIdentityImageAssistant(f.args);await f.nodes.analyse.onclick();assert.match(f.nodes.status.textContent,/人工服務/);assert.equal(f.nodes.candidate.hidden,true);
+f=fixture();let release;const late=new Promise(resolve=>release=resolve);let requestCount=0;bindIdentityImageAssistant({...f.args,api:async(path,body)=>{requestCount++;return body?{job:{id:'job'}}:late;}});const pending=f.nodes.analyse.onclick();await Promise.resolve();f.form.isConnected=false;release(f.job);await pending;assert.equal(f.nodes.candidate.hidden,true);assert.equal(f.form.elements.description.value,'Unsaved description');
+console.log('Identity image UI: explicit enqueue, exact source, candidate preview, apply/undo, no canon write, stale/foreign job rejection, errors, closed editor and missing/voice source passed.');
