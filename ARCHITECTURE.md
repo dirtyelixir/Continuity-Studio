@@ -21,8 +21,8 @@ Manager). `README.md` is the product/run summary; `docs/` is the project's own r
 
 | area | files | lines | notes |
 | --- | ---: | ---: | --- |
-| `studio/` (flat Python package) | 83 modules | 15,219 | 42,007-byte `app.py`, 63,843-byte `engine.py` |
-| `tests/` | 102 test files | 13,294 | plus `tests/fixtures/` |
+| `studio/` (flat Python package) | 83 modules | 15,305 | 42,007-byte `app.py`, 63,843-byte `engine.py` |
+| `tests/` | 102 test files | 13,565 | plus `tests/fixtures/` |
 | `static/` (browser SPA) | 42 `.js` + 3 `.css` + 2 `.html` | — | `app.js` alone is 142,873 bytes |
 | `scripts/` | 64 `.mjs` + Python | — | number-prefixed UI/behaviour checks run by Node |
 | `docs/` | 44 files | — | `STATE.md` 271 KB, `DECISIONS.md` 98 KB, `ACCEPTANCE.md` 63 KB |
@@ -141,7 +141,7 @@ exercise the real frontend modules — a second test surface beside pytest.
 
 ## 9. Test and evidence culture
 
-* 102 pytest files / 13,294 lines; `tests/conftest.py` installs an **autouse offline boundary**
+* 102 pytest files / 13,565 lines; `tests/conftest.py` installs an **autouse offline boundary**
   that neutralises the canonical-state compiler unless a test carries the `canonical_state`
   marker, and forbids implicit provider calls ("A test must explicitly supply its canonical
   semantic provider").

@@ -55,7 +55,7 @@ CHECK_CODES = (
     'reference_slot_missing',    # a numbered reference that was never supplied (blocking)
     'reference_overreach',       # inheriting a state the reference role does not own
     'still_action_leak',         # sequential action inside one frozen instant
-    'composition_conflict',      # mutually exclusive framing or visibility demands (blocking)
+    'composition_conflict',      # mutually exclusive framing or visibility demands (advisory only)
     'ownership_ambiguity',       # an action clause without a named actor
     'cause_ambiguity',           # emission with no stated source
     'state_duplication',         # one declared state restated across sections
@@ -63,7 +63,7 @@ CHECK_CODES = (
     'redundancy',                # repeated description spending attention without adding control
 )
 
-BLOCKING_CODES = frozenset({'unsupported_syntax', 'reference_slot_missing', 'composition_conflict'})
+BLOCKING_CODES = frozenset({'unsupported_syntax', 'reference_slot_missing'})
 
 _UNSUPPORTED = (
     (re.compile(r'\(\s*[^():]{1,40}:\s*\d+(?:\.\d+)?\s*\)'), 'attention weighting "(term:1.2)"'),
@@ -86,7 +86,27 @@ _LIGHT_SOURCE = re.compile(r'\b(sconce|lamp|lantern|window|sunlight|daylight|moo
                            r'reflect\w*|bounce|bounced|spill\w*)\b', re.I)
 
 _PRONOUN = re.compile(r'\b(he|she|they|him|her|them|his|hers|their|theirs|it|its)\b', re.I)
-_NAMED = re.compile(r'<Entity [^>]+>|\b[A-Z][a-z]{2,}\b')
+_ENTITY_TOKEN = re.compile(r'<Entity [^>]+>')
+
+
+def _names(text):
+    """Proper names in this text, used to decide whether a clause already says who acts.
+
+    A capitalised word is only a name if it is NOT merely sentence-initial: "One of them lifts it"
+    opens with a capital and names nobody, while "Ada hands the lantern to Pip" names Pip mid-clause.
+    Treating every capitalised word as a name would silently disable the ownership check on ordinary
+    prose, which is exactly the kind of quiet blindness a check must not have.
+    """
+    names = set()
+    sentences = [s for s in re.split(r'(?<=[.!?;])\s+|\n', text) if s.strip()]
+    for sentence in sentences:
+        words = re.findall(r"\b[A-Za-z][A-Za-z'-]+\b", sentence)
+        for index, word in enumerate(words):
+            if not re.match(r'^[A-Z][a-z]{2,}$', word):
+                continue
+            if index > 0 or text.count(word) > 1:
+                names.add(word)
+    return names
 
 _EMPHASIS = re.compile(r'\b(CRITICAL|MANDATORY|MUST|NEVER|ALWAYS|DO\s+NOT|violat\w*|'
                        r'if\s+incorrect|fail\s+the\s+image)\b')
@@ -144,11 +164,69 @@ def _subject_near(text, position, back=5, ahead=1):
     return ''
 
 
+def _clause_of(text, position):
+    """The sentence clause a claim sits in, used to judge negation and time."""
+    start = max(text.rfind('.', 0, position), text.rfind(';', 0, position),
+                text.rfind('\n', 0, position))
+    end = len(text)
+    for mark in ('.', ';', '\n'):
+        found = text.find(mark, position)
+        if found != -1:
+            end = min(end, found)
+    return text[start + 1:end].strip()
+
+
+_NEGATION = re.compile(r"\b(?:not|never|no|without|avoid|excluding|except|rather\s+than|"
+                       r"instead\s+of|do\s+not|don't|does\s+not|must\s+not|cannot|can't)\b", re.I)
+# Distinct moments in one description: the same subject may legitimately be hidden at one point and
+# visible at another, so a claim in each is not a contradiction.
+_TEMPORAL = re.compile(r'\b(?:then|later|afterwards?|after\s+that|once|by\s+the\s+end|at\s+the\s+'
+                       r'(?:start|end)|initially|eventually|finally|subsequently|next|as\s+the\s+'
+                       r'shot\s+progresses|toward\s+the\s+end)\b', re.I)
+
+
+def _is_prohibition(text, position):
+    """True when the claim sits in an exclusion clause, e.g. "do not let the toggle be hidden".
+
+    A prohibition is not a requirement, so it can never contradict a requirement elsewhere.
+    """
+    return bool(_NEGATION.search(_clause_of(text, position)))
+
+
+def _visibility_claims(text, pattern):
+    """Visible claims that state a requirement, with their resolved subject and clause."""
+    claims = []
+    for match in pattern.finditer(text):
+        if _is_prohibition(text, match.start()):
+            continue
+        clause = _clause_of(text, match.start())
+        claims.append({'subject': _subject_near(text, match.start()),
+                       'clause': clause, 'temporal': bool(_TEMPORAL.search(clause))})
+    return claims
+
+
 def _visibility_conflict(text):
-    """A subject demanded to be both out of view and clearly visible — mechanically provable."""
-    hidden = {_subject_near(text, m.start()) for m in _HIDDEN.finditer(text)}
-    visible = {_subject_near(text, m.start()) for m in _VISIBLE.finditer(text)}
-    return sorted((hidden & visible) - {''})
+    """Subjects named both out of view and clearly visible, excluding prohibitions and time shifts.
+
+    This is advisory evidence only. Natural language cannot prove that two mentions concern the same
+    part of the same entity at the same moment from the same viewpoint, and legitimate prompts say
+    things like "her legs are hidden by the bench while her face stays clearly visible". So a match
+    is reported as something for the writer to check, never as a mechanical contradiction.
+    """
+    hidden = _visibility_claims(text, _HIDDEN)
+    visible = _visibility_claims(text, _VISIBLE)
+    subjects = {claim['subject'] for claim in hidden if claim['subject']}
+    reported = []
+    for claim in visible:
+        if claim['subject'] not in subjects:
+            continue
+        # If exactly one of the two claims is time-bound, the subject may legitimately change from
+        # hidden to visible across the beat or shot; say nothing rather than cry contradiction.
+        if claim['temporal'] != any(other['temporal'] for other in hidden
+                                    if other['subject'] == claim['subject']):
+            continue
+        reported.append(claim['subject'])
+    return sorted(set(reported))
 _REFERENCE_STATE = re.compile(
     r'\b(?:inherit|inherit\w*|copy|carry\s+over|take)\b[^.;]{0,60}'
     r'\b(?:illumination|light\s*state|switch|power|on/?off|lit|unlit|toggle\s+state)\b', re.I)
@@ -288,31 +366,39 @@ def check(fields, kind=None, reference_count=None, declared_states=()):
                                      'single frozen moment; leave the following action out.'
                 % match.group(0), _clause(joined, match.start()))
 
-    # 5. framing or visibility demands that cannot both hold
-    # Provable conflicts block; the softer scale and focus combinations are reported only, because a
-    # prompt can legitimately name a focal plane and still keep one foreground detail readable.
+    # 5. framing or visibility demands that may not both hold.
+    # Advisory only: these are natural-language composition claims, and no keyword rule can prove the
+    # two mentions concern the same part of the same subject at the same moment from the same
+    # viewpoint. A prompt may legitimately hide Ada's legs behind the bench while her face stays
+    # clearly visible, hide the lantern's back while its toggle is readable, or hide Pip at the start
+    # of a shot and bring her into frame later. Reporting these as something to check keeps the
+    # signal without inventing a contradiction, and never lets a warning change the plan.
     close_hit, wide_hit = _CLOSE.search(joined), _WIDE.search(joined)
     if close_hit and wide_hit:
-        add('composition_conflict', 'The same frame is asked for both a close/macro scale and a wide '
-                                    'or full-body scale; one of them has to give.', _clause(joined, wide_hit.start()),
-            blocking=False)
+        add('composition_conflict', 'A close/macro scale and a wide or full-body scale are both '
+                                    'named. Confirm the frame can carry both.', _clause(joined, wide_hit.start()))
     shallow_hit, fine_hit = _SHALLOW.search(joined), _FINE_DETAIL.search(joined)
     if shallow_hit and fine_hit:
-        add('composition_conflict', 'Shallow focus is requested together with legibility of a small '
-                                    'or distant detail; check the audience can still read it.',
-            _clause(joined, fine_hit.start()), blocking=False)
+        add('composition_conflict', 'Shallow focus is named together with legibility of a small or '
+                                    'distant detail. Confirm the audience can still read it.',
+            _clause(joined, fine_hit.start()))
     for left, right, label in _CROP_CONFLICT:
         if left.search(joined) and right.search(joined):
-            add('composition_conflict', 'Framing contradicts itself: ' + label + '.', label)
+            add('composition_conflict', 'Framing names both sides of a crop: ' + label
+                + '. Confirm which the shot must show.', label)
     for subject in _visibility_conflict(joined):
-        add('composition_conflict', '"%s" is required to be out of view and clearly visible at the '
-                                    'same time.' % subject, subject)
+        add('composition_conflict', 'The same subject ("%s") is described as out of view and as '
+                                    'clearly visible. Confirm both refer to the same part at the same '
+                                    'moment and viewpoint, or name the parts separately.' % subject,
+            subject)
 
     # 6. an action clause whose actor could be either of two people
     # Only a genuinely unresolvable clause is reported: two different third-person pronouns acting in
     # one clause with no name to settle it ("he hands it to her" is fine; "he takes it, then she
     # takes it" in one clause is not). Established subjects earlier in a field are not an ambiguity.
     if kind in _STILL_TASKS or kind in ('shot_prompt', 'scene_global', 'video_ref2va'):
+        known_names = _names(joined)
+        known_names_lower = {n.lower() for n in known_names}
         for clause in re.split(r'[;.]', joined):
             clause = clause.strip()
             pronouns = {p.lower() for p in _PRONOUN.findall(clause)}
@@ -320,7 +406,7 @@ def check(fields, kind=None, reference_count=None, declared_states=()):
             feminine = pronouns & {'she', 'her', 'hers'}
             if not (masculine and feminine):
                 continue
-            if _NAMED.search(clause):
+            if _ENTITY_TOKEN.search(clause) or known_names_lower & {w.lower() for w in re.findall(r"\b[A-Za-z][A-Za-z'-]+\b", clause)}:
                 continue
             add('ownership_ambiguity', 'One clause uses both "he/his" and "she/her" with no name to '
                                        'settle which person acts or owns what.', clause)

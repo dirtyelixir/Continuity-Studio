@@ -1,6 +1,6 @@
 # Module inventory (generated)
 
-Flat package `studio/`: **83 modules**, **15219 lines**. Tests: **102 files**, 13294 lines. HTTP routes in `studio/app.py`: **64**. SQLite tables (created in `studio/store.py`): assets, events, jobs, projects, revisions, settings, story_chapters.
+Flat package `studio/`: **83 modules**, **15305 lines**. Tests: **102 files**, 13565 lines. HTTP routes in `studio/app.py`: **64**. SQLite tables (created in `studio/store.py`): assets, events, jobs, projects, revisions, settings, story_chapters.
 
 `deps` = internal modules it imports; `used by` = internal modules importing it; `test refs` = textual `studio.<module>` references across `tests/`. Docstrings are first-person as written in the source.
 
@@ -12,11 +12,11 @@ Flat package `studio/`: **83 modules**, **15219 lines**. Tests: **102 files**, 1
 | `generation_groups` | 583 | 43195 | 14 | 11 | 3 | Storyboard edit uses and native H3 generation are independently addressable. |
 | `video_render` | 582 | 32016 | 20 | 6 | 2 | Persistent, explicitly submitted per-Shot video takes and recoverable Comfy jobs. |
 | `chapter_pipeline` | 479 | 31147 | 9 | 7 | 1 | Checkpointed chapter proposals. |
-| `image_prompts` | 450 | 26671 | 10 | 3 | 5 | Separate source interpretation from the exact, single-image rendering brief. |
+| `prompt_writing` | 476 | 23830 | 1 | 3 | 1 | Shared prompt-writing judgment, loaded from the versioned Studio method bundle. |
+| `image_prompts` | 450 | 26671 | 10 | 3 | 6 | Separate source interpretation from the exact, single-image rendering brief. |
 | `storyboard_board` | 447 | 33959 | 11 | 8 | 5 | Ordered visual storyboard, exact frozen moments and image-bound human review. |
 | `models` | 433 | 16860 | 3 | 29 | 4 | — |
 | `directing_models` | 413 | 17673 | 0 | 5 | 4 | Pure data contracts for the Scene -> dramatic beats -> shots -> edit ranges pipeline. |
-| `prompt_writing` | 390 | 19447 | 1 | 3 | 1 | Shared prompt-writing judgment, loaded from the versioned Studio method bundle. |
 | `postproduction` | 375 | 22369 | 6 | 2 | 4 | Versioned character voices and dialogue takes, independent of visual canon. |
 | `shot_state` | 359 | 28169 | 5 | 5 | 2 | Canonical state compiler and mandatory, durable Production pre-commit gate. |
 | `editorial` | 354 | 18889 | 9 | 3 | 4 | Scene-scoped, versioned editorial trials using the existing Production contract. |
@@ -71,7 +71,7 @@ Flat package `studio/`: **83 modules**, **15219 lines**. Tests: **102 files**, 1
 | `scene_prompts` | 70 | 6812 | 4 | 2 | 0 | Reviewable regeneration of Scene common direction, preserving all Shots. |
 | `h3` | 69 | 5689 | 3 | 4 | 12 | — |
 | `story_import` | 59 | 3340 | 0 | 2 | 1 | Bounded text/DOCX preview. |
-| `production_methods` | 55 | 2224 | 0 | 9 | 2 | Studio-owned, mandatory production instructions; no provider or external skill dependency. |
+| `production_methods` | 55 | 2224 | 0 | 9 | 3 | Studio-owned, mandatory production instructions; no provider or external skill dependency. |
 | `speech_direction` | 54 | 4011 | 1 | 4 | 1 | Explicit speech boundaries derived from canonical Shot dialogue. |
 | `crowds` | 53 | 3350 | 0 | 4 | 0 | Collective cast references are distinct from individual turnaround sheets. |
 | `frame_moments` | 52 | 3525 | 3 | 2 | 0 | Single source for frozen dynamic state; prose alignment remains model work. |

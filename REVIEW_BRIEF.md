@@ -96,7 +96,7 @@ per-module docstrings, import lists and style counters.
 
 **D. Testability and the shape of the safety net**
 
-14. 102 pytest files (13,294 lines) against 83 modules (15,219 lines), plus 64 Node `.mjs`
+14. 102 pytest files (13,565 lines) against 83 modules (15,305 lines), plus 64 Node `.mjs`
     front-end checks. `tests/conftest.py` neutralises the canonical compiler unless a test is
     marked `canonical_state`. Does that autouse boundary hide integration risk, and where
     should the real end-to-end seam be instead?

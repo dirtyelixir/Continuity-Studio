@@ -242,3 +242,165 @@ def test_unsupported_syntax_is_caught_for_each_form():
 def test_reference_slot_beyond_supplied_images_blocks():
     assert 'reference_slot_missing' in blocking('Match the brass tone of Image 5 against the bench.', 'still_frame', refs=4)
     assert not blocking('Match the brass tone of Image 3 against the bench.', 'still_frame', refs=4)
+
+
+# ---------------------------------------------------------------------------
+# Occlusion and composition: legitimate partial visibility must stay clean
+# ---------------------------------------------------------------------------
+
+OCCLUSION_LEGITIMATE = [
+    ('body_hidden_face_visible', 'still_frame',
+     "Ada's lower body is hidden by the workbench, while her face stays clearly visible above it.",
+     'Hiding one part while showing another is ordinary staging, not a contradiction.'),
+    ('behind_prop_face_visible', 'still_frame',
+     "Ada stands behind the bench, half hidden by the lantern, her face clearly visible.",
+     'A figure partly behind an object with a readable face is a normal shot.'),
+    ('prop_back_hidden_toggle_visible', 'still_frame',
+     "The lantern's back is turned away and not visible, while its right-side toggle is clearly visible.",
+     'An object can hide one face and present another; the toggle is the evidence the shot needs.'),
+    ('negative_form_hidden', 'still_frame',
+     "The lantern is not visible from this angle; the lantern's toggle is clearly visible.",
+     'A negated visibility claim states what is excluded, so it cannot conflict with a requirement.'),
+    ('occluded_then_enters_is_fine_on_video', 'video_i2va',
+     "Pip is occluded by the crate at the start, then moves into frame and is clearly visible.",
+     'Over a shot, a subject may begin hidden and become visible; only a still image must hold one instant.'),
+    ('prohibition_about_visibility', 'still_frame',
+     "Do not let the toggle be hidden; the toggle must stay clearly visible.",
+     'A prohibition plus its requirement agree with each other; they do not contradict.'),
+]
+
+
+@pytest.mark.parametrize('name,kind,text,why', OCCLUSION_LEGITIMATE,
+                         ids=[c[0] for c in OCCLUSION_LEGITIMATE])
+def test_legitimate_partial_occlusion_is_clean(name, kind, text, why):
+    assert not blocking(text, kind), f'{name}: must never block — {why}'
+    assert findings(text, kind) == set(), f'{name}: must be entirely clean — {why}'
+
+
+def test_a_sequential_occlusion_is_only_a_still_image_fault():
+    """The same sentence is fine over time and wrong in a frozen instant — the task decides."""
+    text = "Pip is occluded by the crate at the start, then moves into frame and is clearly visible."
+    assert 'still_action_leak' in findings(text, 'still_frame')
+    assert findings(text, 'video_i2va') == set()
+
+
+def test_real_visibility_contradiction_is_reported_but_never_blocks():
+    """The same subject, hidden and clearly visible in one breath: worth flagging, never enforcing.
+
+    Reporting it is useful. Blocking on it would be pretending a keyword rule can read composition,
+    and a warning must never be able to change the plan or the canonical state.
+    """
+    text = ('The brass toggle is hidden behind Ada\'s hand, and the brass toggle is '
+            'clearly visible from camera.')
+    found = findings(text, 'still_frame')
+    assert 'composition_conflict' in found, 'the clearest same-subject case should still be reported'
+    assert not blocking(text, 'still_frame'), 'a composition warning must never block'
+
+
+def test_no_composition_finding_can_ever_block():
+    """Severity policy: only mechanically provable faults may block."""
+    assert 'composition_conflict' not in pw.BLOCKING_CODES
+    assert pw.BLOCKING_CODES == frozenset({'unsupported_syntax', 'reference_slot_missing'})
+
+
+# ---------------------------------------------------------------------------
+# Generalisation: a scene the case library never taught
+# ---------------------------------------------------------------------------
+
+NEW_SCENE = {
+    'text': ("Night shift on a harbour breakwater. Two dockhands in oilskins work the winch: "
+             "the taller one braces the drum, the shorter one feeds the cable. A storm lamp hangs "
+             "from the gantry, its own flame the only warm light, throwing their shadows long "
+             "across wet stone. The breakwater's far end is lost in spray."),
+    'kind': 'still_frame',
+}
+
+
+def test_new_scene_is_not_flagged_and_keeps_its_stated_source():
+    """A scene with no lantern and no bench: the rules must generalise, not just recognise the example."""
+    found = findings(NEW_SCENE['text'], NEW_SCENE['kind'])
+    assert found == set(), f'a clean new scene must stay clean, got {found}'
+    assert not blocking(NEW_SCENE['text'], NEW_SCENE['kind'])
+
+
+def test_new_scene_faults_are_caught_the_same_way():
+    """The same faults, in an unseen scene, are caught by the same rules."""
+    unsourced_glow = ('Night shift on a harbour breakwater. The whole gantry shines with a warm glow '
+                      'and the stone glitters.')
+    assert 'cause_ambiguity' in findings(unsourced_glow, 'still_frame'), \
+        'glow with no stated source must be flagged in any scene'
+
+    nameless_pair = ('One of them lifts the crate while the other steadies it, and then he takes the '
+                     'hook from her before it swings.')
+    assert 'ownership_ambiguity' in findings(nameless_pair, 'still_frame')
+
+    invented_syntax = 'The winch drum (tension:1.4) turns while the gantry lamp glows from its own flame.'
+    assert 'unsupported_syntax' in blocking(invented_syntax, 'still_frame')
+
+    missing_slot = 'Match the breakwater stonework to Image 6 in tone and wetness.'
+    assert 'reference_slot_missing' in blocking(missing_slot, 'still_frame', refs=3)
+
+
+def test_new_scene_occlusion_stays_advisory():
+    partial = ('Night shift on a harbour breakwater. The winch is hidden behind the taller dockhand, '
+               'while the cable drum is clearly visible beside him, lit by the storm lamp hanging '
+               'from the gantry.')
+    assert not blocking(partial, 'still_frame')
+
+
+# ---------------------------------------------------------------------------
+# Coverage: every capability that WRITES a prompt must receive the rules
+# ---------------------------------------------------------------------------
+
+def test_every_writing_capability_receives_the_shared_rules():
+    """A route audit, so a new writing entry point cannot silently miss the shared method.
+
+    Reviewing capabilities are deliberately excluded: they judge consistency and already carry their
+    own review references plus the deterministic checks.
+    """
+    import json
+    from pathlib import Path
+    import studio.production_methods as pm
+    manifest = json.loads((Path(pm.__file__).parent / 'bundled/studio-production-methods/manifest.json').read_text())
+    writers = ('narrative', 'storyboard', 'storyboard_frames', 'image', 'image_prepare',
+               'h3', 'h3_prepare', 'h3_shot', 'h3_scene', 'h3_global',
+               'h3_strategy', 'h3_video_prompt', 'h3_group_plan')
+    for capability in writers:
+        files = manifest['routes'].get(capability, [])
+        assert any('prompt-writing' in f for f in files), \
+            f'{capability} writes prompts but does not receive the shared writing rules'
+    for capability in writers:
+        text, _ = pm.snapshot(capability)
+        assert 'Decide what the frame is for' in text, \
+            f'{capability} is routed the file but the snapshot does not contain the principles'
+
+
+def test_video_tasks_are_distinct_not_one_fixed_template():
+    """T2I, image edit, I2V and montage must not all share one rigid template."""
+    assert pw.task_for_video('I2VA') == 'video_i2va'
+    assert pw.task_for_video('FL2VA') == 'video_fl2va'
+    assert pw.task_for_video('REF2VA') == 'video_ref2va'
+    assert len({pw.task_for_video(m) for m in ('I2VA', 'FL2VA', 'REF2VA')}) == 3, \
+        'the three video modes must not collapse onto one task'
+
+    still = pw.task('exact_start_keyframe')
+    video = pw.task('video_i2va')
+    assert still['kind'] != video['kind']
+    # A frozen-instant rule belongs to stills; a video may carry ordered action.
+    assert 'still_action_leak' in still['checks']
+    assert 'still_action_leak' not in video['checks'], \
+        'the still-image instant rule must not be applied to video progression'
+
+    edit = pw.task('image_edit')
+    assert 'requires_fields' in edit and edit['requires_fields'], \
+        'image edit must demand an explicit what-changes / what-is-kept delta'
+
+
+def test_image_tasks_follow_the_target_not_a_single_template():
+    assert pw.task_for_image('character') == 'character_sheet'
+    assert pw.task_for_image('location') == 'location_plate'
+    assert pw.task_for_image('prop') == 'prop_design'
+    assert pw.task_for_image('frame', moment='start') == 'exact_start_keyframe'
+    assert pw.task_for_image('frame', moment='end') == 'still_frame'
+    assert pw.task_for_image('frame', operation='inpaint') == 'image_edit'
+

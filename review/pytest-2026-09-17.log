@@ -1,25 +1,26 @@
 ........................................................................ [  6%]
 ........................................................................ [ 12%]
 ........................................................................ [ 18%]
-........................................................................ [ 25%]
-........................................................................ [ 31%]
+........................................................................ [ 24%]
+........................................................................ [ 30%]
 ........................................................................ [ 37%]
 ........................................................................ [ 43%]
-...........................................F....F....................... [ 50%]
-........................................................................ [ 56%]
-........................................................................ [ 62%]
-........................................................................ [ 69%]
-........................................................................ [ 75%]
-........................................................................ [ 81%]
-........................................................................ [ 87%]
-........................................................................ [ 94%]
-...................................................................      [100%]
+...........................................F....F....................... [ 49%]
+........................................................................ [ 55%]
+........................................................................ [ 61%]
+........................................................................ [ 67%]
+........................................................................ [ 74%]
+........................................................................ [ 80%]
+........................................................................ [ 86%]
+........................................................................ [ 92%]
+........................................................................ [ 98%]
+..............                                                           [100%]
 =================================== FAILURES ===================================
 ___________ test_engine_automatically_applies_and_freezes_selection ____________
 
-client = <starlette.testclient.TestClient object at 0x7e896aecba10>
+client = <starlette.testclient.TestClient object at 0x74da43fa1ca0>
 plan = {'title': 'Test', 'logline': 'A keeper turns on a light.', 'story': 'Ada fixes a lamp.', 'screenplay': 'ADA: Light.', ...}
-monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e896aecbd10>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74da43fa22a0>
 
     def test_engine_automatically_applies_and_freezes_selection(client,plan,monkeypatch):
         pid,ctx,calls=setup_engine(client,plan,monkeypatch)
@@ -48,9 +49,9 @@ E         + failed
 tests/test_image_loras.py:125: AssertionError
 ____ test_explicit_retry_reuses_original_failed_brief_with_audited_evidence ____
 
-client = <starlette.testclient.TestClient object at 0x7e896c1790d0>
+client = <starlette.testclient.TestClient object at 0x74da4821cce0>
 plan = {'title': 'Test', 'logline': 'A keeper turns on a light.', 'story': 'Ada fixes a lamp.', 'screenplay': 'ADA: Light.', ...}
-monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e896c17b9e0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74da480bd310>
 
     def test_explicit_retry_reuses_original_failed_brief_with_audited_evidence(client,plan,monkeypatch):
         pid,req,old,calls=failed_citation_job(client,plan,monkeypatch)
@@ -78,4 +79,4 @@ tests/test_image_loras.py:213: AssertionError
 =========================== short test summary info ============================
 FAILED tests/test_image_loras.py::test_engine_automatically_applies_and_freezes_selection
 FAILED tests/test_image_loras.py::test_explicit_retry_reuses_original_failed_brief_with_audited_evidence
-2 failed, 1145 passed, 2 warnings in 126.18s (0:02:06)
+2 failed, 1164 passed, 2 warnings in 128.24s (0:02:08)

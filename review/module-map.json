@@ -307,6 +307,29 @@
    "error": null
   },
   {
+   "module": "studio.prompt_writing",
+   "file": "studio/prompt_writing.py",
+   "loc": 476,
+   "bytes": 23830,
+   "docstring": "Shared prompt-writing judgment, loaded from the versioned Studio method bundle. Why this module exists ---------------------- Prompt quality was previously spread over a dozen inline instruction constants plus the ``studio-production-methods`` bundle, and the agent-facing skill package carried a hand-made copy of that bundle. Writers therefore drifted apart, and the same craft rule could be missing from one entry point and duplicated in another. This module is the single runtime reading of the shared writing principles: * the prose lives once, in ``references/prompt-writing.md`` of the Studio ",
+   "imports_internal": [
+    "production_methods"
+   ],
+   "imports_external": [
+    "json",
+    "re"
+   ],
+   "style": {
+    "lines": 476,
+    "non_empty": 393,
+    "avg_chars": 60.6,
+    "lines_over_120": 1,
+    "lines_with_semicolon": 19
+   },
+   "test_refs": 1,
+   "error": null
+  },
+  {
    "module": "studio.image_prompts",
    "file": "studio/image_prompts.py",
    "loc": 450,
@@ -339,7 +362,7 @@
     "lines_over_120": 20,
     "lines_with_semicolon": 11
    },
-   "test_refs": 5,
+   "test_refs": 6,
    "error": null
   },
   {
@@ -427,29 +450,6 @@
     "lines_with_semicolon": 4
    },
    "test_refs": 4,
-   "error": null
-  },
-  {
-   "module": "studio.prompt_writing",
-   "file": "studio/prompt_writing.py",
-   "loc": 390,
-   "bytes": 19447,
-   "docstring": "Shared prompt-writing judgment, loaded from the versioned Studio method bundle. Why this module exists ---------------------- Prompt quality was previously spread over a dozen inline instruction constants plus the ``studio-production-methods`` bundle, and the agent-facing skill package carried a hand-made copy of that bundle. Writers therefore drifted apart, and the same craft rule could be missing from one entry point and duplicated in another. This module is the single runtime reading of the shared writing principles: * the prose lives once, in ``references/prompt-writing.md`` of the Studio ",
-   "imports_internal": [
-    "production_methods"
-   ],
-   "imports_external": [
-    "json",
-    "re"
-   ],
-   "style": {
-    "lines": 390,
-    "non_empty": 320,
-    "avg_chars": 60.8,
-    "lines_over_120": 0,
-    "lines_with_semicolon": 18
-   },
-   "test_refs": 1,
    "error": null
   },
   {
@@ -1976,7 +1976,7 @@
     "lines_over_120": 0,
     "lines_with_semicolon": 1
    },
-   "test_refs": 2,
+   "test_refs": 3,
    "error": null
   },
   {
@@ -2496,6 +2496,9 @@
    "store",
    "storyboarding"
   ],
+  "studio.prompt_writing": [
+   "production_methods"
+  ],
   "studio.image_prompts": [
    "asset_roles",
    "continuity",
@@ -2527,9 +2530,6 @@
    "shot_state_models"
   ],
   "studio.directing_models": [],
-  "studio.prompt_writing": [
-   "production_methods"
-  ],
   "studio.postproduction": [
    "engine",
    "folders",
@@ -2964,6 +2964,11 @@
    "studio.generation_pipeline",
    "studio.providers"
   ],
+  "studio.prompt_writing": [
+   "studio.image_prompts",
+   "studio.prompt_preparation",
+   "studio.video_workflow"
+  ],
   "studio.image_prompts": [
    "studio.continuity",
    "studio.engine",
@@ -3016,11 +3021,6 @@
    "studio.models",
    "studio.providers",
    "studio.storyboarding"
-  ],
-  "studio.prompt_writing": [
-   "studio.image_prompts",
-   "studio.prompt_preparation",
-   "studio.video_workflow"
   ],
   "studio.postproduction": [
    "studio.app",
@@ -3748,11 +3748,11 @@
   },
   {
    "file": "tests/test_prompt_writing.py",
-   "loc": 244
+   "loc": 406
   },
   {
    "file": "tests/test_prompt_writing_wiring.py",
-   "loc": 213
+   "loc": 322
   },
   {
    "file": "tests/test_proposal_progress.py",
@@ -3901,8 +3901,8 @@
  ],
  "counts": {
   "studio_modules": 83,
-  "studio_loc": 15219,
+  "studio_loc": 15305,
   "test_files": 102,
-  "test_loc": 13294
+  "test_loc": 13565
  }
 }
